@@ -1,0 +1,15 @@
+.logo {
+    color: #ED7966;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 2%;
+    align-self: flex-end;
+}
+
+.login-btn {
+    width:22rem;
+    background-color: #ED7966;
+    border:none;
+    --bs-btn-hover-bg: #ED7966;
+    --bs-btn-active-bg: none;
+}
