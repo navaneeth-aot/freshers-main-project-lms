@@ -2,7 +2,7 @@
     color: #ED7966;
     font-size: 24px;
     font-weight: 800;
-    margin-bottom: 2%;
+    margin-bottom: 3%;
     align-self: flex-end;
 }
 
@@ -10,6 +10,33 @@
     width:22rem;
     background-color: #ED7966;
     border:none;
+}
+
+.sidebar-admin {
+    background: #ED7966;
+    min-height: 100vh;
+}
+
+.btn-primary {
+    background-color: #ED7966;
     --bs-btn-hover-bg: #ED7966;
-    --bs-btn-active-bg: none;
+    --bs-btn-active-bg: #e48678;
+}
+
+.box {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;    
+}
+
+.backcolor {
+    background-color: #F5F5F5;;
+}
+
+.red {
+    color: #D04444;
+}
+
+.grey {
+    color: #7E7E7F;
 }

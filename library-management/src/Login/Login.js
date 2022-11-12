@@ -11,7 +11,7 @@ export default function Login({setauthentication,authentication}) {
     const handlePassword = (e) => { setpassword(e.target.value) }
     const handleLogin = (e) => { 
         e.preventDefault();
-        email=="navaneeth@gmail.com" && password==1234 ? setauthentication(!authentication) : alert("Wrong Details");
+        email=="aot@gmail.com" && password==1234 ? setauthentication(!authentication) : console.log("hi");
     }
 
     return(
