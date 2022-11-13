@@ -2,7 +2,7 @@ import React from 'react';
 import Students from './Students';
 import StudentSearch from './StudentSearch';
 
-function Contents() {
+function StudentPage() {
   return (
     <div className='col-md-10 p-5 backcolor'>
         <StudentSearch />
@@ -11,4 +11,4 @@ function Contents() {
   )
 }
 
-export default Contents
+export default StudentPage

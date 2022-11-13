@@ -3,46 +3,63 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-export default function Example({show,setShow}) {
-  
+export default function ModalIssueBook({show,setShow}) {
+  const [studentName, setstudentName] = useState('');
+  const [studentEmail, setstudentEmail] = useState('');
+  const [studentpassword, setstudentpassword] = useState('');
+  const [studentPassConfirm, setstudentPassConfirm] = useState('');
 
   const handleClose = () => setShow(false);
+
+  const handleStudentName = (e)=> { setstudentName(e.target.value) }
+  const handleStudentEmail = (e)=> { setstudentEmail(e.target.value) }
+  const handleStudentPassword = (e)=> { setstudentpassword(e.target.value) }
+  const handleStudentPassConfirm = (e)=> { setstudentPassConfirm(e.target.value) }
+
+  const addStudent = () => {
+    studentpassword != studentPassConfirm ? alert("password did not match") : alert("success")
+  }
 
   return (
       
       <Modal show={show} onHide={handleClose} >
         <Modal.Header closeButton  className='px-4 border-bottom-0'>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Issue Book</Modal.Title>
         </Modal.Header>
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>
+
           <Form.Group className="mb-3" controlId="studentName">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: John Doe"
                 autoFocus
+                onChange={handleStudentName}
               />
             </Form.Group>
+
             <Form.Group className="mb-3" controlId="studentEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Eg: johndoe@gmail.com"
+                onChange={handleStudentEmail}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="studentPassword">
               <Form.Label>password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder=""
+                onChange={handleStudentPassword}
               />
             </Form.Group>
+
             <Form.Group className="mb-3" controlId="studentConfirmPassword">
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
-                type="pasword"
-                placeholder=""
+                type="password"
+                onChange={handleStudentPassConfirm}
               />
             </Form.Group>
             
@@ -52,7 +69,7 @@ export default function Example({show,setShow}) {
           <Button variant="outline-secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button onClick={addStudent}>
             Add Student
           </Button>
         </Modal.Footer>

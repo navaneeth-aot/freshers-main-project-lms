@@ -9,7 +9,7 @@ const [authentication, setauthentication] = useState(false);
 
   return (
       <div>
-        {authentication == !true ? <Login setauthentication={setauthentication} authentication={authentication}/>:<Admin />}
+        {authentication == true ? <Login setauthentication={setauthentication} authentication={authentication}/>:<Admin />}
       </div>
   );
 }

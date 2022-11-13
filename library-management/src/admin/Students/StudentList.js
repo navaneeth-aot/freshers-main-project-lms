@@ -16,14 +16,10 @@ function StudentList() {
 
     students.map((student)=>{
         return(
-            <div key={student.key} className="d-flex justify-content-between px-5 py-3 border-bottom">
-                <div className='col-5'>
-                    {student.name}
-                </div>
-                <div className='col-5'>
-                    {student.mail}
-                </div>
-                <div className='col-2 d-flex gap-3 ms-5'>
+            <div key={student.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
+                <div className='col-5'> {student.name} </div>
+                <div className='col-5'> {student.mail} </div>
+                <div className='col-2 d-flex gap-3 ms-4 ps-2'>
                     <MdEdit className='grey'/>
                     <FiTrash2 className='red'/>
                     <FiEye className='grey'/>
