@@ -13,7 +13,7 @@ export default function ModalAddStudent({show,setShow}) {
   const [studentEmail, setstudentEmail] = useState('');
   const [studentpassword, setstudentpassword] = useState('');
   const [studentPassConfirm, setstudentPassConfirm] = useState('');
-  const [key, setkey] = useState(0)
+  const [key, setkey] = useState(1)
 
   const handleClose = () => { setShow(false) };
 

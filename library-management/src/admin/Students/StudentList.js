@@ -8,7 +8,9 @@ import { StudentContext , StudentArrayContext } from './StudentPage';
 function StudentList() {
     const Student = useContext(StudentContext);
     const setStudents = useContext(StudentArrayContext);
-    
+    const deleteStudent = (item) => { 
+        setStudents(Student.filter((students) => students.key != item));
+     }
 
   return (
     Student.map((Students)=>{
@@ -17,9 +19,9 @@ function StudentList() {
                 <div className='col-5'> {Students.name} </div>
                 <div className='col-5'> {Students.Email} </div>
                 <div className='col-2 d-flex gap-3 ms-4 ps-2'>
-                    <MdEdit className='grey'/>
-                    <FiTrash2 className='red' onClick={() => {deleteStudent(Students.key)} }/>
-                    <FiEye className='grey'/>
+                    <MdEdit className='grey' />
+                    <FiTrash2 className='red' onClick={ () => { deleteStudent(Students.key) } } />
+                    <FiEye className='grey' />
                 </div>
             </div>
         )
