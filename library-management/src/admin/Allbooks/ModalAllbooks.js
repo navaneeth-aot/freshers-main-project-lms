@@ -57,13 +57,23 @@ export default function ModalAllbooks({show,setShow}) {
               </Form.Select>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="studentConfirmPassword">
-              <Form.Label>Total Copies</Form.Label>
-              <Form.Control
-                type="number"
-                onChange={handleStudentPassConfirm}
-              />
-            </Form.Group>
+            <div className='d-flex gap-5'>
+              <Form.Group className="mb-3" controlId="studentConfirmPassword">
+                <Form.Label>Total Copies</Form.Label>
+                <Form.Control
+                  type="number"
+                  onChange={handleStudentPassConfirm}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="studentConfirmPasword">
+                <Form.Label>Remaining</Form.Label>
+                <Form.Control
+                  type="number"
+                  onChange={handleStudentPassConfirm}
+                />
+              </Form.Group>
+            </div>
             
           </Form>
         </Modal.Body>

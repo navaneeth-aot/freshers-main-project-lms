@@ -5,7 +5,7 @@ import { MdOutlineAssignmentReturn } from 'react-icons/md';
 function IssuedBooksList() {
     const [issued, setissued] = useState([
         {key: 1 , title:"It Start With Us",name:"Nitha Samuel",IssueDate:"02-11-2022",DueDate:"09-11-2022",fine:"10"},
-        {key: 1 , title:"It Start With Us",name:"Nitha Samuel",IssueDate:"02-11-2022",DueDate:"09-11-2022",fine:"10"}
+        {key: 2 , title:"It Start With Us",name:"Nitha Samuel",IssueDate:"02-11-2022",DueDate:"09-11-2022",fine:"10"}
     ])
   return (
     issued.map((book)=>{

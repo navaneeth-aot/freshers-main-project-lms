@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { StudentArrayContext , StudentContext } from './StudentPage';
 
 export default function ModalAddStudent({show,setShow}) {
+
+  const Students = useContext(StudentContext);
+  const setstudents = useContext(StudentArrayContext);
+
   const [studentName, setstudentName] = useState('');
   const [studentEmail, setstudentEmail] = useState('');
   const [studentpassword, setstudentpassword] = useState('');
   const [studentPassConfirm, setstudentPassConfirm] = useState('');
+  const [key, setkey] = useState(0)
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => { setShow(false) };
 
   const handleStudentName = (e)=> { setstudentName(e.target.value) }
   const handleStudentEmail = (e)=> { setstudentEmail(e.target.value) }
@@ -17,7 +23,17 @@ export default function ModalAddStudent({show,setShow}) {
   const handleStudentPassConfirm = (e)=> { setstudentPassConfirm(e.target.value) }
 
   const addStudent = () => {
-    studentpassword != studentPassConfirm ? alert("password did not match") : alert("success")
+    if(((studentName && studentEmail) && studentpassword) == "") {
+      alert("please fill all the fields");
+    }
+    else if(studentpassword != studentPassConfirm) {
+      alert("password did not match");
+    }
+    else {
+      setkey(key+1);
+      setstudents([...Students,{key:key,name:studentName,Email:studentEmail,password:studentpassword}]);
+      handleClose();
+    } 
   }
 
   return (
@@ -36,6 +52,7 @@ export default function ModalAddStudent({show,setShow}) {
                 placeholder="Eg: John Doe"
                 autoFocus
                 onChange={handleStudentName}
+                required
               />
             </Form.Group>
 

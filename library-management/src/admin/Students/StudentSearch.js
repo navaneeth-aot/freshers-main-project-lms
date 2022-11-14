@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { GoSearch } from 'react-icons/go';
 import ModalAddStudent from './ModalAddStudent';
 
+
 function StudentSearch() {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);

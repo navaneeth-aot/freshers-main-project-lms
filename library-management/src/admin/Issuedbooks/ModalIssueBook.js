@@ -62,7 +62,6 @@ export default function ModalIssueBook({show,setShow}) {
               <Form.Control
                 type="text"
                 onChange={handleStudentPassConfirm}
-                disabled
               />
             </Form.Group>
             
