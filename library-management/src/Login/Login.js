@@ -1,29 +1,41 @@
-
 import LoginBox from './LoginBox';
 import logo from '../Images/Logo-LMC.png';
-import { useState } from 'react';
+import React,{ useState } from 'react';
 
-export default function Login({setauthentication,authentication}) {
+export default function Login({setauthentication,authentication,login,setlogin}) {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState();
+    
 
     const handleEmail = (e) => { setemail(e.target.value) }
     const handlePassword = (e) => { setpassword(e.target.value) }
     const handleLogin = (e) => { 
         e.preventDefault();
-        email=="aot@gmail.com" && password==1234 ? setauthentication(!authentication) : console.log("hi");
+
+        if(login == "admin") {
+            (email == "aot@gmail.com" && password == 1234) ? setauthentication(!authentication) : alert("Login details is not Valid")
+        }
+
+        else if(login == "student") {
+            (email == "seji@gmail.com" && password == 1234) ? setauthentication(!authentication) : alert("Login details is not Valid")
+        }
+        
+        else {
+            alert("Please select either Admin or Student")
+        }
+        
     }
 
     return(
         <div>
             <div className='col-md-3'>
                 <div className='d-flex px-5 pt-5'>
-                    <img src={logo} alt=""/>
+                    <img src = {logo} alt = ""/>
                     <p className='logo'>LMC</p>
                 </div>
             </div>
             <div className='col-md-12'>
-                <LoginBox handleEmail={handleEmail} handlePassword={handlePassword} handleLogin={handleLogin} />
+                <LoginBox handleEmail={handleEmail} handlePassword={handlePassword} handleLogin={handleLogin} login={login} setlogin={setlogin}/>
             </div>
         </div>
     )

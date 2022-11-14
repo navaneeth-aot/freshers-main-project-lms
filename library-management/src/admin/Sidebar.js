@@ -5,7 +5,7 @@ import { MdMenuBook,MdTaskAlt,MdOutlinePeople } from 'react-icons/md';
 import {Link} from 'react-router-dom';
 
 
-function Sidebar({navigatetoIssuedBooks,navigatetoStudentPage}) {
+function Sidebar() {
     
   return (
     <>
