@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-export default function Example({show,setShow}) {
+export default function ModalAddStudent({show,setShow}) {
   const [studentName, setstudentName] = useState('');
   const [studentEmail, setstudentEmail] = useState('');
   const [studentpassword, setstudentpassword] = useState('');

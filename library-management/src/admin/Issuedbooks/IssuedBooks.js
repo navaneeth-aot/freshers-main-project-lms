@@ -10,7 +10,7 @@ function IssuedBooks() {
                 <div className='col-2'>Issue Date</div>
                 <div className='col-2'>Due Date</div>
                 <div className='col-2'>Fine <br/>(Rs. 10 per day) </div>
-                <div className='col-2 ms-5'>Actions</div>
+                <div className='col-2 ps-4'>Actions</div>
         </div>
         <IssuedBooksList />
     </div>

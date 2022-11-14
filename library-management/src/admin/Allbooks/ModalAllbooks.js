@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-export default function Example({show,setShow}) {
+export default function ModalAllbooks({show,setShow}) {
   const [studentName, setstudentName] = useState('');
   const [studentEmail, setstudentEmail] = useState('');
   const [studentpassword, setstudentpassword] = useState('');
@@ -24,7 +24,7 @@ export default function Example({show,setShow}) {
       
       <Modal show={show} onHide={handleClose} >
         <Modal.Header closeButton  className='px-4 border-bottom-0'>
-          <Modal.Title>Add Student</Modal.Title>
+          <Modal.Title>Add Book</Modal.Title>
         </Modal.Header>
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>
@@ -33,32 +33,34 @@ export default function Example({show,setShow}) {
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Eg: John Doe"
+                placeholder="Eg: Pride and Prejudice"
                 autoFocus
                 onChange={handleStudentName}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentEmail">
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Author</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="Eg: johndoe@gmail.com"
+                type="text"
+                placeholder="Eg: Jane Austen"
                 onChange={handleStudentEmail}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="studentPassword">
-              <Form.Label>password</Form.Label>
-              <Form.Control
-                type="password"
-                onChange={handleStudentPassword}
-              />
+              <Form.Label>Language</Form.Label>
+              <Form.Select aria-label="Default select example">
+                <option>Select Language</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentConfirmPassword">
-              <Form.Label>Confirm Password</Form.Label>
+              <Form.Label>Total Copies</Form.Label>
               <Form.Control
-                type="password"
+                type="number"
                 onChange={handleStudentPassConfirm}
               />
             </Form.Group>

@@ -15,7 +15,7 @@ function IssueSearch() {
         <form className='col-md-6'>
             <div className='d-flex align-items-center border rounded bg-white pe-3'>
                 <Form.Control type="text" placeholder="Search by book title or student" className='border-0' />
-                <GoSearch/> 
+                <GoSearch className='grey'/> 
             </div> 
             
         </form>

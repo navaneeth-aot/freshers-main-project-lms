@@ -16,7 +16,7 @@ function IssuedBooksList() {
                 <div className='col-2'>{book.IssueDate}</div>
                 <div className='col-2'>{book.DueDate}</div>
                 <div className='col-2 ps-5'>{book.fine}</div>
-                <div className='col-2 text-center'><MdOutlineAssignmentReturn className='grey'/></div>
+                <div className='col-2 ps-5'><MdOutlineAssignmentReturn className='grey'/></div>
             </div>
         )
     })

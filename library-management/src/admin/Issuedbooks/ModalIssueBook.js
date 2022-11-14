@@ -30,36 +30,39 @@ export default function ModalIssueBook({show,setShow}) {
           <Form className='border-top border-bottom py-3'>
 
           <Form.Group className="mb-3" controlId="studentName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Eg: John Doe"
-                autoFocus
-                onChange={handleStudentName}
-              />
+              <Form.Label>Book</Form.Label>
+              <Form.Select aria-label="Default select example">
+                <option>Select Book</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Eg: johndoe@gmail.com"
-                onChange={handleStudentEmail}
-              />
+              <Form.Label>Student</Form.Label>
+              <Form.Select aria-label="Default select example">
+                <option>Select Student</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="studentPassword">
-              <Form.Label>password</Form.Label>
+              <Form.Label>Issue Date</Form.Label>
               <Form.Control
-                type="password"
+                type="date"
                 onChange={handleStudentPassword}
+                className = "grey"
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentConfirmPassword">
-              <Form.Label>Confirm Password</Form.Label>
+              <Form.Label>Due Date</Form.Label>
               <Form.Control
-                type="password"
+                type="text"
                 onChange={handleStudentPassConfirm}
+                disabled
               />
             </Form.Group>
             
