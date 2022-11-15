@@ -7,6 +7,7 @@ import ModalAddStudent from './ModalAddStudent';
 
 function StudentSearch() {
   const [show, setShow] = useState(false);
+  const [editFlag, seteditFlag] = useState(false);
   const handleShow = () => setShow(true);
   return (
     <>
@@ -21,7 +22,7 @@ function StudentSearch() {
             
         </form>
         <Button className='col-2' onClick={handleShow}>Add New Student</Button>
-        <ModalAddStudent show={show} setShow={setShow}/>
+        <ModalAddStudent show={show} setShow={setShow} editFlag={editFlag} seteditFlag={seteditFlag}/>
     </div>
     </>
   )

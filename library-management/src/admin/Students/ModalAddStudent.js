@@ -2,9 +2,9 @@ import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { StudentArrayContext , StudentContext } from './StudentPage';
+import { StudentArrayContext , StudentContext } from '../../App';
 
-export default function ModalAddStudent({show,setShow}) {
+export default function ModalAddStudent({show,setShow,editFlag,seteditFlag}) {
 
   const Students = useContext(StudentContext);
   const setstudents = useContext(StudentArrayContext);
@@ -15,7 +15,7 @@ export default function ModalAddStudent({show,setShow}) {
   const [studentPassConfirm, setstudentPassConfirm] = useState('');
   const [key, setkey] = useState(1)
 
-  const handleClose = () => { setShow(false) };
+  const handleClose = () => { setShow(false) }
 
   const handleStudentName = (e)=> { setstudentName(e.target.value) }
   const handleStudentEmail = (e)=> { setstudentEmail(e.target.value) }
@@ -29,11 +29,15 @@ export default function ModalAddStudent({show,setShow}) {
     else if(studentpassword != studentPassConfirm) {
       alert("password did not match");
     }
+    else if(editFlag != false) {
+      seteditFlag(false)
+      handleClose();
+      }
     else {
       setkey(key+1);
       setstudents([...Students,{key:key,name:studentName,Email:studentEmail,password:studentpassword}]);
       handleClose();
-    } 
+      }
   }
 
   return (
@@ -51,8 +55,8 @@ export default function ModalAddStudent({show,setShow}) {
                 type="text"
                 placeholder="Eg: John Doe"
                 autoFocus
+                value={}
                 onChange={handleStudentName}
-                required
               />
             </Form.Group>
 
@@ -87,7 +91,7 @@ export default function ModalAddStudent({show,setShow}) {
             Close
           </Button>
           <Button onClick={addStudent}>
-            Add Student
+            {(editFlag != true) ? "Add Student" : "Update" }
           </Button>
         </Modal.Footer>
       </Modal>

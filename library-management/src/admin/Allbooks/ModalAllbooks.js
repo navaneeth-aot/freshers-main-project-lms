@@ -1,23 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { BooksArrayContext , BooksContext } from '../../App';
 
 export default function ModalAllbooks({show,setShow}) {
-  const [studentName, setstudentName] = useState('');
-  const [studentEmail, setstudentEmail] = useState('');
-  const [studentpassword, setstudentpassword] = useState('');
-  const [studentPassConfirm, setstudentPassConfirm] = useState('');
+
+  const books = useContext(BooksContext);
+  const setbooks = useContext(BooksArrayContext);
+
+  const [bookTitle, setbookTitle] = useState("");
+  const [bookAuthor, setbookAuthor] = useState("");
+  const [bookLanguage, setbookLanguage] = useState("");
+  const [totalCopies, settotalCopies] = useState(0);
+  const [remainingCopies, setremainingCopies] = useState(0);
+  const [key, setkey] = useState(1)
 
   const handleClose = () => setShow(false);
 
-  const handleStudentName = (e)=> { setstudentName(e.target.value) }
-  const handleStudentEmail = (e)=> { setstudentEmail(e.target.value) }
-  const handleStudentPassword = (e)=> { setstudentpassword(e.target.value) }
-  const handleStudentPassConfirm = (e)=> { setstudentPassConfirm(e.target.value) }
+  const handlebookTitle = (e)=> { setbookTitle(e.target.value) }
+  const handlebookAuthor = (e)=> { setbookAuthor(e.target.value) }
+  const handlebookLanguage = (e)=> { setbookLanguage(e.target.value) }
+  const handletotalCopies = (e)=> { settotalCopies(e.target.value) }
+  const handleremainingCopies = (e)=> { setremainingCopies(e.target.value) }
 
   const addStudent = () => {
-    studentpassword != studentPassConfirm ? alert("password did not match") : alert("success")
+    if(( bookTitle && totalCopies ) == "") {
+      alert("please fill Book Name and totalCopies");
+    }
+    else {
+      setkey(key+1);
+      setbooks([...books,{key:key,title:bookTitle,author:bookAuthor,language:bookLanguage,total:totalCopies,remaining:remainingCopies}]);
+      handleClose();
+      console.log(key)
+    }
   }
 
   return (
@@ -29,31 +45,31 @@ export default function ModalAllbooks({show,setShow}) {
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>
 
-          <Form.Group className="mb-3" controlId="studentName">
+          <Form.Group className="mb-3" controlId="bookTitle">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: Pride and Prejudice"
                 autoFocus
-                onChange={handleStudentName}
+                onChange={handlebookTitle}
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="studentEmail">
+            <Form.Group className="mb-3" controlId="bookAuthor">
               <Form.Label>Author</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: Jane Austen"
-                onChange={handleStudentEmail}
+                onChange={handlebookAuthor}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="studentPassword">
+            <Form.Group className="mb-3" controlId="bookLanguage">
               <Form.Label>Language</Form.Label>
-              <Form.Select aria-label="Default select example">
-                <option>Select Language</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <Form.Select aria-label="Default select example" onClick={handlebookLanguage}>
+                <option value="N/A">Select Language</option>
+                <option value="English">English</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Hindi">Hindi</option>
               </Form.Select>
             </Form.Group>
 
@@ -62,7 +78,7 @@ export default function ModalAllbooks({show,setShow}) {
                 <Form.Label>Total Copies</Form.Label>
                 <Form.Control
                   type="number"
-                  onChange={handleStudentPassConfirm}
+                  onChange={handletotalCopies}
                 />
               </Form.Group>
 
@@ -70,7 +86,7 @@ export default function ModalAllbooks({show,setShow}) {
                 <Form.Label>Remaining</Form.Label>
                 <Form.Control
                   type="number"
-                  onChange={handleStudentPassConfirm}
+                  onChange={handleremainingCopies}
                 />
               </Form.Group>
             </div>
@@ -78,11 +94,11 @@ export default function ModalAllbooks({show,setShow}) {
           </Form>
         </Modal.Body>
         <Modal.Footer  className='px-4 border-top-0'>
-          <Button variant="outline-secondary" onClick={handleClose}>
+          <Button variant="outline-secondary" onSelect={handleClose}>
             Close
           </Button>
           <Button onClick={addStudent}>
-            Add Student
+            Add Book
           </Button>
         </Modal.Footer>
       </Modal>

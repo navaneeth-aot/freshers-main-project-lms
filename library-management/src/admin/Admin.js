@@ -13,7 +13,7 @@ export default function Admin() {
            <Router>  
             <Sidebar />
             <Routes>
-              <Route path="/" element = {<IssuedBooksPage />} />
+              <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
               <Route path="/Allbooks" element = {<AllbooksPage />} />
               <Route path="/studentsPage" element = {<StudentPage />} />
             </Routes>
