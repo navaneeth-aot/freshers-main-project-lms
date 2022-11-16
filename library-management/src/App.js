@@ -1,10 +1,11 @@
 import './App.css';
 import Login from './Login/Login';
 import './App.js';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import Admin from './admin/Admin';
 import Student from './student/Student';
 import { Link, Route, Router, Routes } from 'react-router-dom';
+import ReactDOM from "react-dom";
 
 export const StudentContext = React.createContext()
 export const StudentArrayContext = React.createContext()
@@ -12,10 +13,38 @@ export const BooksContext = React.createContext()
 export const BooksArrayContext = React.createContext()
 
 function App() {
+  const StudentArray = JSON.parse(localStorage.getItem('studentsKey')) || [];
+  const BooksArray = JSON.parse(localStorage.getItem('booksKey')) || [];
   const [key, setKey] = useState('admin');
   const [authentication, setauthentication] = useState(false);
-  const [students, setstudents] = useState([{key: 1 , name:"Nitha Samuel",Email:"nithasamuel@gmail.com"}]);
-  const [books, setbooks] = useState([{key:"1",title:"It Start With Us",author:"Colleen Hoover",language:"English",total:"5",remaining:"2"}]);
+  const [students, setstudents] = useState(StudentArray);
+  const [books, setbooks] = useState(BooksArray);
+
+  useEffect(() => {
+    const students = JSON.parse(localStorage.getItem('studentsKey'));
+    if (students) {
+      setstudents(students);
+    }
+  }, []);
+
+  useEffect(() => {
+      localStorage.setItem('studentsKey', JSON.stringify(students));
+  }, [students]);
+
+
+  useEffect(() => {
+    const books = JSON.parse(localStorage.getItem('booksKey'));
+    if (books) {
+      setbooks(books);
+    }
+  }, []);
+
+  useEffect(() => {
+      localStorage.setItem('booksKey', JSON.stringify(books));
+  }, [books]);
+
+  
+
 
   return (
       <div>
@@ -23,14 +52,15 @@ function App() {
           <StudentContext.Provider value = { students }>
             <BooksContext.Provider value = { books }>
               <BooksArrayContext.Provider value = { setbooks }>
-                  {(key == "admin") &&
+                {(key == "admin") &&
                     (authentication == !true ? 
-                    <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} /> : 
+                    <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
                     <Admin />)}
+                  
                 
                   {(key == "student") &&
                     (authentication == !true ? 
-                    <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} /> :
+                    <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> :
                     <Student />)}
               </BooksArrayContext.Provider>
             </BooksContext.Provider>

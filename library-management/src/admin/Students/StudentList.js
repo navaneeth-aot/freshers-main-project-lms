@@ -11,14 +11,17 @@ function StudentList() {
     const setStudents = useContext(StudentArrayContext);
     const [editFlag, seteditFlag] = useState(false);
     const [editshow, editsetShow] = useState(false);
+    const [primarykey, setprimarykey] = useState()
 
-    const deleteStudent = (key) => { 
-        setStudents(Student.filter((students) => students.key != key));
+    const deleteStudent = (deletekey) => { 
+        setStudents(Student.filter((students) => students.key != deletekey));
+        setprimarykey(deletekey)
      }
 
-    const editStudent = (key) => {
+    const editStudent = (editkey) => {
         seteditFlag(true);
         editsetShow(true);
+        setprimarykey(editkey);
     }
 
   return (
@@ -35,7 +38,7 @@ function StudentList() {
                 </div>
                 
             </div>
-            <ModalAddStudent show={editshow} setShow={editsetShow} editFlag={editFlag} seteditFlag={seteditFlag} />
+            <ModalAddStudent show={editshow} setShow={editsetShow} editFlag={editFlag} seteditFlag={seteditFlag} primarykey={primarykey}/>
             </>
         )
     })

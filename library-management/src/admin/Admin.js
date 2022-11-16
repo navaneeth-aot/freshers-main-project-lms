@@ -13,9 +13,9 @@ export default function Admin() {
            <Router>  
             <Sidebar />
             <Routes>
-              <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
-              <Route path="/Allbooks" element = {<AllbooksPage />} />
-              <Route path="/studentsPage" element = {<StudentPage />} />
+              <Route path='issuedbooks' element = {<IssuedBooksPage/>} />
+              <Route path="Allbooks" element = {<AllbooksPage />} />
+              <Route path="studentsPage" element = {<StudentPage />} />
             </Routes>
           </Router>
             

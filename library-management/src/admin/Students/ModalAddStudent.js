@@ -4,18 +4,18 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { StudentArrayContext , StudentContext } from '../../App';
 
-export default function ModalAddStudent({show,setShow,editFlag,seteditFlag}) {
+export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,primarykey}) {
 
   const Students = useContext(StudentContext);
   const setstudents = useContext(StudentArrayContext);
 
-  const [studentName, setstudentName] = useState('');
+  const [studentName, setstudentName] = useState('navi');
   const [studentEmail, setstudentEmail] = useState('');
   const [studentpassword, setstudentpassword] = useState('');
   const [studentPassConfirm, setstudentPassConfirm] = useState('');
   const [key, setkey] = useState(1)
 
-  const handleClose = () => { setShow(false) }
+  const handleClose = () => { setShow(false);seteditFlag(false) }
 
   const handleStudentName = (e)=> { setstudentName(e.target.value) }
   const handleStudentEmail = (e)=> { setstudentEmail(e.target.value) }
@@ -40,6 +40,8 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag}) {
       }
   }
 
+  const value = Students.map((item)=>{ return((item.key == primarykey) && item ) })
+    
   return (
       
       <Modal show={show} onHide={handleClose} >
@@ -48,14 +50,14 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag}) {
         </Modal.Header>
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>
-
+            {console.log(primarykey)}
+            {console.log(value)}
           <Form.Group className="mb-3" controlId="studentName">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: John Doe"
                 autoFocus
-                value={}
                 onChange={handleStudentName}
               />
             </Form.Group>

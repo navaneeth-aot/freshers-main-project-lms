@@ -4,9 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-
 export default function LoginBox({handleEmail,handlePassword,handleLogin,login,setlogin}) {
-    
     
     return(
         <div className='d-flex justify-content-center mt-5'>
