@@ -4,43 +4,71 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { StudentArrayContext , StudentContext } from '../../App';
 
-export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,primarykey}) {
+export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,primarykey,editEmail,seteditEmail,editname,seteditname,editpassword,seteditpassword,editpasswordConfirm, seteditpasswordConfirm}) {
 
   const Students = useContext(StudentContext);
   const setstudents = useContext(StudentArrayContext);
 
-  const [studentName, setstudentName] = useState('navi');
+  const [studentName, setstudentName] = useState('');
   const [studentEmail, setstudentEmail] = useState('');
   const [studentpassword, setstudentpassword] = useState('');
   const [studentPassConfirm, setstudentPassConfirm] = useState('');
-  const [key, setkey] = useState(1)
+  const [key, setkey] = useState(1);
 
-  const handleClose = () => { setShow(false);seteditFlag(false) }
+  const handleClose = () => { setShow(false);seteditFlag(false); } 
 
   const handleStudentName = (e)=> { setstudentName(e.target.value) }
   const handleStudentEmail = (e)=> { setstudentEmail(e.target.value) }
   const handleStudentPassword = (e)=> { setstudentpassword(e.target.value) }
   const handleStudentPassConfirm = (e)=> { setstudentPassConfirm(e.target.value) }
 
-  const addStudent = () => {
-    if(((studentName && studentEmail) && studentpassword) == "") {
-      alert("please fill all the fields");
-    }
-    else if(studentpassword != studentPassConfirm) {
-      alert("password did not match");
-    }
-    else if(editFlag != false) {
-      seteditFlag(false)
-      handleClose();
-      }
-    else {
-      setkey(key+1);
-      setstudents([...Students,{key:key,name:studentName,Email:studentEmail,password:studentpassword}]);
-      handleClose();
-      }
-  }
+  const handleEditName = (e)=> { seteditname(e.target.value);console.log(e.target.value) }
+  const handleEditEmail = (e)=> { seteditEmail(e.target.value);console.log(e.target.value) }
+  const handleEditPassword = (e)=> { seteditpassword(e.target.value);console.log(e.target.value) }
+  const handleEditPasswordConfirm = (e)=> { seteditpasswordConfirm(e.target.value);console.log(e.target.value) }
+  // console.log(editName)
 
-  const value = Students.map((item)=>{ return((item.key == primarykey) && item ) })
+  const addStudent = () => {
+    if(editFlag != false) {
+      if(((editname && editEmail) && editpassword) == "") {
+        alert("please fill all  fields");
+      }
+      else if(editpassword != editpasswordConfirm) {
+        alert("password did not match");
+      }
+      else {
+        const updatedStudents = Students.map((item) => {
+          if(item.key == primarykey) {
+          item.name = editname;
+          item.Email = editEmail;
+          item.password = editpassword;
+          }
+          return(item)
+        })
+        setstudents(updatedStudents)
+        handleClose()
+      }
+    }
+
+    else {
+      if(((studentName && studentEmail) && studentpassword) == "") {
+        alert("please fill all the fields");
+      }
+      else if(studentpassword != studentPassConfirm) {
+        alert("password did not match");
+      }
+      else {
+        setkey(key+1);
+        setstudents([...Students,{key:key,name:studentName,Email:studentEmail,password:studentpassword}]);
+        setstudentName('')
+        setstudentEmail('')
+        setstudentpassword('')
+        setstudentPassConfirm('')
+        handleClose();
+      }
+    }
+  }
+  
     
   return (
       
@@ -50,15 +78,14 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
         </Modal.Header>
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>
-            {console.log(primarykey)}
-            {console.log(value)}
           <Form.Group className="mb-3" controlId="studentName">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: John Doe"
                 autoFocus
-                onChange={handleStudentName}
+                value={(editFlag != true) ? studentName : editname}
+                onChange={(editFlag != true) ? handleStudentName : handleEditName}
               />
             </Form.Group>
 
@@ -67,22 +94,25 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
               <Form.Control
                 type="email"
                 placeholder="Eg: johndoe@gmail.com"
-                onChange={handleStudentEmail}
+                value={(editFlag != true) ? studentEmail : editEmail}
+                onChange={(editFlag != true) ? handleStudentEmail : handleEditEmail}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="studentPassword">
               <Form.Label>password</Form.Label>
               <Form.Control
                 type="password"
-                onChange={handleStudentPassword}
+                value={editFlag != true ? studentpassword : editpassword}
+                onChange={(editFlag != true) ? handleStudentPassword : handleEditPassword}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentConfirmPassword">
               <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
+              <Form.Control 
                 type="password"
-                onChange={handleStudentPassConfirm}
+                value={editFlag != true ? studentPassConfirm : editpasswordConfirm}
+                onChange={(editFlag != true) ? handleStudentPassConfirm : handleEditPasswordConfirm}
               />
             </Form.Group>
             

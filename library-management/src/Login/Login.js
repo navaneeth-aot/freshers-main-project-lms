@@ -16,6 +16,7 @@ export default function Login({setauthentication,authentication,login,setlogin,s
         
         if(login == "admin") {
             (email == "aot@gmail.com" && password == 1234) ? setauthentication(!authentication) : alert("Login details is not Valid")
+            
         }
 
         else if(login == "student") {

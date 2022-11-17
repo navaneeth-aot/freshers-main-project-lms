@@ -4,7 +4,7 @@ import './App.js';
 import React, {useState,useEffect} from 'react';
 import Admin from './admin/Admin';
 import Student from './student/Student';
-import { Link, Route, Router, Routes } from 'react-router-dom';
+import { Link, Navigate, redirect, Route, Router, Routes } from 'react-router-dom';
 import ReactDOM from "react-dom";
 
 export const StudentContext = React.createContext()
@@ -52,16 +52,21 @@ function App() {
           <StudentContext.Provider value = { students }>
             <BooksContext.Provider value = { books }>
               <BooksArrayContext.Provider value = { setbooks }>
-                {(key == "admin") &&
-                    (authentication == !true ? 
-                    <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
-                    <Admin />)}
-                  
-                
-                  {(key == "student") &&
-                    (authentication == !true ? 
-                    <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> :
-                    <Student />)}
+                  <Routes>
+                    <Route path="/" element={ <Navigate replace to="/login" />} />
+                    {
+                    (key == "admin") &&
+                      <Route path="/login" element={authentication == !true ? 
+                      <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
+                      <Admin />} />
+                    }
+                    {
+                    (key == "student") &&
+                      <Route path="/login" element={authentication == !true ? 
+                      <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
+                      <Student />} />
+                    }
+                  </Routes>
               </BooksArrayContext.Provider>
             </BooksContext.Provider>
           </StudentContext.Provider>
