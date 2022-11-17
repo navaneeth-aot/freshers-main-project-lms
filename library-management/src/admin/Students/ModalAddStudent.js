@@ -74,7 +74,7 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
       
       <Modal show={show} onHide={handleClose} >
         <Modal.Header closeButton  className='px-4 border-bottom-0'>
-          <Modal.Title>Add Student</Modal.Title>
+          <Modal.Title>{(editFlag != true) ? "Add Student" : "Update Student" }</Modal.Title>
         </Modal.Header>
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>

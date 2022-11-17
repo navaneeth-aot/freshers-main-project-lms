@@ -22,21 +22,6 @@ function StudentList() {
         setprimarykey(deletekey)
      }
 
-    // // const editStudent = (editkey) => {
-    // //     seteditFlag(true);
-    // //     editsetShow(true);
-    // //     setprimarykey(editkey);
-    // //     Student.map((item)=>{
-    // //         if(item.key == editkey) {
-    // //             seteditEmail(item.Email);
-    // //             seteditname(item.name);
-    // //             seteditpassword(item.password);
-                
-    // //         }
-            
-    //     })
-    //}
-
   return (
     Student.map((Students)=>{
         return(
