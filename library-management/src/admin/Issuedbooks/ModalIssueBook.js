@@ -2,17 +2,22 @@ import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { BooksContext , StudentContext } from '../../App';
+import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext } from '../../App';
 
 export default function ModalIssueBook({show,setShow}) {
 
   const Students = useContext(StudentContext);
   const books = useContext(BooksContext);
+  const IssuedBook = useContext(IssuedBooksContext);
+  const setIssuedBook = useContext(IssuedBooksArrayContext);
 
   const [BookName, setBookName] = useState('');
   const [IssuedStudent, setIssuedStudent] = useState('');
   const [IssueDate, setIssueDate] = useState('');
   const [DueDate, setDueDate] = useState('');
+  const [fine, setfine] = useState(0)
+  const [Return, setReturn] = useState('')
+  const [key, setkey] = useState(1);
 
   const handleClose = () => setShow(false);
 
@@ -22,7 +27,13 @@ export default function ModalIssueBook({show,setShow}) {
   const handleDueDate = (e)=> { setDueDate(e.target.value) }
 
   const IssueBook = () => {
-
+    setkey(key+1);
+    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:IssueDate,DueDate:DueDate,fine:fine,ReturnDate:Return}]);
+    setBookName('')
+    setIssuedStudent('')
+    setIssueDate('')
+    setDueDate('')
+    handleClose();
   }
 
   return (
@@ -38,7 +49,7 @@ export default function ModalIssueBook({show,setShow}) {
               <Form.Label>Book</Form.Label>
               <Form.Select aria-label="Default select example"
                 onChange={handleBook}>
-                <option>Select Book</option>
+                <option value="N/A">Select Book</option>
                 {books.map((book) => {
                   return (
                     <>
@@ -53,7 +64,7 @@ export default function ModalIssueBook({show,setShow}) {
               <Form.Label>Student</Form.Label>
               <Form.Select aria-label="Default select example"
               onChange={handleStudent}>
-              <option>Select Student</option>
+              <option value="N/A">Select Student</option>
               {Students.map((student) => {
                 return (
                   <>
@@ -66,7 +77,7 @@ export default function ModalIssueBook({show,setShow}) {
             <Form.Group className="mb-3" controlId="studentPassword">
               <Form.Label>Issue Date</Form.Label>
               <Form.Control
-                type="date"
+                type="Date"
                 onChange={handleIssueDate}
                 className = "grey"
               />
@@ -75,7 +86,7 @@ export default function ModalIssueBook({show,setShow}) {
             <Form.Group className="mb-3" controlId="studentConfirmPassword">
               <Form.Label>Due Date</Form.Label>
               <Form.Control
-                type="text"
+                type="Date"
                 onChange={handleDueDate}
               />
             </Form.Group>
@@ -84,10 +95,10 @@ export default function ModalIssueBook({show,setShow}) {
         </Modal.Body>
         <Modal.Footer  className='px-4 border-top-0'>
           <Button variant="outline-secondary" onClick={handleClose}>
-            Close
+            Cancel
           </Button>
           <Button onClick={IssueBook}>
-            Add Student
+            Issue Book
           </Button>
         </Modal.Footer>
       </Modal>
