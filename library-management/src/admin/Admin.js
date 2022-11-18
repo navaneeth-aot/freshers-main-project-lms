@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route , Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route , Navigate, Outlet } from "react-router-dom";
 import Sidebar from './Sidebar';
 import IssuedBooksPage from './Issuedbooks/IssuedBooksPage';
 import AllbooksPage from './Allbooks/AllbooksPage';
@@ -12,11 +12,7 @@ export default function Admin() {
         <div className='d-flex'>
           
             <Sidebar />
-            <Routes>
-              <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
-              <Route path='/allbooks' element = {<AllbooksPage />} />
-              <Route path="/studentspage" element = {<StudentPage />} />
-            </Routes>
+            <Outlet/>
            
         </div>
   )

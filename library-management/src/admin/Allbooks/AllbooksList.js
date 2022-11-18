@@ -4,10 +4,12 @@ import { MdEdit } from 'react-icons/md';
 import { FiTrash2 } from 'react-icons/fi';
 import { BooksArrayContext , BooksContext } from '../../App';
 import ModalAllbooks from './ModalAllbooks';
+import DeleteModal from '../DeleteModal';
 
 function AllbooksList() {
-    const books = useContext(BooksContext);
+    const Books = useContext(BooksContext);
     const setbooks = useContext(BooksArrayContext);
+
     const [BookEditFlag, setBookEditFlag] = useState(false);
     const [editBooksetShow, setEditBooksetShow] = useState(false);
     const [primarykey, setprimarykey] = useState();
@@ -17,14 +19,13 @@ function AllbooksList() {
     const [editTotal, seteditTotal] = useState('')
     const [editRemaining, seteditRemaining] = useState('')
 
-    const deletebook = (key) => { 
-        setbooks(books.filter((book) => book.key != key));
-     }
+    const [DeleteBooksShow, setDeleteBooksShow] = useState(false);
+    const [bookFlag, setbookFlag] = useState(false)
 
 
   return (
 
-    books.map((books)=>{
+    Books.map((books)=>{
 
         return(
             <div key={books.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
@@ -44,8 +45,12 @@ function AllbooksList() {
                             seteditTotal(books.total);
                             seteditRemaining(books.remaining);
                             } } />
-                    <FiTrash2 className='red' onClick={ () => { deletebook(books.key) } } />
+                    <FiTrash2 className='red' onClick={ () => { 
+                        setDeleteBooksShow(true);
+                        setbookFlag(true);
+                        setprimarykey(books.key); } } />
                 </div>
+
                 <ModalAllbooks 
                 show={editBooksetShow} 
                 setShow={setEditBooksetShow} 
@@ -63,6 +68,17 @@ function AllbooksList() {
                 seteditTotal={seteditTotal}
                 seteditRemaining={seteditRemaining}
                 />
+
+                <DeleteModal 
+                    show={DeleteBooksShow}
+                    setShow={setDeleteBooksShow}
+                    primarykey={primarykey}
+                    setprimarykey={setprimarykey}
+                    setbooks={setbooks}
+                    books={Books}
+                    bookFlag={bookFlag}
+                    setbookFlag={setbookFlag}
+                    />
             </div>
         )
     })

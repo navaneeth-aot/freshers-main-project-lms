@@ -9,7 +9,6 @@ import ReactDOM from "react-dom";
 import IssuedBooksPage from './admin/Issuedbooks/IssuedBooksPage';
 import AllbooksPage from './admin/Allbooks/AllbooksPage';
 import StudentPage from './admin/Students/StudentPage';
-import Sidebar from './admin/Sidebar';
 
 export const StudentContext = React.createContext()
 export const StudentArrayContext = React.createContext()
@@ -70,11 +69,11 @@ function App() {
                       <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
                       <Student />} />
                     }
-                  
-                    {/* <Route path='/issuedbooks' element = {<Admin/>} />
-                    <Route path='/allbooks' element = {<Admin />} />
-                    <Route path="/studentspage" element = {<Admin />} /> */}
-            
+                    <Route path='/' element={<Admin />}>
+                    <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
+                    <Route path='/allbooks' element = {<AllbooksPage />} />
+                    <Route path="/studentspage" element = {<StudentPage />} />
+                    </Route>
                   </Routes>
               </BooksArrayContext.Provider>
             </BooksContext.Provider>

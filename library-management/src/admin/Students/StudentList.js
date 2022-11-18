@@ -3,12 +3,14 @@ import { MdEdit } from 'react-icons/md';
 import { FiEye,FiTrash2 } from 'react-icons/fi';
 import { StudentContext , StudentArrayContext } from '../../App';
 import ModalAddStudent from './ModalAddStudent';
+import DeleteModal from '../DeleteModal';
 
 
 
 function StudentList() {
     const Student = useContext(StudentContext);
     const setStudents = useContext(StudentArrayContext);
+
     const [editFlag, seteditFlag] = useState(false);
     const [editshow, editsetShow] = useState(false);
     const [primarykey, setprimarykey] = useState();
@@ -17,10 +19,7 @@ function StudentList() {
     const [editpassword, seteditpassword] = useState('')
     const [editpasswordConfirm, seteditpasswordConfirm] = useState('')
 
-    const deleteStudent = (deletekey) => { 
-        setStudents(Student.filter((students) => students.key != deletekey));
-        setprimarykey(deletekey)
-     }
+    const [DeleteStudentshow, setDeleteStudentShow] = useState(false);
 
   return (
     Student.map((Students)=>{
@@ -38,7 +37,9 @@ function StudentList() {
                             seteditname(Students.name);
                             seteditpassword(Students.password);
                             seteditpasswordConfirm(Students.password); } } />
-                        <FiTrash2 className='red' onClick={ () => { deleteStudent(Students.key) } } />
+                        <FiTrash2 className='red' onClick={ () => { 
+                            setDeleteStudentShow(true);
+                            setprimarykey(Students.key); } } />
                         <FiEye className='grey' />
                     </div>
                     
@@ -57,6 +58,15 @@ function StudentList() {
                     seteditpassword={seteditpassword}
                     editpasswordConfirm={editpasswordConfirm}
                     seteditpasswordConfirm={seteditpasswordConfirm}
+                    />
+
+                <DeleteModal 
+                    show={DeleteStudentshow}
+                    setShow={setDeleteStudentShow}
+                    primarykey={primarykey}
+                    setprimarykey={setprimarykey}
+                    setStudents={setStudents}
+                    Student={Student}
                     />
             </>
         )

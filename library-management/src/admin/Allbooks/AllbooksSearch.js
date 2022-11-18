@@ -7,6 +7,7 @@ import ModalAllbooks from './ModalAllbooks';
 function AllbooksSearch() {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+  const [BookEditFlag, setBookEditFlag] = useState(false)
   return (
     <>
     <h4>All Books</h4>
@@ -20,7 +21,7 @@ function AllbooksSearch() {
             
         </form>
         <Button className='col-2' onClick={handleShow}>Add New Book</Button>
-        <ModalAllbooks show={show} setShow={setShow}/>
+        <ModalAllbooks show={show} setShow={setShow} setBookEditFlag={setBookEditFlag} BookEditFlag={BookEditFlag}/>
     </div>
     </>
   )

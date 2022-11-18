@@ -21,6 +21,7 @@
     background-color: #ED7966;
     --bs-btn-hover-bg: #ED7966;
     --bs-btn-active-bg: #e48678;
+    border-color: #ED7966;
 }
 
 .box {
