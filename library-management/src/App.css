@@ -20,8 +20,11 @@
 .btn-primary {
     background-color: #ED7966;
     --bs-btn-hover-bg: #ED7966;
-    --bs-btn-active-bg: #e48678;
+    --bs-btn-active-bg: #e07363;
     border-color: #ED7966;
+    --bs-btn-hover-border-color: #e07363;
+    --bs-btn-hover-bg: #e07363;
+    --bs-btn-active-border-color: none;
 }
 
 .box {

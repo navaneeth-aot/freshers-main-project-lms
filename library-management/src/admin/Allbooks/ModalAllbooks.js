@@ -87,7 +87,6 @@ export default function ModalAllbooks({show,
       
       <Modal show={show} onHide={handleClose} >
         <Modal.Header closeButton  className='px-4 border-bottom-0'>
-          {console.log(BookEditFlag)}
           <Modal.Title>{(BookEditFlag != true) ? "Add Book" : "Update Book" }</Modal.Title>
         </Modal.Header>
         <Modal.Body  className='px-4'>
