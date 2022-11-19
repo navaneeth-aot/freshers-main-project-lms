@@ -12,6 +12,7 @@ export default function Admin() {
         <div className='d-flex'>
           
             <Sidebar />
+            {/* <IssuedBooksPage /> */}
             <Outlet/>
            
         </div>

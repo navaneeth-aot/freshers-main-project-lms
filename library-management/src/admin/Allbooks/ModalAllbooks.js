@@ -30,14 +30,20 @@ export default function ModalAllbooks({show,
   const [bookLanguage, setbookLanguage] = useState("");
   const [totalCopies, settotalCopies] = useState(0);
   const [remainingCopies, setremainingCopies] = useState(0);
-  const [key, setkey] = useState(1)
+
+  const keys = books.map(object => { return object.key });
+  const maxKey = Math.max(...keys);
+  const newKey = maxKey + 1;
+
+  const [key, setkey] = useState(newKey)
 
   const handleClose = () => {setShow(false);setBookEditFlag(false)}
+
 
   const handlebookTitle = (e)=> { setbookTitle(e.target.value) }
   const handlebookAuthor = (e)=> { setbookAuthor(e.target.value) }
   const handlebookLanguage = (e)=> { setbookLanguage(e.target.value) }
-  const handletotalCopies = (e)=> { settotalCopies(e.target.value) }
+  const handletotalCopies = (e)=> { settotalCopies(e.target.value); setremainingCopies(e.target.value) }
   const handleremainingCopies = (e)=> { setremainingCopies(e.target.value) }
 
   const handleEditTitle = (e)=> { seteditTitle(e.target.value) }
@@ -120,7 +126,14 @@ export default function ModalAllbooks({show,
                 <option value="N/A">Select Language</option>
                 <option value="English">English</option>
                 <option value="Malayalam">Malayalam</option>
-                <option value="Hindi">Hindi</option>
+                <option value="Hindi">Hindi</option>Mandarin
+                <option value="Spanish">Spanish</option>
+                <option value="Mandarin">Mandarin</option>
+                <option value="French">French</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Russian">Russian</option>
+                <option value="Bengali">Portuguese</option>
+                <option value="Portuguese">Portuguese</option>
               </Form.Select>
             </Form.Group>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import IssuedBooksList from './IssuedBooksList';
 
-function IssuedBooks() {
+function IssuedBooks({search}) {
   return (
     <div className='box mt-4 bg-white px-5 border-box rounded'>
         <div className="d-flex justify-content-between px-2 py-3 border-bottom grey">
@@ -12,7 +12,7 @@ function IssuedBooks() {
                 <div className='col-2'>Fine <br/>(Rs. 10 per day) </div>
                 <div className='col-2 ps-4'>Actions</div>
         </div>
-        <IssuedBooksList />
+        <IssuedBooksList search={search}/>
     </div>
   )
 }

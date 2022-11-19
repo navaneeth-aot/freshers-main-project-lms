@@ -27,6 +27,7 @@ export default function ModalIssueBook({show,setShow}) {
   const handleDueDate = (e)=> { setDueDate(e.target.value) }
 
   const IssueBook = () => {
+    if(((BookName && IssuedStudent) && IssueDate) != "") {
     setkey(key+1);
     setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:IssueDate,DueDate:DueDate,fine:fine,ReturnDate:Return}]);
     setBookName('')
@@ -34,6 +35,9 @@ export default function ModalIssueBook({show,setShow}) {
     setIssueDate('')
     setDueDate('')
     handleClose();
+    }
+    else 
+    alert("Book , Student , Issue Date are mandatory")
   }
 
   return (

@@ -13,7 +13,12 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
   const [studentEmail, setstudentEmail] = useState('');
   const [studentpassword, setstudentpassword] = useState('');
   const [studentPassConfirm, setstudentPassConfirm] = useState('');
-  const [key, setkey] = useState(1);
+
+  const keys = Students.map(object => { return object.key });  //finding the next key for unique key generation
+  const maxKey = Math.max(...keys);
+  const newKey = maxKey + 1;
+
+  const [key, setkey] = useState(newKey)
 
   const handleClose = () => { setShow(false);seteditFlag(false); } 
 
@@ -26,7 +31,6 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
   const handleEditEmail = (e)=> { seteditEmail(e.target.value);console.log(e.target.value) }
   const handleEditPassword = (e)=> { seteditpassword(e.target.value);console.log(e.target.value) }
   const handleEditPasswordConfirm = (e)=> { seteditpasswordConfirm(e.target.value);console.log(e.target.value) }
-  // console.log(editName)
 
   const addStudent = () => {
     if(editFlag != false) {
