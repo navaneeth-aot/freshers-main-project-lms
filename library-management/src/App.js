@@ -8,6 +8,7 @@ import { Link, Navigate, redirect, Route, Router, Routes } from 'react-router-do
 import IssuedBooksPage from './admin/Issuedbooks/IssuedBooksPage';
 import AllbooksPage from './admin/Allbooks/AllbooksPage';
 import StudentPage from './admin/Students/StudentPage';
+import ViewDetails from './admin/ViewDetails';
 
 export const StudentContext = React.createContext()
 export const StudentArrayContext = React.createContext()
@@ -17,9 +18,9 @@ export const IssuedBooksContext = React.createContext()
 export const IssuedBooksArrayContext = React.createContext()
 
 function App() {
-  const StudentArray = JSON.parse(localStorage.getItem('studentsKey')) || [];
-  const BooksArray = JSON.parse(localStorage.getItem('booksKey')) || [];
-  const IssuedBookArray = JSON.parse(localStorage.getItem('IssuedBookKey')) || [];
+  const StudentArray = JSON.parse(localStorage.getItem('studentsDB')) || [];
+  const BooksArray = JSON.parse(localStorage.getItem('booksDB')) || [];
+  const IssuedBookArray = JSON.parse(localStorage.getItem('IssuedBookDB')) || [];
   const [key, setKey] = useState('admin');
   const [authentication, setauthentication] = useState(false);
   const [students, setstudents] = useState(StudentArray);
@@ -27,38 +28,38 @@ function App() {
   const [IssuedBook, setIssuedBook] = useState(IssuedBookArray);
 
   useEffect(() => {
-    const students = JSON.parse(localStorage.getItem('studentsKey'));
+    const students = JSON.parse(localStorage.getItem('studentsDB'));
     if (students) {
       setstudents(students);
     }
   }, []);
 
   useEffect(() => {
-      localStorage.setItem('studentsKey', JSON.stringify(students));
+      localStorage.setItem('studentsDB', JSON.stringify(students));
   }, [students]);
 
 
   useEffect(() => {
-    const books = JSON.parse(localStorage.getItem('booksKey'));
+    const books = JSON.parse(localStorage.getItem('booksDB'));
     if (books) {
       setbooks(books);
     }
   }, []);
 
   useEffect(() => {
-      localStorage.setItem('booksKey', JSON.stringify(books));
+      localStorage.setItem('booksDB', JSON.stringify(books));
   }, [books]);
 
 
   useEffect(() => {
-    const IssuedBook = JSON.parse(localStorage.getItem('IssuedBookKey'));
+    const IssuedBook = JSON.parse(localStorage.getItem('IssuedBookDB'));
     if (IssuedBook) {
       setIssuedBook(IssuedBook);
     }
   }, []);
 
   useEffect(() => {
-      localStorage.setItem('IssuedBookKey', JSON.stringify(IssuedBook));
+      localStorage.setItem('IssuedBookDB', JSON.stringify(IssuedBook));
   }, [IssuedBook]);
 
   
@@ -90,6 +91,7 @@ function App() {
                       <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
                       <Route path='/allbooks' element = {<AllbooksPage />} />
                       <Route path="/studentspage" element = {<StudentPage />} />
+                      <Route path="/details" element = {<ViewDetails />} />
                       </Route>
                     </Routes>
                   </IssuedBooksContext.Provider>

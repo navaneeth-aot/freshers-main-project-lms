@@ -2,12 +2,13 @@ import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext } from '../../App';
+import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext ,BooksArrayContext } from '../../App';
 
 export default function ModalIssueBook({show,setShow}) {
 
   const Students = useContext(StudentContext);
   const books = useContext(BooksContext);
+  const setbooks = useContext(BooksArrayContext);
   const IssuedBook = useContext(IssuedBooksContext);
   const setIssuedBook = useContext(IssuedBooksArrayContext);
 
@@ -28,6 +29,13 @@ export default function ModalIssueBook({show,setShow}) {
 
   const IssueBook = () => {
     if(((BookName && IssuedStudent) && IssueDate) != "") {
+    const newBook = books.map((obj) => {
+      if(obj.key == BookName){
+        obj.remaining = obj.remaining - 1;
+      }
+      return(obj)
+    })
+    setbooks(newBook)
     setkey(key+1);
     setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:IssueDate,DueDate:DueDate,fine:fine,ReturnDate:Return}]);
     setBookName('')
@@ -48,16 +56,17 @@ export default function ModalIssueBook({show,setShow}) {
         </Modal.Header>
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>
-
+          
           <Form.Group className="mb-3" controlId="studentName">
               <Form.Label>Book</Form.Label>
               <Form.Select aria-label="Default select example"
                 onChange={handleBook}>
                 <option value="N/A">Select Book</option>
                 {books.map((book) => {
+                  if(book.remaining != 0)
                   return (
                     <>
-                      <option value={book.title}>{book.title}</option>
+                      <option value={book.key}>{book.title}</option>
                     </>
                   );
                 })}
@@ -72,7 +81,7 @@ export default function ModalIssueBook({show,setShow}) {
               {Students.map((student) => {
                 return (
                   <>
-                    <option value={student.name}>{student.name}</option>
+                    <option value={student.key}>{student.name}</option>
                   </>
                 );
               })}

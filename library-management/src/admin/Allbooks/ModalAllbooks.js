@@ -33,7 +33,7 @@ export default function ModalAllbooks({show,
 
   const keys = books.map(object => { return object.key });
   const maxKey = Math.max(...keys);
-  const newKey = maxKey + 1;
+  const newKey = (!maxKey + 1) || 1 ;
 
   const [key, setkey] = useState(newKey)
 
@@ -132,7 +132,7 @@ export default function ModalAllbooks({show,
                 <option value="French">French</option>
                 <option value="Arabic">Arabic</option>
                 <option value="Russian">Russian</option>
-                <option value="Bengali">Portuguese</option>
+                <option value="Bengali">Bengali</option>
                 <option value="Portuguese">Portuguese</option>
               </Form.Select>
             </Form.Group>

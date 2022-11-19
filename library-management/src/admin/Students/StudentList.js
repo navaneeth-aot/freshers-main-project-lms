@@ -4,6 +4,7 @@ import { FiEye,FiTrash2 } from 'react-icons/fi';
 import { StudentContext , StudentArrayContext } from '../../App';
 import ModalAddStudent from './ModalAddStudent';
 import DeleteModal from '../DeleteModal';
+import {Link, Outlet} from 'react-router-dom';
 
 
 
@@ -14,6 +15,7 @@ function StudentList() {
     const [editFlag, seteditFlag] = useState(false);
     const [editshow, editsetShow] = useState(false);
     const [primarykey, setprimarykey] = useState();
+    const [details, setdetails] = useState();
     const [editname, seteditname] = useState("");
     const [editEmail, seteditEmail] = useState("");
     const [editpassword, seteditpassword] = useState('')
@@ -28,7 +30,7 @@ function StudentList() {
                 <div key={Students.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
                     <div className='col-5'> {Students.name} </div>
                     <div className='col-5'> {Students.Email} </div>
-                    <div className='col-2 d-flex gap-3 ms-4 ps-2'>
+                    <div className='col-2 d-flex gap-3 ms-4 ps-2 align-items-center'>
                         <MdEdit className='grey' onClick={ () => { 
                             seteditFlag(true);
                             editsetShow(true);
@@ -40,7 +42,7 @@ function StudentList() {
                         <FiTrash2 className='red' onClick={ () => { 
                             setDeleteStudentShow(true);
                             setprimarykey(Students.key); } } />
-                        <FiEye className='grey' />
+                        <Link to="/details"><FiEye className='grey' onClick={ () => { setprimarykey(Students.key) } }/></Link>
                     </div>
                     
                 </div>
@@ -68,6 +70,7 @@ function StudentList() {
                     setStudents={setStudents}
                     Student={Student}
                     />
+                <Outlet primarykey={primarykey}/>
             </>
         )
     })

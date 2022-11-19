@@ -34,7 +34,7 @@ function AllbooksList() {
                 <div className='col-2'>{ books.language }</div>
                 <div className='col-2 ps-4 ms-2'>{ books.total }</div>
                 <div className='col-2 ps-4'>{ books.remaining }</div>
-                <div className='col-2 d-flex gap-3 ps-5'>
+                <div className='col-2 d-flex gap-3 ps-5 pt-1'>
                     <MdEdit className='grey' onClick={ () => { 
                             setBookEditFlag(true);
                             setEditBooksetShow(true);
