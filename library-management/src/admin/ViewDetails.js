@@ -1,8 +1,16 @@
-import React from 'react';
+import React , {useContext } from 'react';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
+import { StudentContext } from '../App';
 
-function ViewDetails({details}) {
-    console.log(details);
+function ViewDetails({primarykey}) {
+    const Student = useContext(StudentContext);
+
+    
+    Student.map((item) => {
+    if(item.key == primarykey) {
+        console.log("hi")
+    }
+    })
   return (
     <>
 

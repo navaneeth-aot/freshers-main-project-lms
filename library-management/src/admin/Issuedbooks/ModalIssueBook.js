@@ -18,9 +18,8 @@ export default function ModalIssueBook({show,setShow}) {
   const [IssueDate, setIssueDate] = useState('');
   const [DueDate, setDueDate] = useState('');
   const [fine, setfine] = useState(0)
-  const [Return, setReturn] = useState('')
   
-  
+
   const [key, setkey] = useState(shortid.generate());
 
   const handleClose = () => setShow(false);
@@ -40,7 +39,7 @@ export default function ModalIssueBook({show,setShow}) {
     })
     setbooks(newBook)
     setkey(key);
-    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:IssueDate,DueDate:DueDate,fine:fine,ReturnDate:Return}]);
+    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:IssueDate,DueDate:DueDate,fine:fine,ReturnDate:"",return:false}]);
     setBookName('')
     setIssuedStudent('')
     setIssueDate('')

@@ -48,7 +48,6 @@ function StudentList({search}) {
                             setprimarykey(Students.key); } } />
                         <Link to="/details"><FiEye className='grey' onClick={ () => { setprimarykey(Students.key) } }/></Link>
                     </div>
-                    
                 </div>
                 <ModalAddStudent 
                     show={editshow} 
