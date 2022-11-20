@@ -6,7 +6,7 @@ import { BooksArrayContext , BooksContext } from '../../App';
 import ModalAllbooks from './ModalAllbooks';
 import DeleteModal from '../DeleteModal';
 
-function AllbooksList() {
+function AllbooksList({search}) {
     const Books = useContext(BooksContext);
     const setbooks = useContext(BooksArrayContext);
 
@@ -25,7 +25,11 @@ function AllbooksList() {
 
   return (
 
-    Books.map((books)=>{
+    Books.filter((object) => {
+        if(search == "") { return object }
+        else if(object.title.toLowerCase().includes(search.toLowerCase())) { return object }
+        else if(object.author.toLowerCase().includes(search.toLowerCase())) { return object }
+    }).map((books)=>{
 
         return(
             <div key={books.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
@@ -52,22 +56,22 @@ function AllbooksList() {
                 </div>
 
                 <ModalAllbooks 
-                show={editBooksetShow} 
-                setShow={setEditBooksetShow} 
-                BookEditFlag={BookEditFlag} 
-                setBookEditFlag={setBookEditFlag} 
-                primarykey={primarykey}
-                editTitle={editTitle} 
-                editAuthor={editAuthor}
-                editLanguage={editLanguage}
-                editTotal={editTotal}
-                editRemaining={editRemaining}
-                seteditTitle={seteditTitle}
-                seteditAuthor={seteditAuthor}
-                seteditLanguage={seteditLanguage}
-                seteditTotal={seteditTotal}
-                seteditRemaining={seteditRemaining}
-                />
+                    show={editBooksetShow} 
+                    setShow={setEditBooksetShow} 
+                    BookEditFlag={BookEditFlag} 
+                    setBookEditFlag={setBookEditFlag} 
+                    primarykey={primarykey}
+                    editTitle={editTitle} 
+                    editAuthor={editAuthor}
+                    editLanguage={editLanguage}
+                    editTotal={editTotal}
+                    editRemaining={editRemaining}
+                    seteditTitle={seteditTitle}
+                    seteditAuthor={seteditAuthor}
+                    seteditLanguage={seteditLanguage}
+                    seteditTotal={seteditTotal}
+                    seteditRemaining={seteditRemaining}
+                    />
 
                 <DeleteModal 
                     show={DeleteBooksShow}

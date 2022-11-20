@@ -1,7 +1,7 @@
 import React from 'react';
 import AllbooksList from './AllbooksList';
 
-function Allbooks() {
+function Allbooks({search}) {
   
   return (
     <div className='box mt-4 bg-white px-5 border-box rounded'>
@@ -13,7 +13,7 @@ function Allbooks() {
                 <div className='col-2'>Remaining</div>
                 <div className='col-2 ps-5 ms-2'>Actions</div>
         </div>
-        <AllbooksList />
+        <AllbooksList search={search}/>
     </div>
   )
 }

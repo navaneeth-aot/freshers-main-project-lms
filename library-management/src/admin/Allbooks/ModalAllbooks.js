@@ -32,10 +32,6 @@ export default function ModalAllbooks({show,
   const [totalCopies, settotalCopies] = useState(0);
   const [remainingCopies, setremainingCopies] = useState(0);
 
-  // const keys = books.map(object => { return object.key });
-  // const maxKey = Math.max(...keys);
-  // const newKey = maxKey + 1 || 1 ;
-
   const [key, setkey] = useState(shortid.generate())
 
   const handleClose = () => {setShow(false);setBookEditFlag(false)}

@@ -8,7 +8,7 @@ import {Link, Outlet} from 'react-router-dom';
 
 
 
-function StudentList() {
+function StudentList({search}) {
     const Student = useContext(StudentContext);
     const setStudents = useContext(StudentArrayContext);
 
@@ -24,7 +24,11 @@ function StudentList() {
     const [DeleteStudentshow, setDeleteStudentShow] = useState(false);
 
   return (
-    Student.map((Students)=>{
+    Student.filter((student) => {
+        if(search == "") { return student }
+        else if(student.name.toLowerCase().includes(search.toLowerCase())) { return student }
+        else if(student.Email.toLowerCase().includes(search.toLowerCase())) { return student }
+    }).map((Students)=>{
         return(
             <>
                 <div key={Students.key} className="d-flex justify-content-between px-2 py-3 border-bottom">

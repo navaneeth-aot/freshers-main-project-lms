@@ -7,7 +7,7 @@ function IssuedBooksPage() {
 
   return (
     <div className='col-md-10 p-5 backcolor'>
-        <IssueSearch search={search} setsearch={setsearch}/>
+        <IssueSearch setsearch={setsearch}/>
         <IssuedBooks search={search}/>
     </div>
   )

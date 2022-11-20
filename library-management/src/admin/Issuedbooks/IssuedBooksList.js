@@ -11,8 +11,26 @@ function IssuedBooksList({search}) {
 
     return (
             
+        // IssuedBook.filter((object) => {
+        //     if(search == "") { return object }
+        //     else if(books.map((book) => { if(book.key == object.title) {
+        //         console.log(book.title);
+        //         return(book.title);
+        //     } }).includes(search)) { return object }
+
+
+
+
+
+
+
+
+        //     // else if(Students.map((item) => {
+        //     //     if(item.key == object.name) { return (item) }
+        //     //         }).toLowerCase().includes(search.toLowerCase())) { return object }
+        // })
+        
         IssuedBook.map((IssueBook)=>{
-            console.log(search)
             if(IssueBook.ReturnDate == "") {
             return(
                 <div key={IssueBook.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
