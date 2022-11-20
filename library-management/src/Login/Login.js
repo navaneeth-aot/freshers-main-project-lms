@@ -15,17 +15,20 @@ export default function Login({setauthentication,authentication,login,setlogin,s
 
         
         if(login == "admin") {
-            (email == "aot@gmail.com" && password == 1234) ? setauthentication(!authentication) : alert("Login details is not Valid")
+            (email.toLowerCase() == "aot@gmail.com" && password == 1234) && setauthentication(!authentication)
             
         }
 
         else if(login == "student") {
             students.map((students)=>{
-                (email == students.Email && password == students.password) ? setauthentication(!authentication) : alert("Login details is not Valid")
+                (email.toLowerCase() == students.Email.toLowerCase() && password == students.password) && setauthentication(!authentication)  
             })
+            
             // (email == "jio@gmail.com" && password == 1234) ? setauthentication(!authentication) : alert("Login details is not Valid")
         }
-        
+        else {
+            alert("Login details is not Valid")
+        }
     }
 
     return(
