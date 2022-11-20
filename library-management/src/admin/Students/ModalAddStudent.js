@@ -9,6 +9,7 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
   const Students = useContext(StudentContext);
   const setstudents = useContext(StudentArrayContext);
 
+  const shortid = require('shortid');
   const [studentName, setstudentName] = useState('');
   const [studentEmail, setstudentEmail] = useState('');
   const [studentpassword, setstudentpassword] = useState('');
@@ -16,9 +17,9 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
 
   const keys = Students.map(object => { return object.key });  //finding the next key for unique key generation
   const maxKey = Math.max(...keys);
-  const newKey = (!maxKey + 1) || 1;
+  const newKey = (maxKey > 0) ? maxKey + 1 : 1;
 
-  const [key, setkey] = useState(newKey)
+  const [key, setkey] = useState(shortid.generate())
 
   const handleClose = () => { setShow(false);seteditFlag(false); } 
 

@@ -6,6 +6,7 @@ import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayCo
 
 export default function ModalIssueBook({show,setShow}) {
 
+  const shortid = require('shortid');
   const Students = useContext(StudentContext);
   const books = useContext(BooksContext);
   const setbooks = useContext(BooksArrayContext);
@@ -18,7 +19,9 @@ export default function ModalIssueBook({show,setShow}) {
   const [DueDate, setDueDate] = useState('');
   const [fine, setfine] = useState(0)
   const [Return, setReturn] = useState('')
-  const [key, setkey] = useState(1);
+  
+  
+  const [key, setkey] = useState(shortid.generate());
 
   const handleClose = () => setShow(false);
 
@@ -36,7 +39,7 @@ export default function ModalIssueBook({show,setShow}) {
       return(obj)
     })
     setbooks(newBook)
-    setkey(key+1);
+    setkey(key);
     setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:IssueDate,DueDate:DueDate,fine:fine,ReturnDate:Return}]);
     setBookName('')
     setIssuedStudent('')

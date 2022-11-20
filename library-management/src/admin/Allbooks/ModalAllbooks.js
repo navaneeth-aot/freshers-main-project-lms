@@ -1,4 +1,5 @@
 import React, { useState , useContext } from 'react';
+import { shortid } from 'shortid'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -21,7 +22,7 @@ export default function ModalAllbooks({show,
                                       seteditRemaining
 }) 
 {
-
+  const shortid = require('shortid');
   const books = useContext(BooksContext);
   const setbooks = useContext(BooksArrayContext);
 
@@ -31,11 +32,11 @@ export default function ModalAllbooks({show,
   const [totalCopies, settotalCopies] = useState(0);
   const [remainingCopies, setremainingCopies] = useState(0);
 
-  const keys = books.map(object => { return object.key });
-  const maxKey = Math.max(...keys);
-  const newKey = (!maxKey + 1) || 1 ;
+  // const keys = books.map(object => { return object.key });
+  // const maxKey = Math.max(...keys);
+  // const newKey = maxKey + 1 || 1 ;
 
-  const [key, setkey] = useState(newKey)
+  const [key, setkey] = useState(shortid.generate())
 
   const handleClose = () => {setShow(false);setBookEditFlag(false)}
 
@@ -58,7 +59,7 @@ export default function ModalAllbooks({show,
         alert("please fill Book Name and totalCopies");
       }
       else {
-        setkey(key+1);
+        setkey(key);
         setbooks([...books,{key:key,title:bookTitle,author:bookAuthor,language:bookLanguage,total:totalCopies,remaining:remainingCopies}]);
         setbookTitle('')
         setbookAuthor('')
