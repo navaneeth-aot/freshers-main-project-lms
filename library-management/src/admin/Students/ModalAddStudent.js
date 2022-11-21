@@ -2,6 +2,8 @@ import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { StudentArrayContext , StudentContext } from '../../App';
 
 export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,primarykey,editEmail,seteditEmail,editname,seteditname,editpassword,seteditpassword,editpasswordConfirm, seteditpasswordConfirm}) {
@@ -15,9 +17,6 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
   const [studentpassword, setstudentpassword] = useState('');
   const [studentPassConfirm, setstudentPassConfirm] = useState('');
 
-  const keys = Students.map(object => { return object.key });  //finding the next key for unique key generation
-  const maxKey = Math.max(...keys);
-  const newKey = (maxKey > 0) ? maxKey + 1 : 1;
 
   const [key, setkey] = useState(shortid.generate())
 
@@ -36,10 +35,28 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
   const addStudent = () => {
     if(editFlag != false) {
       if(((editname && editEmail) && editpassword) == "") {
-        alert("please fill all  fields");
+        toast.error('please fill all  fields!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
       else if(editpassword != editpasswordConfirm) {
-        alert("password did not match");
+        toast.info('please fill all  fields!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
       else {
         const updatedStudents = Students.map((item) => {
@@ -57,10 +74,28 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
 
     else {
       if(((studentName && studentEmail) && studentpassword) == "") {
-        alert("please fill all the fields");
+        toast.error('please fill all  fields!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
       else if(studentpassword != studentPassConfirm) {
-        alert("password did not match");
+        toast.info('please fill all  fields!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
       else {
         setkey(key+1);
@@ -131,6 +166,7 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
             {(editFlag != true) ? "Add Student" : "Update" }
           </Button>
         </Modal.Footer>
+        <ToastContainer />
       </Modal>
   );
 }

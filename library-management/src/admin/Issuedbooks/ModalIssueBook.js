@@ -2,6 +2,8 @@ import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext ,BooksArrayContext } from '../../App';
 
 export default function ModalIssueBook({show,setShow}) {
@@ -47,7 +49,16 @@ export default function ModalIssueBook({show,setShow}) {
     handleClose();
     }
     else 
-    alert("Book , Student , Issue Date are mandatory")
+    toast.error('Book , Student , Issue Date are mandatory!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
   }
 
   return (
@@ -116,6 +127,7 @@ export default function ModalIssueBook({show,setShow}) {
             Issue Book
           </Button>
         </Modal.Footer>
+        <ToastContainer />
       </Modal>
   );
 }

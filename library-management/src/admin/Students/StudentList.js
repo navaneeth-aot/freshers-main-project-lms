@@ -23,6 +23,9 @@ function StudentList({search}) {
 
     const [DeleteStudentshow, setDeleteStudentShow] = useState(false);
 
+    const [bookFlag, setbookFlag] = useState(false)
+    const [markFlag, setmarkFlag] = useState(false)
+
   return (
     Student.filter((student) => {
         if(search == "") { return student }
@@ -72,8 +75,12 @@ function StudentList({search}) {
                     setprimarykey={setprimarykey}
                     setStudents={setStudents}
                     Student={Student}
+                    bookFlag={bookFlag}
+                    setbookFlag={setbookFlag}
+                    markFlag={markFlag}
+                    setmarkFlag={setmarkFlag}
                     />
-                <Outlet primarykey={primarykey}/>
+                <Outlet />
             </>
         )
     })

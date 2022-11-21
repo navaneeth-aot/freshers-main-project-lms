@@ -1,6 +1,8 @@
 import LoginBox from './LoginBox';
 import logo from '../Images/Logo-LMC.png';
 import React,{ useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Student from '../student/Student';
 
 export default function Login({setauthentication,authentication,login,setlogin,students}) {
@@ -12,22 +14,47 @@ export default function Login({setauthentication,authentication,login,setlogin,s
     const handlePassword = (e) => { setpassword(e.target.value) }
     const handleLogin = (e) => { 
         e.preventDefault();
-
         
         if(login == "admin") {
-            (email.toLowerCase() == "aot@gmail.com" && password == 1234) && setauthentication(!authentication)
-            
+            if(email.toLowerCase() == "aot@gmail.com" && password == 1234) {
+                setauthentication(!authentication);
+                alert("Logged In");
+            }
+            else {
+                toast.error('Login Error!', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            }
         }
 
         else if(login == "student") {
-            students.map((students)=>{
-                (email.toLowerCase() == students.Email.toLowerCase() && password == students.password) && setauthentication(!authentication)  
-            })
+            const log = students.find((students)=>{
+                if((email.toLowerCase() == students.Email.toLowerCase() && password == students.password)) {
+                    setauthentication(!authentication)
+                    alert("login success")
+                }  
+            }) 
             
-            // (email == "jio@gmail.com" && password == 1234) ? setauthentication(!authentication) : alert("Login details is not Valid")
-        }
-        else {
-            alert("Login details is not Valid")
+            if(!log) {
+                toast.error('Login Error!', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            }
+            
         }
     }
 
@@ -41,6 +68,18 @@ export default function Login({setauthentication,authentication,login,setlogin,s
             </div>
             <div className='col-md-12'>
                 <LoginBox handleEmail={handleEmail} handlePassword={handlePassword} handleLogin={handleLogin} login={login} setlogin={setlogin} />
+                <ToastContainer
+                    position="top-center"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    />
             </div>
         </div>
     )

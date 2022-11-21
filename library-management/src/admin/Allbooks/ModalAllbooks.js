@@ -3,6 +3,8 @@ import { shortid } from 'shortid'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BooksArrayContext , BooksContext } from '../../App';
 
 export default function ModalAllbooks({show,
@@ -52,7 +54,16 @@ export default function ModalAllbooks({show,
   const addBooks = () => {
     if(BookEditFlag == false) {
       if(( bookTitle && totalCopies ) == "") {
-        alert("please fill Book Name and totalCopies");
+        toast.error('please fill Book Name and totalCopies!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
       else {
         setkey(key);
@@ -67,7 +78,16 @@ export default function ModalAllbooks({show,
     }
     else {
       if(( editTitle && editTotal ) == "") {
-        alert("please fill Book Name and totalCopies");
+        toast.error('please fill Book Name and totalCopies atleast  !', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
       else {
         const updatedAllbooks = books.map((item) => {
@@ -164,6 +184,7 @@ export default function ModalAllbooks({show,
             {(BookEditFlag != true) ? "Add Book" : "Update" }
           </Button>
         </Modal.Footer>
+        <ToastContainer />
       </Modal>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useContext } from 'react';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext , BooksArrayContext } from '../../App';
+import DeleteModal from '../DeleteModal';
 
 
 function IssuedBooksList({search}) {
@@ -12,24 +13,12 @@ function IssuedBooksList({search}) {
     const IssuedBook = useContext(IssuedBooksContext);
     const setIssuedBook = useContext(IssuedBooksArrayContext);
     
+    const [DeleteStudentshow, setDeleteStudentShow] = useState(false);
+    const [primarykey, setprimarykey] = useState();
+    const [Title, setTitle] = useState()
+    const [markFlag, setmarkFlag] = useState(false)
 
-    const handleReturn = (key,title) => { 
-        const marked = IssuedBook.map((object) => {
-            if(object.key == key) { 
-                object.return = true
-                object.ReturnDate = new Date()
-            }
-            return(object)
-        })
-        const newBook = books.map((object) => {
-            if(object.key == title) {
-                object.remaining = object.remaining + 1
-            }
-            return(object)
-        })
-        setIssuedBook(marked)
-        setbooks(newBook)
-    }
+    const [bookFlag, setbookFlag] = useState(false)
 
     return (
             
@@ -81,7 +70,26 @@ function IssuedBooksList({search}) {
                     <div className='col-2'>{IssueBook.IssueDate}</div>
                     <div className='col-2'>{IssueBook.DueDate}</div>
                     <div className='col-2 ps-5'>{IssueBook.fine}</div>
-                <div className='col-2 ps-5'><MdOutlineAssignmentReturn className='grey' onClick={()=>{handleReturn(IssueBook.key,IssueBook.title)}}/></div>
+                <div className='col-2 ps-5'><MdOutlineAssignmentReturn className='grey' onClick={()=>{
+                    setDeleteStudentShow(true);
+                    setprimarykey(IssueBook.key);
+                    setmarkFlag(true)}}/></div>
+                <DeleteModal 
+                    show={DeleteStudentshow}
+                    setShow={setDeleteStudentShow}
+                    primarykey={primarykey}
+                    setprimarykey={setprimarykey}
+                    setbooks={setbooks}
+                    books={books}
+                    setIssuedBook={setIssuedBook}
+                    IssuedBook={IssuedBook}
+                    Title={Title}
+                    setTitle={setTitle}
+                    markFlag={markFlag}
+                    setmarkFlag={setmarkFlag}
+                    bookFlag={bookFlag}
+                    setbookFlag={setbookFlag}
+                    />
                 </div>
             )
             }

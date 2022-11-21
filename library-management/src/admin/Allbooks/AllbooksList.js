@@ -21,6 +21,7 @@ function AllbooksList({search}) {
 
     const [DeleteBooksShow, setDeleteBooksShow] = useState(false);
     const [bookFlag, setbookFlag] = useState(false)
+    const [markFlag, setmarkFlag] = useState(false)
 
 
   return (
@@ -82,6 +83,8 @@ function AllbooksList({search}) {
                     books={Books}
                     bookFlag={bookFlag}
                     setbookFlag={setbookFlag}
+                    markFlag={markFlag}
+                    setmarkFlag={setmarkFlag}
                     />
             </div>
         )
