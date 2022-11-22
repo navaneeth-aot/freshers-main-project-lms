@@ -1,23 +1,20 @@
-import React , {useContext } from 'react';
+import React , {useContext , useState } from 'react';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { StudentContext } from '../App';
+import { Link, useParams } from 'react-router-dom';
 
-function ViewDetails({primarykey}) {
+function ViewDetails({params}) {
     const Student = useContext(StudentContext);
-
+    const [id, setid] = useState(params)
+    console.log(id)
     
-    Student.map((item) => {
-    if(item.key == primarykey) {
-        console.log("hi")
-    }
-    })
   return (
     <>
 
     <div className='col-md-10 p-5 backcolor'>
 
         <p className='d-flex align-items-center'>
-            <MdOutlineArrowBackIos size={20}/>Students /Nitha Samuel
+        <Link to="/studentspage" className='text-decoration-none'><MdOutlineArrowBackIos size={20}/>Students /Nitha Samuel </Link>
         </p>
         <hr></hr>
         <div className='d-flex mt-5 px-5 bg-white py-3'>

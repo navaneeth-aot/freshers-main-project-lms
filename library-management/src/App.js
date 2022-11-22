@@ -16,6 +16,7 @@ export const BooksContext = React.createContext()
 export const BooksArrayContext = React.createContext()
 export const IssuedBooksContext = React.createContext()
 export const IssuedBooksArrayContext = React.createContext()
+export const SetParamsContext = React.createContext()
 
 function App() {
   const StudentArray = JSON.parse(localStorage.getItem('studentsDB')) || [];
@@ -62,7 +63,7 @@ function App() {
       localStorage.setItem('IssuedBookDB', JSON.stringify(IssuedBook));
   }, [IssuedBook]);
 
-  
+  const [params, setparams] = useState()
 
 
   return (
@@ -73,27 +74,29 @@ function App() {
               <BooksArrayContext.Provider value = { setbooks }>
                 <IssuedBooksArrayContext.Provider value = { setIssuedBook }>
                   <IssuedBooksContext.Provider value = { IssuedBook }>
-                    <Routes>
-                      <Route path="/" element={ <Navigate replace to="/login" />} />
-                      {
-                      (key == "admin") &&
-                        <Route path="/login" element={authentication == !true ? 
-                        <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
-                        <Admin />} />
-                      }
-                      {
-                      (key == "student") &&
-                        <Route path="/login" element={authentication == !true ? 
-                        <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
-                        <Student />} />
-                      }
-                      <Route path='/' element={<Admin />}>
-                      <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
-                      <Route path='/allbooks' element = {<AllbooksPage />} />
-                      <Route path="/studentspage" element = {<StudentPage />} />
-                      <Route path="/details" element = {<ViewDetails />} />
-                      </Route>
-                    </Routes>
+                    <SetParamsContext.Provider value = { setparams }>
+                      <Routes>
+                        <Route path="/" element={ <Navigate replace to="/login" />} />
+                        {
+                        (key == "admin") &&
+                          <Route path="/login" element={authentication == !true ? 
+                          <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
+                          <Admin />} />
+                        }
+                        {
+                        (key == "student") &&
+                          <Route path="/login" element={authentication == !true ? 
+                          <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
+                          <Student />} />
+                        }
+                        <Route path='/' element={<Admin />}>
+                          <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
+                          <Route path='/allbooks' element = {<AllbooksPage />} />
+                          <Route path="/studentspage" element = {<StudentPage />} />
+                          <Route path="/Studentsdetails" element = {<ViewDetails params={params}/>} />
+                        </Route>
+                      </Routes>
+                    </SetParamsContext.Provider>
                   </IssuedBooksContext.Provider>
                 </IssuedBooksArrayContext.Provider>
               </BooksArrayContext.Provider>

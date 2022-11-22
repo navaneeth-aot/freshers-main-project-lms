@@ -12,7 +12,9 @@ export default function Admin() {
         <div className='d-flex'>
           
             <Sidebar />
-            {/* <IssuedBooksPage /> */}
+            <Routes>
+              <Route index element = {<IssuedBooksPage/>} />
+            </Routes>
             <Outlet/>
            
         </div>
