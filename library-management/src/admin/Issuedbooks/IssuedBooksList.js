@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
 import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext , BooksArrayContext } from '../../App';
 import DeleteModal from '../DeleteModal';
+import Moment from 'moment';
+import DateDiff from 'date-diff';
 
 
 function IssuedBooksList({search}) {
@@ -20,10 +22,9 @@ function IssuedBooksList({search}) {
 
     const [bookFlag, setbookFlag] = useState(false)
 
-    
     const tempArray = IssuedBook.map((issued) => {
         if(issued.return == false) {
-            let obj ={ key:issued.key,IssueDate:issued.IssueDate,DueDate:issued.DueDate,return:issued.return }
+            let obj ={ key:issued.key,IssueDate:issued.IssueDate,DueDate:issued.DueDate,return:issued.return,fine:0 }
             books.map((book) => {
                 if(book.key == issued.title) {
                     obj.title = book.title
@@ -34,6 +35,12 @@ function IssuedBooksList({search}) {
                     obj.name = object.name
                     }
                 })
+                
+            var date1 = new Date();
+            var date2 = new Date(issued.DueDate);
+            var diff = new DateDiff(date1, date2);
+            obj.fine = Math.floor(diff.days())*10
+
             return(obj)
         }
     })
@@ -50,7 +57,7 @@ function IssuedBooksList({search}) {
                     <div className='col-2'>{IssueBook.name}</div>
                     <div className='col-2'>{IssueBook.IssueDate}</div>
                     <div className='col-2'>{IssueBook.DueDate}</div>
-                    <div className='col-2 ps-5'>-</div>
+                    <div className='col-2 ps-5'>{ IssueBook.fine < 0 ? "-" : IssueBook.fine }</div>
                 <div className='col-2 ps-5'><MdOutlineAssignmentReturn className='grey' onClick={()=>{
                     setDeleteStudentShow(true);
                     setprimarykey(IssueBook.key);

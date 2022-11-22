@@ -1,4 +1,4 @@
-import React, { useState , useContext } from 'react';
+import React, { useState , useContext , useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,6 +6,7 @@ import Moment from 'moment';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext ,BooksArrayContext } from '../../App';
+import moment from 'moment';
 
 export default function ModalIssueBook({show,setShow}) {
 
@@ -18,20 +19,30 @@ export default function ModalIssueBook({show,setShow}) {
 
   const [BookName, setBookName] = useState('');
   const [IssuedStudent, setIssuedStudent] = useState('');
-  const [IssueDate, setIssueDate] = useState('');
-  const [DueDate, setDueDate] = useState('');
-
+  const [Issue, setIssue] = useState(Moment().format("YYYY-MM-DD"));
+  const [Due, setDue] = useState(moment().add(7, 'days').format("YYYY-MM-DD"));
   const [key, setkey] = useState(shortid.generate());
+  
+  useEffect(() => {
+    setDue(moment(Issue, "YYYY-MM-DD").add(7, 'days').format("YYYY-MM-DD"))
+  }, [Issue]);  
 
   const handleClose = () => setShow(false);
 
   const handleBook = (e)=> { setBookName(e.target.value) }
   const handleStudent = (e)=> { setIssuedStudent(e.target.value) }
-  const handleIssueDate = (e)=> { setIssueDate(e.target.value) }
-  const handleDueDate = (e)=> { setDueDate(e.target.value) }
+  const handleIssueDate = (e)=> { 
+    const newDate = Moment(new Date(e.target.value)).format("YYYY-MM-DD");
+    setIssue(newDate);
+    }
+  const handleDueDate = (e)=> { 
+    const newDate = Moment(new Date(e.target.value)).format("YYYY-MM-DD");
+    console.log(newDate);
+    setDue(newDate);
+    }
 
   const IssueBook = () => {
-    if(((BookName && IssuedStudent) && IssueDate) != "") {
+    if(((BookName && IssuedStudent) && Issue) != "") {
     const newBook = books.map((obj) => {
       if(obj.key == BookName){
         obj.remaining = obj.remaining - 1;
@@ -40,11 +51,9 @@ export default function ModalIssueBook({show,setShow}) {
     })
     setbooks(newBook)
     setkey(shortid.generate());
-    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:IssueDate,DueDate:DueDate,ReturnDate:"",return:false}]);
+    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:Issue,DueDate:Due,ReturnDate:"",return:false,fine:0}]);
     setBookName('')
     setIssuedStudent('')
-    setIssueDate('')
-    setDueDate('')
     handleClose();
     }
     else 
@@ -105,7 +114,7 @@ export default function ModalIssueBook({show,setShow}) {
                 type="Date"
                 
                 className = "grey"
-                value={Moment().format("YYYY-MM-DD")}
+                value={Issue}
                 onInput ={handleIssueDate}
               />
             </Form.Group>
@@ -116,7 +125,7 @@ export default function ModalIssueBook({show,setShow}) {
                 type="Date"
                 onChange={handleDueDate}
                 className = 'grey'
-                //value={Moment().add(10, 'days').format("YYYY-MM-DD")}
+                value={Due}
               />
             </Form.Group>
             
