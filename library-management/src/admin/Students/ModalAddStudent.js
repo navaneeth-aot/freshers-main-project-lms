@@ -98,7 +98,7 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
           });
       }
       else {
-        setkey(key+1);
+        setkey(shortid.generate());
         setstudents([...Students,{key:key,name:studentName,Email:studentEmail,password:studentpassword}]);
         setstudentName('')
         setstudentEmail('')

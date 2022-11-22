@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext , BooksArrayContext , StudentArrayContext } from '../App';
 
-function DeleteModal({show,setShow,setprimarykey,primarykey,Student,setStudents,bookFlag,setbookFlag,setbooks,books,setIssuedBook,IssuedBook,Title,setTitle,markFlag,setmarkFlag}) {
+function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag,Title,setTitle,markFlag,setmarkFlag}) {
   
+  const setStudents = useContext(StudentArrayContext);
+  const Student = useContext(StudentContext);
+  const books = useContext(BooksContext);
+  const setbooks = useContext(BooksArrayContext);
+  const IssuedBook = useContext(IssuedBooksContext);
+  const setIssuedBook = useContext(IssuedBooksArrayContext);
+
+  const [deletable, setdeletable] = useState(true)
 
   const handleClose = () => {
     setShow(false);
@@ -18,11 +29,10 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,Student,setStudents,
      }
 
   const deletebook = () => { 
-        setbooks(books.filter((book) => book.key != primarykey));
-        handleClose();
-        setprimarykey('');
-        setTitle('')
-     }
+      setbooks(books.filter((book) => book.key != primarykey));
+      handleClose();
+      setprimarykey('');
+  }
 
   const handleReturn = () => { 
       const marked = IssuedBook.map((object) => {
@@ -42,6 +52,7 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,Student,setStudents,
       setbooks(newBook)
       handleClose();
       setprimarykey('');
+      setTitle('')
   }
 
   return (
@@ -58,8 +69,10 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,Student,setStudents,
           <Button variant="primary" className='px-5' onClick={ (markFlag != true) ? ((bookFlag != true) ? handleStudentDelete : deletebook) : handleReturn }>
             Yes
           </Button>
+          
         </Modal.Footer>
       </Modal>
+      <ToastContainer />
     </>
   );
 }

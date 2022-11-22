@@ -73,8 +73,6 @@ function StudentList({search}) {
                     setShow={setDeleteStudentShow}
                     primarykey={primarykey}
                     setprimarykey={setprimarykey}
-                    setStudents={setStudents}
-                    Student={Student}
                     bookFlag={bookFlag}
                     setbookFlag={setbookFlag}
                     markFlag={markFlag}

@@ -2,6 +2,7 @@ import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import Moment from 'moment';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext ,BooksArrayContext } from '../../App';
@@ -19,8 +20,6 @@ export default function ModalIssueBook({show,setShow}) {
   const [IssuedStudent, setIssuedStudent] = useState('');
   const [IssueDate, setIssueDate] = useState('');
   const [DueDate, setDueDate] = useState('');
-  const [fine, setfine] = useState(0)
-  
 
   const [key, setkey] = useState(shortid.generate());
 
@@ -40,8 +39,8 @@ export default function ModalIssueBook({show,setShow}) {
       return(obj)
     })
     setbooks(newBook)
-    setkey(key);
-    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:IssueDate,DueDate:DueDate,fine:fine,ReturnDate:"",return:false}]);
+    setkey(shortid.generate());
+    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:IssueDate,DueDate:DueDate,ReturnDate:"",return:false}]);
     setBookName('')
     setIssuedStudent('')
     setIssueDate('')
@@ -104,8 +103,10 @@ export default function ModalIssueBook({show,setShow}) {
               <Form.Label>Issue Date</Form.Label>
               <Form.Control
                 type="Date"
-                onChange={handleIssueDate}
+                
                 className = "grey"
+                value={Moment().format("YYYY-MM-DD")}
+                onInput ={handleIssueDate}
               />
             </Form.Group>
 
@@ -114,6 +115,8 @@ export default function ModalIssueBook({show,setShow}) {
               <Form.Control
                 type="Date"
                 onChange={handleDueDate}
+                className = 'grey'
+                //value={Moment().add(10, 'days').format("YYYY-MM-DD")}
               />
             </Form.Group>
             

@@ -66,7 +66,7 @@ export default function ModalAllbooks({show,
           });
       }
       else {
-        setkey(key);
+        setkey(shortid.generate());
         setbooks([...books,{key:key,title:bookTitle,author:bookAuthor,language:bookLanguage,total:totalCopies,remaining:remainingCopies}]);
         setbookTitle('')
         setbookAuthor('')

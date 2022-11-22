@@ -14,65 +14,47 @@ function IssuedBooksList({search}) {
     const setIssuedBook = useContext(IssuedBooksArrayContext);
     
     const [DeleteStudentshow, setDeleteStudentShow] = useState(false);
-    const [primarykey, setprimarykey] = useState();
+    const [primarykey, setprimarykey] = useState('');
     const [Title, setTitle] = useState()
     const [markFlag, setmarkFlag] = useState(false)
 
     const [bookFlag, setbookFlag] = useState(false)
 
+    
+    const tempArray = IssuedBook.map((issued) => {
+        if(issued.return == false) {
+            let obj ={ key:issued.key,IssueDate:issued.IssueDate,DueDate:issued.DueDate,return:issued.return }
+            books.map((book) => {
+                if(book.key == issued.title) {
+                    obj.title = book.title
+                    }
+                })
+            Students.map((object) => {
+                if(object.key == issued.name) {
+                    obj.name = object.name
+                    }
+                })
+            return(obj)
+        }
+    })
     return (
+        tempArray.filter((tempValue) => {
+            if(search == "") { return tempValue }
+            else if(tempValue.title.toLowerCase().includes(search.toLowerCase())) { return tempValue }
+            else if(tempValue.name.toLowerCase().includes(search.toLowerCase())) { return tempValue }
+        }).map((IssueBook)=>{
             
-        // IssuedBook.filter((object) => {
-        //     if(search == "") { return object }
-        //     else if(books.map((book) => { if(book.key == object.title) {
-        //         console.log(book.title);
-        //         return(book.title);
-        //     } }).includes(search)) { return object }
-
-
-
-
-
-
-
-
-        //     // else if(Students.map((item) => {
-        //     //     if(item.key == object.name) { return (item) }
-        //     //         }).toLowerCase().includes(search.toLowerCase())) { return object }
-        // })
-
-        IssuedBook.map((IssueBook)=>{
-            if(IssueBook.return == false) {
             return(
                 <div key={IssueBook.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
-                    <div className='col-2'>
-                        {books.map((book) => {
-                            if(book.key == IssueBook.title)
-                                return (
-                                    <>
-                                        {book.title}
-                                    </>
-                                );
-                            }
-                        )}
-                    </div>
-                    <div className='col-2'>
-                        {Students.map((object) => {
-                            if(object.key == IssueBook.name)
-                                return (
-                                    <>
-                                        {object.name}
-                                    </>
-                                );
-                            }
-                        )}
-                    </div>
+                    <div className='col-2'>{IssueBook.title}</div>
+                    <div className='col-2'>{IssueBook.name}</div>
                     <div className='col-2'>{IssueBook.IssueDate}</div>
                     <div className='col-2'>{IssueBook.DueDate}</div>
-                    <div className='col-2 ps-5'>{IssueBook.fine}</div>
+                    <div className='col-2 ps-5'>-</div>
                 <div className='col-2 ps-5'><MdOutlineAssignmentReturn className='grey' onClick={()=>{
                     setDeleteStudentShow(true);
                     setprimarykey(IssueBook.key);
+                    setTitle(IssueBook.title);
                     setmarkFlag(true)}}/></div>
                 <DeleteModal 
                     show={DeleteStudentshow}
@@ -81,8 +63,6 @@ function IssuedBooksList({search}) {
                     setprimarykey={setprimarykey}
                     setbooks={setbooks}
                     books={books}
-                    setIssuedBook={setIssuedBook}
-                    IssuedBook={IssuedBook}
                     Title={Title}
                     setTitle={setTitle}
                     markFlag={markFlag}
@@ -92,7 +72,6 @@ function IssuedBooksList({search}) {
                     />
                 </div>
             )
-            }
         
         })
     

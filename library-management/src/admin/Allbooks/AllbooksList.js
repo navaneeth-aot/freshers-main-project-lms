@@ -79,8 +79,6 @@ function AllbooksList({search}) {
                     setShow={setDeleteBooksShow}
                     primarykey={primarykey}
                     setprimarykey={setprimarykey}
-                    setbooks={setbooks}
-                    books={Books}
                     bookFlag={bookFlag}
                     setbookFlag={setbookFlag}
                     markFlag={markFlag}
