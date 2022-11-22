@@ -54,6 +54,7 @@ export default function ModalIssueBook({show,setShow}) {
     setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:Issue,DueDate:Due,ReturnDate:"",return:false,fine:0}]);
     setBookName('')
     setIssuedStudent('')
+    setIssue(Moment().format("YYYY-MM-DD"))
     handleClose();
     }
     else 

@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Moment from 'moment';
 import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext , BooksArrayContext , StudentArrayContext } from '../App';
 
 function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag,Title,setTitle,markFlag,setmarkFlag}) {
@@ -38,7 +39,7 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag
       const marked = IssuedBook.map((object) => {
           if(object.key == primarykey) { 
               object.return = true
-              object.ReturnDate = new Date()
+              object.ReturnDate = Moment().format("YYYY-MM-DD")
           }
           return(object)
       })
