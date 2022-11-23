@@ -63,9 +63,6 @@ function App() {
       localStorage.setItem('IssuedBookDB', JSON.stringify(IssuedBook));
   }, [IssuedBook]);
 
-  const [params, setparams] = useState()
-
-
   return (
       <div>
         <StudentArrayContext.Provider value = { setstudents }>
@@ -74,7 +71,7 @@ function App() {
               <BooksArrayContext.Provider value = { setbooks }>
                 <IssuedBooksArrayContext.Provider value = { setIssuedBook }>
                   <IssuedBooksContext.Provider value = { IssuedBook }>
-                    <SetParamsContext.Provider value = { setparams }>
+                    
                       <Routes>
                         <Route path="/" element={ <Navigate replace to="/login" />} />
                         {
@@ -93,10 +90,10 @@ function App() {
                           <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
                           <Route path='/allbooks' element = {<AllbooksPage />} />
                           <Route path="/studentspage" element = {<StudentPage />} />
-                          <Route path="/Studentsdetails" element = {<ViewDetails params={params}/>} />
+                          <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
                         </Route>
                       </Routes>
-                    </SetParamsContext.Provider>
+                    
                   </IssuedBooksContext.Provider>
                 </IssuedBooksArrayContext.Provider>
               </BooksArrayContext.Provider>

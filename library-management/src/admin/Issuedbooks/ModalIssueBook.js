@@ -37,7 +37,6 @@ export default function ModalIssueBook({show,setShow}) {
     }
   const handleDueDate = (e)=> { 
     const newDate = Moment(new Date(e.target.value)).format("YYYY-MM-DD");
-    console.log(newDate);
     setDue(newDate);
     }
 
@@ -113,7 +112,6 @@ export default function ModalIssueBook({show,setShow}) {
               <Form.Label>Issue Date</Form.Label>
               <Form.Control
                 type="Date"
-                
                 className = "grey"
                 value={Issue}
                 onInput ={handleIssueDate}
@@ -124,9 +122,9 @@ export default function ModalIssueBook({show,setShow}) {
               <Form.Label>Due Date</Form.Label>
               <Form.Control
                 type="Date"
-                onChange={handleDueDate}
                 className = 'grey'
                 value={Due}
+                onChange={handleDueDate}
               />
             </Form.Group>
             

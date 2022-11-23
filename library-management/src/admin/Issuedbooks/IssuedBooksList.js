@@ -5,6 +5,7 @@ import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayCo
 import DeleteModal from '../DeleteModal';
 import DateDiff from 'date-diff';
 import ReactTooltip from 'react-tooltip';
+import Moment from 'moment';
 
 
 function IssuedBooksList({search}) {
@@ -43,6 +44,7 @@ function IssuedBooksList({search}) {
             return(obj)
         }
     })
+    //console.log(tempArray)
     return (
         tempArray.filter((tempValue) => {
             if(tempValue != undefined) {
@@ -55,8 +57,8 @@ function IssuedBooksList({search}) {
                 <div key={IssueBook.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
                     <div className='col-2'>{IssueBook.booktitle}</div>
                     <div className='col-2'>{IssueBook.name}</div>
-                    <div className='col-2'>{IssueBook.IssueDate}</div>
-                    <div className='col-2'>{IssueBook.DueDate}</div>
+                    <div className='col-2'>{Moment(new Date(IssueBook.IssueDate)).format("DD-MM-YYYY")}</div>
+                    <div className='col-2'>{Moment(new Date(IssueBook.DueDate)).format("DD-MM-YYYY")}</div>
                     <div className='col-2 ps-5'>{ IssueBook.fine < 0 ? "-" : IssueBook.fine }</div>
                 <div className='col-2 ps-5'><MdOutlineAssignmentReturn className='grey' data-tip="Mark as returned" onClick={()=>{
                     setDeleteStudentShow(true);

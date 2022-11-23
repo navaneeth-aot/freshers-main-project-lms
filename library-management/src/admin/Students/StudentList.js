@@ -1,7 +1,7 @@
 import React,{useContext,useState} from 'react'
 import { MdEdit } from 'react-icons/md';
 import { FiEye,FiTrash2 } from 'react-icons/fi';
-import { StudentContext , SetParamsContext } from '../../App';
+import { StudentContext } from '../../App';
 import ModalAddStudent from './ModalAddStudent';
 import DeleteModal from '../DeleteModal';
 import {Link, Outlet} from 'react-router-dom';
@@ -10,7 +10,6 @@ import {Link, Outlet} from 'react-router-dom';
 
 function StudentList({search}) {
     const Student = useContext(StudentContext);
-    const setparams = useContext(SetParamsContext);
 
     const [editFlag, seteditFlag] = useState(false);
     const [editshow, editsetShow] = useState(false);
@@ -49,7 +48,7 @@ function StudentList({search}) {
                         <FiTrash2 className='red' onClick={ () => { 
                             setDeleteStudentShow(true);
                             setprimarykey(Students.key); } } />
-                        <Link to="/Studentsdetails"><FiEye className='grey' onClick={ () => { setprimarykey(Students.key);setparams(Students.key) } }/></Link>
+                        <Link to={`/Studentsdetails/${Students.key}`}><FiEye className='grey'/></Link>
                     </div>
                 </div>
                 <ModalAddStudent 

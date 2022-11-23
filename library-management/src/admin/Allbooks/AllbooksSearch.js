@@ -19,7 +19,6 @@ function AllbooksSearch({setsearch}) {
                 <Form.Control type="text" placeholder="Search by book title or author " className='border-0' onChange={handleSearch}/>
                 <GoSearch className='grey'/> 
             </div> 
-            
         </form>
         <Button className='col-2' onClick={handleShow}>Add New Book</Button>
         <ModalAllbooks show={show} setShow={setShow} setBookEditFlag={setBookEditFlag} BookEditFlag={BookEditFlag}/>
