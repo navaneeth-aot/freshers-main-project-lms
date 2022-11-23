@@ -12,6 +12,7 @@ function ViewDetails() {
     const books = useContext(BooksContext);
     const IssuedBook = useContext(IssuedBooksContext);
     let {id} = useParams();
+    const [search, setsearch] = useState('')
     
     const booksTakenByStudent = IssuedBook.filter((bookList) => {
         if(bookList.name == id)
@@ -61,7 +62,6 @@ function ViewDetails() {
             totalFine = totalFine + item.fine
         }
     })
-    console.log(tempArray)
 
     return (
     
@@ -95,7 +95,7 @@ function ViewDetails() {
                             <h6 className='py-2'>Issued Books ({tempArray.length})</h6>
                             <form className='col-md-6 py-2'>
                                 <div className='d-flex align-items-center border rounded bg-white pe-3'>
-                                    <Form.Control type="text" placeholder="Search by book title or author " className='border-0'/>
+                                    <Form.Control type="text" placeholder="Search by book title or author " className='border-0' onChange={ (e) => {setsearch(e.target.value)} }/>
                                     <GoSearch className='grey'/> 
                                 </div> 
                             </form>
@@ -110,7 +110,11 @@ function ViewDetails() {
                         </div>
                             
                     </div>
-                    {tempArray.map((item) => {
+                    {tempArray.filter((tempValue) => {
+                        if(search == "") { return tempValue }
+                        else if(tempValue.title.toLowerCase().includes(search.toLowerCase())) { return tempValue }
+                        else if(tempValue.author.toLowerCase().includes(search.toLowerCase())) { return tempValue }
+                        }).map((item) => {
                             return (
                                 <div key={item.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
                                     <div className='col-2'> {item.title} </div>
@@ -120,9 +124,9 @@ function ViewDetails() {
                                     <div className='col-2'>{ item.ReturnDate == "" ? "-" : item.ReturnDate }</div>
                                     <div className='col-2 ps-5'> { item.fine < 0 ? 0 : item.fine } </div>
                                 </div>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
                 </div>
             </div>
             </>
