@@ -33,7 +33,7 @@ function AllbooksList({search}) {
     }).map((books)=>{
 
         return(
-            <div key={books.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
+            <div key={books.key} className="d-flex justify-content-between px-2 py-3 border-bottom blue">
                 <div className='col-2'>{ books.title }</div>
                 <div className='col-2'>{ books.author }</div>
                 <div className='col-2'>{ books.language }</div>

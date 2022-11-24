@@ -113,13 +113,13 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
   return (
       
       <Modal show={show} onHide={handleClose} >
-        <Modal.Header closeButton  className='px-4 border-bottom-0'>
-          <Modal.Title>{(editFlag != true) ? "Add Student" : "Update Student" }</Modal.Title>
+        <Modal.Header closeButton  className='px-4 border-bottom-0 blue'>
+          <Modal.Title className='fw-bold'>{(editFlag != true) ? "Add Student" : "Update Student" }</Modal.Title>
         </Modal.Header>
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>
           <Form.Group className="mb-3" controlId="studentName">
-              <Form.Label>Name</Form.Label>
+              <Form.Label className='blue fw-semibold'>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: John Doe"
@@ -130,7 +130,7 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentEmail">
-              <Form.Label>Email</Form.Label>
+              <Form.Label className='blue fw-semibold'>Email</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Eg: johndoe@gmail.com"
@@ -139,7 +139,7 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="studentPassword">
-              <Form.Label>password</Form.Label>
+              <Form.Label className='blue fw-semibold'>password</Form.Label>
               <Form.Control
                 type="password"
                 value={editFlag != true ? studentpassword : editpassword}
@@ -148,7 +148,7 @@ export default function ModalAddStudent({show,setShow,editFlag,seteditFlag,prima
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentConfirmPassword">
-              <Form.Label>Confirm Password</Form.Label>
+              <Form.Label className='blue fw-semibold'>Confirm Password</Form.Label>
               <Form.Control 
                 type="password"
                 value={editFlag != true ? studentPassConfirm : editpasswordConfirm}

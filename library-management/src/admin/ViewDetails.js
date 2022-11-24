@@ -69,20 +69,20 @@ function ViewDetails() {
             <div className='col-md-10 p-5 backcolor'>
 
                 <p className='d-flex align-items-center'>
-                <Link to="/studentspage" className='text-decoration-none'><MdOutlineArrowBackIos size={20}/>Students /{studentDetails.name} </Link>
+                <Link to="/studentspage" className='text-decoration-none blue fw-semibold'><MdOutlineArrowBackIos size={20}/><span className='grey'>Students</span> /{studentDetails.name} </Link>
                 </p>
                 <hr></hr>
                 <div className='d-flex mt-5 px-5 bg-white py-3'>
                     <div className='col-8 border-end pt-2'>
-                        <h4>{studentDetails.name}</h4>
-                        <h6>{studentDetails.Email}</h6>
+                        <h4 className='dark'>{studentDetails.name}</h4>
+                        <h6 className='dark-light'>{studentDetails.Email}</h6>
                     </div>
-                    <div className='col-2 pt-2 ps-4'>
+                    <div className='col-2 pt-2 ps-4 grey'>
                         <h6>Total Books issued</h6>
                         <h6>Returned Books</h6>
                         <h6>Total Fine</h6>
                     </div>
-                    <div className='col-2 pt-2 ps-5'>
+                    <div className='col-2 pt-2 ps-5 fw-semibold'>
                         <h6>{tempArray.length}</h6>
                         <h6>{returnedBooks}</h6>
                         <h6>Rs. {totalFine}</h6>
@@ -92,7 +92,7 @@ function ViewDetails() {
                 <div className='box mt-4 bg-white px-5 border-box rounded'>
                     <div>
                         <div className='pt-3'>
-                            <h6 className='py-2'>Issued Books ({tempArray.length})</h6>
+                            <h6 className='py-2 fw-semibold'>Issued Books ({tempArray.length})</h6>
                             <form className='col-md-6 py-2'>
                                 <div className='d-flex align-items-center border rounded bg-white pe-3'>
                                     <Form.Control type="text" placeholder="Search by book title or author " className='border-0' onChange={ (e) => {setsearch(e.target.value)} }/>
@@ -116,7 +116,7 @@ function ViewDetails() {
                         else if(tempValue.author.toLowerCase().includes(search.toLowerCase())) { return tempValue }
                         }).map((item) => {
                             return (
-                                <div key={item.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
+                                <div key={item.key} className="d-flex justify-content-between px-2 py-3 border-bottom blue">
                                     <div className='col-2'> {item.title} </div>
                                     <div className='col-2'> {item.author} </div>
                                     <div className='col-2'>{Moment(new Date(item.IssueDate)).format("DD-MM-YYYY")}</div>

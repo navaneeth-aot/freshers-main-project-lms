@@ -15,7 +15,7 @@ function StudentSearch({setsearch}) {
 
   return (
     <>
-    <h4>Students</h4>
+    <h4 className='fw-bold blue'>Students</h4>
     <hr></hr>
     <div className='d-flex mt-5 justify-content-between'>
         <form className='col-md-6'>

@@ -110,13 +110,13 @@ export default function ModalAllbooks({show,
       
       <Modal show={show} onHide={handleClose} >
         <Modal.Header closeButton  className='px-4 border-bottom-0'>
-          <Modal.Title>{(BookEditFlag != true) ? "Add Book" : "Update Book" }</Modal.Title>
+          <Modal.Title className='blue fw-bold'>{(BookEditFlag != true) ? "Add Book" : "Update Book" }</Modal.Title>
         </Modal.Header>
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>
 
           <Form.Group className="mb-3" controlId="bookTitle">
-              <Form.Label>Name</Form.Label>
+              <Form.Label className='blue fw-semibold'>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: Pride and Prejudice"
@@ -127,7 +127,7 @@ export default function ModalAllbooks({show,
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="bookAuthor">
-              <Form.Label>Author</Form.Label>
+              <Form.Label className='blue fw-semibold'>Author</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: Jane Austen"
@@ -136,7 +136,7 @@ export default function ModalAllbooks({show,
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="bookLanguage">
-              <Form.Label>Language</Form.Label>
+              <Form.Label className='blue fw-semibold'>Language</Form.Label>
               <Form.Select aria-label="Default select example" 
               value={(BookEditFlag != true) ? bookLanguage : editLanguage}
               onChange={(BookEditFlag != true) ? handlebookLanguage : handleEditLanguage }>
@@ -156,7 +156,7 @@ export default function ModalAllbooks({show,
 
             <div className='d-flex gap-5'>
               <Form.Group className="mb-3" controlId="studentConfirmPassword">
-                <Form.Label>Total Copies</Form.Label>
+                <Form.Label className='blue fw-semibold'>Total Copies</Form.Label>
                 <Form.Control
                   type="number"
                   value={(BookEditFlag != true) ? totalCopies : editTotal}
@@ -165,7 +165,7 @@ export default function ModalAllbooks({show,
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="studentConfirmPasword">
-                <Form.Label>Remaining</Form.Label>
+                <Form.Label className='blue fw-semibold'>Remaining</Form.Label>
                 <Form.Control
                   type="number"
                   onChange={(BookEditFlag != true) ? handleremainingCopies : handleEditremainingCopies }

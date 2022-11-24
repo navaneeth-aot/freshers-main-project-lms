@@ -12,7 +12,7 @@ function IssueSearch({ setsearch }) {
 
   return (
     <>
-    <h4>Issued Books</h4>
+    <h4 className='fw-bold blue'>Issued Books</h4>
     <hr></hr>
     <div className='d-flex mt-5 justify-content-between'>
         <form className='col-md-6'>

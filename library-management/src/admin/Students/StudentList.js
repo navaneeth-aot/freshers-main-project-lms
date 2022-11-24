@@ -33,7 +33,7 @@ function StudentList({search}) {
     }).map((Students)=>{
         return(
             <>
-                <div key={Students.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
+                <div key={Students.key} className="d-flex justify-content-between px-2 py-3 border-bottom blue">
                     <div className='col-5'> {Students.name} </div>
                     <div className='col-5'> {Students.Email} </div>
                     <div className='col-2 d-flex gap-3 ms-4 ps-2 align-items-center'>

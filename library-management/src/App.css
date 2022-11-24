@@ -2,6 +2,9 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .logo {
@@ -23,6 +26,11 @@ body {
     min-height: 100vh;
 }
 
+.sidebar-student {
+    background: #303179;
+    min-height: 100vh;
+}
+
 .btn-primary {
     background-color: #ED7966;
     --bs-btn-hover-bg: #ED7966;
@@ -30,7 +38,7 @@ body {
     border-color: #ED7966;
     --bs-btn-hover-border-color: #e07363;
     --bs-btn-hover-bg: #e07363;
-    --bs-btn-active-border-color: none;
+    --bs-btn-active-border-color: #ED7966;
 }
 
 .box {
@@ -49,4 +57,33 @@ body {
 
 .grey {
     color: #7E7E7F;
+}
+
+.blue {
+    color: #09174A;
+}
+
+.dark {
+    color: #282829;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.dark-light {
+    color: #414141;
+}
+
+.nav-link {
+    color: #09174A;
+}
+
+.adminEmail {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.profile {
+    height:100%;
+    width:100%;
 }

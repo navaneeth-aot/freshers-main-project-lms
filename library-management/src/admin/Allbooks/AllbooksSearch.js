@@ -11,7 +11,7 @@ function AllbooksSearch({setsearch}) {
   const [BookEditFlag, setBookEditFlag] = useState(false)
   return (
     <>
-    <h4>All Books</h4>
+    <h4 className='fw-bold blue'>All Books</h4>
     <hr></hr>
     <div className='d-flex mt-5 justify-content-between'>
         <form className='col-md-6'>

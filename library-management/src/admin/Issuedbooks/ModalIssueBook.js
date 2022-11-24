@@ -73,13 +73,13 @@ export default function ModalIssueBook({show,setShow}) {
       
       <Modal show={show} onHide={handleClose} >
         <Modal.Header closeButton  className='px-4 border-bottom-0'>
-          <Modal.Title>Issue Book</Modal.Title>
+          <Modal.Title className='blue fw-bold'>Issue Book</Modal.Title>
         </Modal.Header>
         <Modal.Body  className='px-4'>
           <Form className='border-top border-bottom py-3'>
           
           <Form.Group className="mb-3" controlId="studentName">
-              <Form.Label>Book</Form.Label>
+              <Form.Label className='blue fw-semibold'>Book</Form.Label>
               <Form.Select aria-label="Default select example"
                 onChange={handleBook}>
                 <option value="N/A">Select Book</option>
@@ -95,7 +95,7 @@ export default function ModalIssueBook({show,setShow}) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentEmail">
-              <Form.Label>Student</Form.Label>
+              <Form.Label className='blue fw-semibold'>Student</Form.Label>
               <Form.Select aria-label="Default select example"
               onChange={handleStudent}>
               <option value="N/A">Select Student</option>
@@ -109,7 +109,7 @@ export default function ModalIssueBook({show,setShow}) {
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="studentPassword">
-              <Form.Label>Issue Date</Form.Label>
+              <Form.Label className='blue fw-semibold'>Issue Date</Form.Label>
               <Form.Control
                 type="Date"
                 className = "grey"
@@ -119,7 +119,7 @@ export default function ModalIssueBook({show,setShow}) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentConfirmPassword">
-              <Form.Label>Due Date</Form.Label>
+              <Form.Label className='blue fw-semibold'>Due Date</Form.Label>
               <Form.Control
                 type="Date"
                 className = 'grey'

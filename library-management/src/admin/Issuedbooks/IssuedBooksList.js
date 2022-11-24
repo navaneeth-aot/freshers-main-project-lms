@@ -44,7 +44,6 @@ function IssuedBooksList({search}) {
             return(obj)
         }
     })
-    //console.log(tempArray)
     return (
         tempArray.filter((tempValue) => {
             if(tempValue != undefined) {
@@ -54,7 +53,7 @@ function IssuedBooksList({search}) {
         }}).map((IssueBook)=>{
             
             return(
-                <div key={IssueBook.key} className="d-flex justify-content-between px-2 py-3 border-bottom">
+                <div key={IssueBook.key} className="d-flex justify-content-between px-2 py-3 border-bottom blue">
                     <div className='col-2'>{IssueBook.booktitle}</div>
                     <div className='col-2'>{IssueBook.name}</div>
                     <div className='col-2'>{Moment(new Date(IssueBook.IssueDate)).format("DD-MM-YYYY")}</div>

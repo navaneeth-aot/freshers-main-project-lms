@@ -9,18 +9,18 @@ export default function LoginBox({handleEmail,handlePassword,handleLogin,login,s
     return(
         <div className='d-flex justify-content-center mt-5'>
             <div>
-                <h3>Login</h3>
-                <p>Welcome back! Please enter your details.</p>
+                <h3 className='blue fw-bold'>Login</h3>
+                <p className='grey'>Welcome back! Please enter your details.</p>
                 <form>
                     <Tabs id = "controlled-tab-example" activeKey={login} onSelect={(k) => {setlogin(k)}} className = "mb-3">
-                        <Tab eventKey = "admin" title = "Admin" ></Tab>
-                        <Tab eventKey = "student" title = "Student" ></Tab>
+                        <Tab eventKey = "admin" title = "Admin"></Tab>
+                        <Tab eventKey = "student" title = "Student"></Tab>
                     </Tabs>
                 
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label className='blue'>Email address</Form.Label>
                     <Form.Control type = "email" placeholder = "Enter your email" onChange={handleEmail}/>
                     <br/>
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className='blue'>Password</Form.Label>
                     <Form.Control type = "password" placeholder = "Enter your password" onChange={handlePassword}/>
                     <br/>
                     <Button className = "login-btn" type = "submit" onClick={handleLogin}>Login</Button>
