@@ -1,8 +1,10 @@
 import React from 'react'
 import Logo_white from '../Images/Logo-white.png';
+import profile from '../Images/Student_profile.png';
+import ReactTooltip from 'react-tooltip';
 import Nav from 'react-bootstrap/Nav';
 import { MdMenuBook,MdTaskAlt,MdOutlinePeople } from 'react-icons/md';
-import {Link} from 'react-router-dom';
+import { Link , Outlet } from 'react-router-dom';
 
 function Student() {
   return (
@@ -14,16 +16,20 @@ function Student() {
                         <img src={Logo_white} alt=""/>
                     </div>
                 </div>
-                <Link to="/mybooks" className='btn btn-info mt-5 col-12 d-flex align-items-center gap-3'><MdMenuBook/>My Books</Link>
-                <Link to="/myissuedbooks" className='btn btn-info col-12 d-flex align-items-center gap-3'><MdTaskAlt/>Issued Books</Link>
+                <Link to="/mybooks" className='btn btn-success mt-5 col-12 d-flex align-items-center gap-3'><MdMenuBook/>My Books</Link>
+                <Link to="/myissuedbooks" className='btn btn-success col-12 d-flex align-items-center gap-3'><MdTaskAlt/>Issued Books</Link>
             </Nav>
-            <div className='sticky-bottom'>
-                <hr></hr>
-                Student
+            <div className='sticky-bottom pb-4 border-top pt-3 d-flex gap-2 col-12'>
+                <Link to = "/"><img src={profile} alt="" data-tip="Log Out" className='col-2 profile'/></Link>
+                <ReactTooltip />
+                <div className='text-white col-7'>
+                    <div className='col-12'>Nitha Samuel</div>
+                    <div className='adminEmail pt-2 col-12'>nithasamuel@gmail.com</div>
+                </div>
             </div>
         </div>
-        <div className='col-md-10 bg-success'>
-            
+        <div className='col-12'>
+            <Outlet />
         </div>
     </div>
   )

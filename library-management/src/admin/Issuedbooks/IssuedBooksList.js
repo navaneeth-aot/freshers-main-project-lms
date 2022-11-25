@@ -39,7 +39,7 @@ function IssuedBooksList({search}) {
             var date1 = new Date();
             var date2 = new Date(issued.DueDate);
             var diff = new DateDiff(date1, date2);
-            obj.fine = Math.floor(diff.days())*10
+            obj.fine = Math.round(diff.days())*10
 
             return(obj)
         }

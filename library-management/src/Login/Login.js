@@ -3,11 +3,12 @@ import logo from '../Images/Logo-LMC.png';
 import React,{ useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Student from '../student/Student';
+import { useNavigate } from "react-router-dom";
 
 export default function Login({setauthentication,authentication,login,setlogin,students}) {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState();
+    const navigate  = useNavigate();
     
 
     const handleEmail = (e) => { setemail(e.target.value) }
@@ -16,9 +17,10 @@ export default function Login({setauthentication,authentication,login,setlogin,s
         e.preventDefault();
         
         if(login == "admin") {
+            
             if(email.toLowerCase() == "aot@gmail.com" && password == 1234) {
-                setauthentication(!authentication);
                 alert("Logged In");
+                navigate("/issuedbooks");
             }
             else {
                 toast.error('Login Error!', {
@@ -37,8 +39,8 @@ export default function Login({setauthentication,authentication,login,setlogin,s
         else if(login == "student") {
             const log = students.find((students)=>{
                 if((email.toLowerCase() == students.Email.toLowerCase() && password == students.password)) {
-                    setauthentication(!authentication)
-                    alert("login success")
+                    navigate("/myBooks");
+                    alert("login success");
                 }  
             }) 
             

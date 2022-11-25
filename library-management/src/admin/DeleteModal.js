@@ -62,7 +62,7 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag
         <div className='border-0 d-flex justify-content-center pt-4' >
           <h2>{ (markFlag != true) ? ((bookFlag != true) ? "Delete Student" : "Delete Book") : "Mark as returned?" }</h2>
         </div>
-        <Modal.Body className='justify-centent-center ps-5 ms-5 grey'>{(markFlag != true) ? ((bookFlag != true) ? "Are you want to Delete this Student" : "Are you want to Delete this Book") : "Are you sure to mark this book as returned?"}</Modal.Body>
+        <Modal.Body className='justify-content-center grey text-center'>{(markFlag != true) ? ((bookFlag != true) ? "Are you want to Delete this Student" : "Are you want to Delete this Book") : "Are you sure to mark this book as returned?"}</Modal.Body>
         <Modal.Footer className='border-0 justify-content-center gap-4 pb-5'>
           <Button variant="outline-secondary" className='px-5' onClick={handleClose}>
             No

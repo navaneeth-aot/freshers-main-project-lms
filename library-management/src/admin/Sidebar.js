@@ -22,7 +22,7 @@ function Sidebar() {
                 <Link to="/studentsPage" className='btn btn-primary col-12 d-flex align-items-center gap-3'><MdOutlinePeople/>Students</Link>
             </Nav>
             <div className='sticky-bottom pb-4 border-top pt-3 d-flex gap-2 col-12'>
-                <Link to = "/Login"><img src={admin} alt="" data-tip="Log Out" className='col-2 profile'/></Link>
+                <Link to = "/"><img src={admin} alt="" data-tip="Log Out" className='col-2 profile'/></Link>
                 <ReactTooltip />
                 <div className='text-white col-7'>
                     <div className='col-12'>Orlando Diggs</div>

@@ -9,6 +9,8 @@ import IssuedBooksPage from './admin/Issuedbooks/IssuedBooksPage';
 import AllbooksPage from './admin/Allbooks/AllbooksPage';
 import StudentPage from './admin/Students/StudentPage';
 import ViewDetails from './admin/ViewDetails';
+import MyBooks from './student/MyBooks/MyBooks';
+import MyIssuedBooks from './student/MyIssuedBooks/MyIssuedBooks';
 
 export const StudentContext = React.createContext()
 export const StudentArrayContext = React.createContext()
@@ -74,24 +76,22 @@ function App() {
                     
                       <Routes>
                         <Route path="/" element={ <Navigate replace to="/login" />} />
-                        {
-                        (key == "admin") &&
-                          <Route path="/login" element={authentication == !true ? 
-                          <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
-                          <Admin />} />
-                        }
-                        {
-                        (key == "student") &&
-                          <Route path="/login" element={authentication == !true ? 
-                          <Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/> : 
-                          <Student />} />
-                        }
-                        <Route path='/' element={<Admin />}>
-                          <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
-                          <Route path='/allbooks' element = {<AllbooksPage />} />
-                          <Route path="/studentspage" element = {<StudentPage />} />
-                          <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
-                        </Route>
+                          <Route path="/login" element={<Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/>} />
+                          <Route path='/' element={<Admin />}>
+                            <Route element= {<Navigate replace to="/issuedbooks" /> } />
+                            <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
+                            <Route path='/allbooks' element = {<AllbooksPage />} />
+                            <Route path="/studentspage" element = {<StudentPage />} />
+                            <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
+                          </Route>
+                          <Route path = '/' element={<Student />}>
+                            <Route element= {<Navigate replace to="/myBooks" /> } />
+                            <Route path='/myBooks' element={<MyBooks />}/>
+                            <Route path='/myIssuedBooks' element={<MyIssuedBooks />}/>
+                          </Route>
+                            
+                           
+                        
                       </Routes>
                     
                   </IssuedBooksContext.Provider>

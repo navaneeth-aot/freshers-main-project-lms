@@ -1,10 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
+}
+
+.montserrat {
+    font-family: 'Montserrat', sans-serif;
 }
 
 .logo {
@@ -33,12 +38,20 @@ body {
 
 .btn-primary {
     background-color: #ED7966;
-    --bs-btn-hover-bg: #ED7966;
-    --bs-btn-active-bg: #e07363;
+    --bs-btn-active-bg: #ef8979;
     border-color: #ED7966;
-    --bs-btn-hover-border-color: #e07363;
-    --bs-btn-hover-bg: #e07363;
+    --bs-btn-hover-border-color: #ef8979;
+    --bs-btn-hover-bg: #ef8979;
     --bs-btn-active-border-color: #ED7966;
+}
+
+.btn-success {
+    background-color: #303179;
+    --bs-btn-active-bg: #494a89;
+    border-color: #303179;
+    --bs-btn-hover-border-color: #494a89;
+    --bs-btn-hover-bg: #494a89;
+    --bs-btn-active-border-color: #303179;
 }
 
 .box {
@@ -48,7 +61,11 @@ body {
 }
 
 .backcolor {
-    background-color: #F5F5F5;;
+    background-color: #fffbfa;
+}
+
+.backcolor2 {
+    background-color: #fbfbff;
 }
 
 .red {
@@ -60,6 +77,10 @@ body {
 }
 
 .blue {
+    color: #09174A;
+}
+
+.blue:hover {
     color: #09174A;
 }
 
@@ -86,4 +107,8 @@ body {
 .profile {
     height:100%;
     width:100%;
+}
+
+textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus {
+    outline:0px !important;
 }

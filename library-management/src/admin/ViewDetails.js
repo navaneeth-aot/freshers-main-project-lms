@@ -32,7 +32,6 @@ function ViewDetails() {
                        DueDate: issued.DueDate,
                        return: issued.return,
                        ReturnDate: issued.ReturnDate,
-                       return: issued.return
                     }
 
             books.map((book) => {
@@ -45,7 +44,7 @@ function ViewDetails() {
             var date1 = new Date();
             var date2 = new Date(issued.DueDate);
             var diff = new DateDiff(date1, date2);
-            obj.fine = Math.floor(diff.days())*10
+            obj.fine = Math.round(diff.days())*10
 
             return(obj)
         }
@@ -66,10 +65,10 @@ function ViewDetails() {
     return (
     
             <>
-            <div className='col-md-10 p-5 backcolor'>
+            <div className='col-md-10 p-5 backcolor montserrat'>
 
                 <p className='d-flex align-items-center'>
-                <Link to="/studentspage" className='text-decoration-none blue fw-semibold'><MdOutlineArrowBackIos size={20}/><span className='grey'>Students</span> /{studentDetails.name} </Link>
+                <Link to="/studentspage" className='text-decoration-none blue fw-semibold '><MdOutlineArrowBackIos size={20}/><span className='grey'>Students</span> /{studentDetails.name} </Link>
                 </p>
                 <hr></hr>
                 <div className='d-flex mt-5 px-5 bg-white py-3'>
