@@ -50,14 +50,14 @@ export default function ModalIssueBook({show,setShow}) {
     })
     setbooks(newBook)
     setkey(shortid.generate());
-    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:Issue,DueDate:Due,ReturnDate:"",return:false,fine:0}]);
+    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:Issue,DueDate:Due,ReturnDate:"",return:false}]);
     setBookName('')
     setIssuedStudent('')
     setIssue(Moment().format("YYYY-MM-DD"))
     handleClose();
     }
     else 
-    toast.error('Book , Student , Issue Date are mandatory!', {
+    toast.error('Fill all the fields !', {
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -79,7 +79,7 @@ export default function ModalIssueBook({show,setShow}) {
           <Form className='border-top border-bottom py-3'>
           
           <Form.Group className="mb-3" controlId="studentName">
-              <Form.Label className='blue fw-semibold'>Book</Form.Label>
+              <Form.Label className='blue'>Book</Form.Label>
               <Form.Select aria-label="Default select example"
                 onChange={handleBook}>
                 <option value="N/A">Select Book</option>
@@ -95,7 +95,7 @@ export default function ModalIssueBook({show,setShow}) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentEmail">
-              <Form.Label className='blue fw-semibold'>Student</Form.Label>
+              <Form.Label className='blue'>Student</Form.Label>
               <Form.Select aria-label="Default select example"
               onChange={handleStudent}>
               <option value="N/A">Select Student</option>
@@ -109,7 +109,7 @@ export default function ModalIssueBook({show,setShow}) {
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="studentPassword">
-              <Form.Label className='blue fw-semibold'>Issue Date</Form.Label>
+              <Form.Label className='blue'>Issue Date</Form.Label>
               <Form.Control
                 type="Date"
                 className = "grey"
@@ -119,12 +119,13 @@ export default function ModalIssueBook({show,setShow}) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="studentConfirmPassword">
-              <Form.Label className='blue fw-semibold'>Due Date</Form.Label>
+              <Form.Label className='blue'>Due Date</Form.Label>
               <Form.Control
                 type="Date"
                 className = 'grey'
                 value={Due}
                 onChange={handleDueDate}
+                disabled
               />
             </Form.Group>
             

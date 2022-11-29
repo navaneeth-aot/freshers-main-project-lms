@@ -53,8 +53,8 @@ export default function ModalAllbooks({show,
 
   const addBooks = () => {
     if(BookEditFlag == false) {
-      if(( bookTitle && totalCopies ) == "") {
-        toast.error('please fill Book Name and totalCopies!', {
+      if((( bookTitle && totalCopies ) == "") || (( bookLanguage && bookAuthor ) == "")) {
+        toast.error('please fill all the fields !', {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -77,8 +77,8 @@ export default function ModalAllbooks({show,
       }
     }
     else {
-      if(( editTitle && editTotal ) == "") {
-        toast.error('please fill Book Name and totalCopies atleast  !', {
+      if((( editTitle && editTotal ) == "") || (( editAuthor && editLanguage ) == "")) {
+        toast.error('please fill Book Name and totalCopies atleast !', {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -116,7 +116,7 @@ export default function ModalAllbooks({show,
           <Form className='border-top border-bottom py-3'>
 
           <Form.Group className="mb-3" controlId="bookTitle">
-              <Form.Label className='blue fw-semibold'>Name</Form.Label>
+              <Form.Label className='blue'>Name</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: Pride and Prejudice"
@@ -127,7 +127,7 @@ export default function ModalAllbooks({show,
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="bookAuthor">
-              <Form.Label className='blue fw-semibold'>Author</Form.Label>
+              <Form.Label className='blue'>Author</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Eg: Jane Austen"
@@ -136,7 +136,7 @@ export default function ModalAllbooks({show,
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="bookLanguage">
-              <Form.Label className='blue fw-semibold'>Language</Form.Label>
+              <Form.Label className='blue'>Language</Form.Label>
               <Form.Select aria-label="Default select example" 
               value={(BookEditFlag != true) ? bookLanguage : editLanguage}
               onChange={(BookEditFlag != true) ? handlebookLanguage : handleEditLanguage }>
@@ -156,7 +156,7 @@ export default function ModalAllbooks({show,
 
             <div className='d-flex gap-5'>
               <Form.Group className="mb-3" controlId="studentConfirmPassword">
-                <Form.Label className='blue fw-semibold'>Total Copies</Form.Label>
+                <Form.Label className='blue'>Total Copies</Form.Label>
                 <Form.Control
                   type="number"
                   value={(BookEditFlag != true) ? totalCopies : editTotal}
@@ -165,7 +165,7 @@ export default function ModalAllbooks({show,
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="studentConfirmPasword">
-                <Form.Label className='blue fw-semibold'>Remaining</Form.Label>
+                <Form.Label className='blue'>Remaining</Form.Label>
                 <Form.Control
                   type="number"
                   onChange={(BookEditFlag != true) ? handleremainingCopies : handleEditremainingCopies }

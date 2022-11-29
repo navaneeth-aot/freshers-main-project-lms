@@ -5,7 +5,7 @@ import MyIssuedbooksSearch from './MyIssuedbooksSearch';
 function MyIssuedBooks() {
   const [search, setsearch] = useState("")
   return (
-    <div className='col-md-10 p-5 backcolor2'>
+    <div className='col-md-12 p-5'>
         <MyIssuedbooksSearch setsearch={setsearch}/>
         <MyIssuedbooksList search={search}/>
     </div>

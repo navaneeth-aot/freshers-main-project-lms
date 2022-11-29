@@ -120,7 +120,7 @@ function ViewDetails() {
                                     <div className='col-2'> {item.author} </div>
                                     <div className='col-2'>{Moment(new Date(item.IssueDate)).format("DD-MM-YYYY")}</div>
                                     <div className='col-2'>{Moment(new Date(item.DueDate)).format("DD-MM-YYYY")}</div>
-                                    <div className='col-2'>{ item.ReturnDate == "" ? "-" : item.ReturnDate }</div>
+                                    <div className='col-2'>{ item.ReturnDate == "" ? "-" : Moment(new Date(item.ReturnDate)).format("DD-MM-YYYY") }</div>
                                     <div className='col-2 ps-5'> { item.fine < 0 ? 0 : item.fine } </div>
                                 </div>
                                 )

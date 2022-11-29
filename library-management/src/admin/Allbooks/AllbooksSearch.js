@@ -16,7 +16,7 @@ function AllbooksSearch({setsearch}) {
     <div className='d-flex mt-5 justify-content-between'>
         <form className='col-md-6'>
             <div className='d-flex align-items-center border rounded bg-white pe-3'>
-                <Form.Control type="text" placeholder="Search by book title or author " className='border-0' onChange={handleSearch}/>
+                <Form.Control type="text" placeholder="Search by book title or author " className='border-0 montserrat' onChange={handleSearch}/>
                 <GoSearch className='grey'/> 
             </div> 
         </form>

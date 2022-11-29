@@ -3,7 +3,7 @@ import IssuedBooksList from './IssuedBooksList';
 
 function IssuedBooks({search}) {
   return (
-    <div className='box mt-4 bg-white px-5 border-box rounded montserrat'>
+    <div className='box mt-4 bg-white px-4 border-box rounded montserrat'>
         <div className="d-flex justify-content-between px-2 py-3 border-bottom grey">
                 <div className='col-2'>Book Title</div>
                 <div className='col-2'>Student</div>

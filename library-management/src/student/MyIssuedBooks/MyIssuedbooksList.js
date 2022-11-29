@@ -11,58 +11,51 @@ function AllbooksList({search}) {
     const IssuedBook = useContext(IssuedBooksContext); 
     const Students = useContext(StudentContext);
 
-    const tempArray = IssuedBook.map((issued) => {
-        if(issued.return == false) {
-            let obj ={ key:issued.key,title:issued.title,IssueDate:issued.IssueDate,DueDate:issued.DueDate,return:issued.return,fine:0 }
-            books.map((book) => {
-                if(book.key == issued.title) {
-                    obj.booktitle = book.title
-                    }
-                })
-            Students.map((object) => {
-                if(object.key == issued.name) {
-                    obj.name = object.name
-                    }
-                }) 
-            var date1 = new Date();
-            var date2 = new Date(issued.DueDate);
-            var diff = new DateDiff(date1, date2);
-            obj.fine = Math.round(diff.days())*10
-
-            return(obj)
-        }
-    })
+    //const tempArray = IssuedBook.map((issued) => {
+    //     if(issued.return == false) {
+    //         let obj ={ key:issued.key,title:issued.title,IssueDate:issued.IssueDate,DueDate:issued.DueDate,return:issued.return,fine:0 }
+    //         books.map((book) => {
+    //             if(book.key == issued.title) {
+    //                 obj.booktitle = book.title
+    //                 obj.authorName = book.author
+    //                 obj.language = book.language
+    //                 obj.total = book.total
+    //                 obj.remaining = book.remaining
+    //                 }
+    //             })
+    //         return(obj)
+    //     }
+    // })
     return (
-        <>
+        <div className='px-4 bg-white'>
             <div className="d-flex justify-content-between px-2 py-3 mt-5 border-bottom grey bg-white">
                 <div className='col-2'>Book Title</div>
-                <div className='col-2'>Student</div>
-                <div className='col-2'>Issue Date</div>
-                <div className='col-2'>Due Date</div>
-                <div className='col-2'>Fine <br/>(Rs. 10 per day) </div>
+                <div className='col-2'>Author</div>
+                <div className='col-2'>Language</div>
+                <div className='col-2'>Total Copies</div>
+                <div className='col-2'>Remaining</div>
                 <div className='col-2 ps-4'>Actions</div>
             </div>
             
             
-            {tempArray.filter((tempValue) => {
-                if(tempValue != undefined) {
-                if(search == "") { return tempValue; }
-                else if(tempValue.booktitle.toLowerCase().includes(search.toLowerCase())) { return tempValue }
-                else if(tempValue.name.toLowerCase().includes(search.toLowerCase())) { return tempValue }
-            }}).map((IssueBook)=>{
+            {books.filter((book) => {
+                if(search == "") { return book; }
+                else if(book.title.toLowerCase().includes(search.toLowerCase())) { return book }
+                else if(book.author.toLowerCase().includes(search.toLowerCase())) { return book }
+            }).map((item)=>{
 
             return(
-                <div key={IssueBook.key} className="d-flex justify-content-between px-2 py-3 border-bottom blue bg-white">
-                        <div className='col-2'>{IssueBook.booktitle}</div>
-                        <div className='col-2'>{IssueBook.name}</div>
-                        <div className='col-2'>{Moment(new Date(IssueBook.IssueDate)).format("DD-MM-YYYY")}</div>
-                        <div className='col-2'>{Moment(new Date(IssueBook.DueDate)).format("DD-MM-YYYY")}</div>
-                        <div className='col-2 ps-5'>{ IssueBook.fine < 0 ? "-" : IssueBook.fine }</div>
+                <div key={item.key} className="d-flex justify-content-between px-2 py-3 border-bottom blue bg-white">
+                        <div className='col-2'>{item.title}</div>
+                        <div className='col-2'>{item.author}</div>
+                        <div className='col-2'>{item.language}</div>
+                        <div className='col-2 ps-4'>{item.total}</div>
+                        <div className='col-2 ps-4'>{ item.remaining}</div>
                         <div className='col-2 ps-5'><FiEye className='grey' /></div>
                 </div>
             )
         })}
-    </>
+    </div>
   )
 }
 

@@ -28,7 +28,7 @@ function Student() {
                 </div>
             </div>
         </div>
-        <div className='col-12'>
+        <div className='col-10 backcolor2'>
             <Outlet />
         </div>
     </div>
