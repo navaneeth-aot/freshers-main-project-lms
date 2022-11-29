@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import { GoSearch } from 'react-icons/go';
 
-function MyIssuedbooksSearch({setsearch}) {
+function MyBooksSearch({setsearch}) {
   const handleSearch = (e) => {setsearch(e.target.value)}
 
   return (
     <>
-    <h4 className='fw-bold blue'>All Books</h4>
+    <h4 className='fw-bold blue'>My Books</h4>
     <hr></hr>
     <div className='d-flex mt-5 justify-content-between col-12'>
         <form className='col-5'>
@@ -28,4 +28,4 @@ function MyIssuedbooksSearch({setsearch}) {
   )
 }
 
-export default MyIssuedbooksSearch
+export default MyBooksSearch

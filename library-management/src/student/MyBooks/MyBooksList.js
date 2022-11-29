@@ -6,7 +6,7 @@ import { MdEdit } from 'react-icons/md';
 import { FiEye } from 'react-icons/fi';
 import { BooksContext , IssuedBooksContext , StudentContext } from '../../App';
 
-function MyIssuedbooksList({search}) {
+function MyBooksList({search}) {
     const books = useContext(BooksContext);
     const IssuedBook = useContext(IssuedBooksContext); 
     const Students = useContext(StudentContext);
@@ -31,10 +31,10 @@ function MyIssuedbooksList({search}) {
             <div className="d-flex justify-content-between px-2 py-3 mt-5 border-bottom grey bg-white">
                 <div className='col-2'>Book Title</div>
                 <div className='col-2'>Author</div>
-                <div className='col-2'>Language</div>
-                <div className='col-2'>Total Copies</div>
-                <div className='col-2'>Remaining</div>
-                <div className='col-2 ps-4'>Actions</div>
+                <div className='col-2'>Issue Date</div>
+                <div className='col-2'>Due Date</div>
+                <div className='col-2'>Return Date</div>
+                <div className='col-2 ps-4'>Fine<br/>(Rs. 10 per day)</div>
             </div>
             
             
@@ -59,4 +59,4 @@ function MyIssuedbooksList({search}) {
   )
 }
 
-export default MyIssuedbooksList
+export default MyBooksList
