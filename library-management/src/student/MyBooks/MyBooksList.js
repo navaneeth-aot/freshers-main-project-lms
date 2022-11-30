@@ -1,11 +1,9 @@
 import React from 'react';
 import { useContext , useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
-import Moment from 'moment';
 import DateDiff from 'date-diff';
-import { MdEdit } from 'react-icons/md';
-import { FiEye } from 'react-icons/fi';
 import { BooksContext , IssuedBooksContext , StudentContext } from '../../App';
+import MyBooksData from './MyBooksData';
 
 function MyBooksList({search,id}) {
     const books = useContext(BooksContext);
@@ -48,21 +46,25 @@ function MyBooksList({search,id}) {
         }
     })
 
+    const [eventKey, seteventKey] = useState("Issued")
     
-    
+    const handleIssued = () => { seteventKey("Issued") }
+    const handlePending = () => { seteventKey("Pending") }
+    const handleReturned = () => { seteventKey("Returned") }
+
 
 
     return (
         <>
             <Nav variant="tabs" defaultActiveKey="Issued">
                 <Nav.Item>
-                    <Nav.Link eventKey="Issued">Issued Books ({booksTakenByStudent.length})</Nav.Link>
+                    <Nav.Link eventKey="Issued" onClick={handleIssued}>Issued Books ({booksTakenByStudent.length})</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="Pending">Pending to return ({pending})</Nav.Link>
+                    <Nav.Link eventKey="Pending" onClick={handlePending}>Pending to return ({pending})</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="Returned">Returned Books ({booksTakenByStudent.length - pending})</Nav.Link>
+                    <Nav.Link eventKey="Returned" onClick={handleReturned}>Returned Books ({booksTakenByStudent.length - pending})</Nav.Link>
                 </Nav.Item>
             </Nav>
             <div className='px-4 bg-white'>
@@ -75,23 +77,17 @@ function MyBooksList({search,id}) {
                     <div className='col-2 ps-4'>Fine<br/>(Rs. 10 per day)</div>
                 </div>
                 
-                
                 {tempArray.filter((tempValue) => {
                         if(search == "") { return tempValue }
                         else if(tempValue.title.toLowerCase().includes(search.toLowerCase())) { return tempValue }
                         else if(tempValue.author.toLowerCase().includes(search.toLowerCase())) { return tempValue }
                         }).map((item) => {
-                            if(item.return != false)
-                            return (
-                                <div key={item.key} className="d-flex justify-content-between px-2 py-3 border-bottom blue">
-                                    <div className='col-2'> {item.title} </div>
-                                    <div className='col-2'> {item.author} </div>
-                                    <div className='col-2'>{Moment(new Date(item.IssueDate)).format("DD-MM-YYYY")}</div>
-                                    <div className='col-2'>{Moment(new Date(item.DueDate)).format("DD-MM-YYYY")}</div>
-                                    <div className='col-2'>{ item.ReturnDate == "" ? "-" : Moment(new Date(item.ReturnDate)).format("DD-MM-YYYY") }</div>
-                                    <div className='col-2 ps-5'> { item.fine < 0 ? 0 : item.fine } </div>
-                                </div>
-                                )
+                            if(eventKey == "Pending" && item.return == false)
+                                return <MyBooksData item={item}/>
+                            if(eventKey == "Returned" && item.return != false)
+                                return <MyBooksData item={item}/>
+                            if(eventKey == "Issued")
+                                return <MyBooksData item={item}/>
                             })
                         }
         </div>
