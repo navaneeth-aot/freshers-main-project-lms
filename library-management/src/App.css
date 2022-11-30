@@ -95,8 +95,12 @@ body {
     color: #414141;
 }
 
+.nav-link.active {
+    color: #09174A !important ;
+}
+
 .nav-link {
-    color: #09174A;
+    color: #7E7E7F;
 }
 
 .adminEmail {
@@ -107,8 +111,4 @@ body {
 .profile {
     height:100%;
     width:100%;
-}
-
-textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus {
-    outline:0px !important;
 }

@@ -9,7 +9,7 @@ function MyBooksSearch({setsearch}) {
     <>
     <h4 className='fw-bold blue'>My Books</h4>
     <hr></hr>
-    <div className='d-flex mt-5 justify-content-between col-12'>
+    <div className='d-flex my-5 justify-content-between col-12'>
         <form className='col-5'>
             <div className='d-flex align-items-center border rounded bg-white pe-3'>
                 <Form.Control type="text" placeholder="Search by book title or author " className='border-0' onChange={handleSearch}/>
@@ -19,8 +19,8 @@ function MyBooksSearch({setsearch}) {
         <div className='col-2 d-flex text-nowrap align-items-center gap-2'>
         Sort By :
           <Form.Select aria-label="Default select example">
-            <option value="1">Ascending</option>
-            <option value="2">Descending</option>
+            <option value="1">Issue Date</option>
+            <option value="2">Due Date</option>
           </Form.Select>
         </div>
     </div>

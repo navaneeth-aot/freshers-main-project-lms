@@ -73,27 +73,22 @@ function App() {
               <BooksArrayContext.Provider value = { setbooks }>
                 <IssuedBooksArrayContext.Provider value = { setIssuedBook }>
                   <IssuedBooksContext.Provider value = { IssuedBook }>
-                    
-                      <Routes>
-                        <Route path="/" element={ <Navigate replace to="/login" />} />
-                          <Route path="/login" element={<Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/>} />
-                          <Route path='/' element={<Admin />}>
-                            <Route element= {<Navigate replace to="/issuedbooks" /> } />
-                            <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
-                            <Route path='/allbooks' element = {<AllbooksPage />} />
-                            <Route path="/studentspage" element = {<StudentPage />} />
-                            <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
-                          </Route>
-                          <Route path = '/' element={<Student />}>
-                            <Route element= {<Navigate replace to="/myBooks" /> } />
-                            <Route path='/myBooks' element={<MyBooks />}/>
-                            <Route path='/myIssuedBooks' element={<MyIssuedBooks />}/>
-                          </Route>
-                            
-                           
-                        
-                      </Routes>
-                    
+                    <Routes>
+                      <Route path="/" element={ <Navigate replace to="/login" />} />
+                        <Route path="/login" element={<Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/>} />
+                        <Route path='/' element={<Admin />}>
+                          <Route element= {<Navigate replace to="/issuedbooks" /> } />
+                          <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
+                          <Route path='/allbooks' element = {<AllbooksPage />} />
+                          <Route path="/studentspage" element = {<StudentPage />} />
+                          <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
+                        </Route>
+                        <Route path = '/' element={<Student />}>
+                          <Route element= {<Navigate replace to="/myBooks" /> } />
+                          <Route path='/myBooks' element={<MyBooks />}/>
+                          <Route path='/myIssuedBooks' element={<MyIssuedBooks />}/>
+                        </Route>
+                    </Routes>
                   </IssuedBooksContext.Provider>
                 </IssuedBooksArrayContext.Provider>
               </BooksArrayContext.Provider>

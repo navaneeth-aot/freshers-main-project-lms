@@ -37,9 +37,9 @@ export default function Login({setauthentication,authentication,login,setlogin,s
         }
 
         else if(login == "student") {
-            const log = students.find((students)=>{
-                if((email.toLowerCase() == students.Email.toLowerCase() && password == students.password)) {
-                    navigate("/myBooks");
+            const log = students.find((student)=>{
+                if((email.toLowerCase() == student.Email.toLowerCase() && password == student.password)) {
+                    navigate("/myBooks",{state:{id:student.key,name:student.name}});
                     alert("login success");
                 }  
             }) 
