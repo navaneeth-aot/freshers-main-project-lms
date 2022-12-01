@@ -41,7 +41,7 @@ function ViewDetails() {
                     }
                 })
                 
-            var date1 = new Date();
+            var date1 = issued.ReturnDate == "" ? new Date() : new Date(issued.ReturnDate);
             var date2 = new Date(issued.DueDate);
             var diff = new DateDiff(date1, date2);
             obj.fine = Math.round(diff.days())*10

@@ -1,31 +1,30 @@
 import React from 'react';
 import { useContext , useState } from 'react';
-import Moment from 'moment';
-import DateDiff from 'date-diff';
-import { MdEdit } from 'react-icons/md';
 import { FiEye } from 'react-icons/fi';
 import { BooksContext , IssuedBooksContext , StudentContext } from '../../App';
 
-function MyIssuedbooksList({search}) {
+function MyIssuedbooksList({search,sortValue}) {
     const books = useContext(BooksContext);
     const IssuedBook = useContext(IssuedBooksContext); 
     const Students = useContext(StudentContext);
 
-    //const tempArray = IssuedBook.map((issued) => {
-    //     if(issued.return == false) {
-    //         let obj ={ key:issued.key,title:issued.title,IssueDate:issued.IssueDate,DueDate:issued.DueDate,return:issued.return,fine:0 }
-    //         books.map((book) => {
-    //             if(book.key == issued.title) {
-    //                 obj.booktitle = book.title
-    //                 obj.authorName = book.author
-    //                 obj.language = book.language
-    //                 obj.total = book.total
-    //                 obj.remaining = book.remaining
-    //                 }
-    //             })
-    //         return(obj)
-    //     }
-    // })
+    if(sortValue == 1) {
+        books.sort((a, b) => {
+            if ( a.title < b.title ) { return -1 }
+            if ( a.title > b.title ) { return 1 }
+            return 0;
+        })
+    }
+
+    if(sortValue == 2) {
+        books.sort((a, b) => {
+            if ( a.title > b.title ) { return -1 }
+            if ( a.title < b.title ) { return 1 }
+            return 0;
+        })
+    }
+    
+
     return (
         <div className='px-4 bg-white'>
             <div className="d-flex justify-content-between px-2 py-3 mt-5 border-bottom grey bg-white">
