@@ -4,7 +4,7 @@ import './App.js';
 import React, {useState,useEffect} from 'react';
 import Admin from './admin/Admin';
 import Student from './student/Student';
-import { Link, Navigate, redirect, Route, Router, Routes } from 'react-router-dom';
+import { Navigate, Route,Routes } from 'react-router-dom';
 import IssuedBooksPage from './admin/Issuedbooks/IssuedBooksPage';
 import AllbooksPage from './admin/Allbooks/AllbooksPage';
 import StudentPage from './admin/Students/StudentPage';
@@ -24,23 +24,11 @@ function App() {
   const StudentArray = JSON.parse(localStorage.getItem('studentsDB')) || [];
   const BooksArray = JSON.parse(localStorage.getItem('booksDB')) || [];
   const IssuedBookArray = JSON.parse(localStorage.getItem('IssuedBookDB')) || [];
-  const StudentID = JSON.parse(sessionStorage.getItem('StudentID')) || "";
   const [key, setKey] = useState('admin');
+  const [authentication, setauthentication] = useState(false);
   const [students, setstudents] = useState(StudentArray);
   const [books, setbooks] = useState(BooksArray);
   const [IssuedBook, setIssuedBook] = useState(IssuedBookArray);
-  const [id, setid] = useState(StudentID);
-
-  useEffect(() => {
-    const id = JSON.parse(sessionStorage.getItem('StudentID'));
-    if (id) {
-      setid(id);
-    }
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem('StudentID', JSON.stringify(id));
-  }, [id]);
 
   useEffect(() => {
     const students = JSON.parse(localStorage.getItem('studentsDB'));
@@ -87,7 +75,7 @@ function App() {
                   <IssuedBooksContext.Provider value = { IssuedBook }>
                     <Routes>
                       <Route path="/" element={ <Navigate replace to="/login" />} />
-                        <Route path="/login" element={<Login setuser={setid} login={key} setlogin={setKey} students={students}/>} />
+                        <Route path="/login" element={<Login setauthentication={setauthentication} authentication={authentication} login={key} setlogin={setKey} students={students}/>} />
                         <Route path='/' element={<Admin />}>
                           <Route element= {<Navigate replace to="/issuedbooks" /> } />
                           <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
@@ -95,7 +83,7 @@ function App() {
                           <Route path="/studentspage" element = {<StudentPage />} />
                           <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
                         </Route>
-                        <Route path = '/' element={<Student user={id} />}>
+                        <Route path = '/' element={<Student />}>
                           <Route element= {<Navigate replace to="/myBooks" /> } />
                           <Route path='/myBooks' element={<MyBooks />}/>
                           <Route path='/myIssuedBooks' element={<MyIssuedBooks />}/>
