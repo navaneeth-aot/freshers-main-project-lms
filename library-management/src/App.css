@@ -95,23 +95,8 @@ body {
     color: #414141;
 }
 
-.nav {
-    --bs-nav-link-hover-color: #7E7E7F;
-    --bs-nav-tabs-link-hover-border-color: #FFFFFF;
-}
-
 .nav-link.active {
     color: #09174A !important ;
-    background: none !important;
-    border: none;
-    border-bottom: 3px solid #0C39C7 !important;
-}
-
-.nav-link2.active {
-    color: #09174A !important ;
-    background: none !important;
-    border: none;
-    border-bottom: 3px solid #0C39C7 !important;
 }
 
 .nav-link {

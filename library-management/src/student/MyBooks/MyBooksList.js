@@ -1,9 +1,19 @@
 import React from 'react';
 import { useContext , useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
+import Moment from 'moment';
 import DateDiff from 'date-diff';
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
 import { BooksContext , IssuedBooksContext } from '../../App';
 import MyBooksData from './MyBooksData';
+=======
+import { MdEdit } from 'react-icons/md';
+import { FiEye } from 'react-icons/fi';
+import { BooksContext , IssuedBooksContext , StudentContext } from '../../App';
+>>>>>>> parent of 0fa2ec6 (student completed (without sorting))
 
 function MyBooksList({search,id,sortValue}) {
     const books = useContext(BooksContext);
@@ -45,8 +55,8 @@ function MyBooksList({search,id,sortValue}) {
         }
     })
 
-    const [eventKey, seteventKey] = useState("Issued")
     
+<<<<<<< HEAD
     const handleIssued = () => { seteventKey("Issued") }
     const handlePending = () => { seteventKey("Pending") }
     const handleReturned = () => { seteventKey("Returned") }
@@ -60,6 +70,9 @@ function MyBooksList({search,id,sortValue}) {
             return 0;
         })
     }
+=======
+    
+>>>>>>> parent of 0fa2ec6 (student completed (without sorting))
 
     if(sortValue == 1) {
         tempArray.sort((a, b) => {
@@ -75,13 +88,18 @@ function MyBooksList({search,id,sortValue}) {
         <>
             <Nav variant="tabs" defaultActiveKey="Issued">
                 <Nav.Item>
-                    <Nav.Link eventKey="Issued" onClick={handleIssued}>Issued Books ({booksTakenByStudent.length})</Nav.Link>
+                    <Nav.Link eventKey="Issued">Issued Books ({booksTakenByStudent.length})</Nav.Link>
                 </Nav.Item>
+<<<<<<< HEAD
                 <Nav.Item className='px-5'>
                     <Nav.Link eventKey="Pending" onClick={handlePending}>Pending to return ({pending})</Nav.Link>
+=======
+                <Nav.Item>
+                    <Nav.Link eventKey="Pending">Pending to return ({pending})</Nav.Link>
+>>>>>>> parent of 0fa2ec6 (student completed (without sorting))
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="Returned" onClick={handleReturned}>Returned Books ({booksTakenByStudent.length - pending})</Nav.Link>
+                    <Nav.Link eventKey="Returned">Returned Books ({booksTakenByStudent.length - pending})</Nav.Link>
                 </Nav.Item>
             </Nav>
             <div className='px-4 bg-white'>
@@ -94,17 +112,23 @@ function MyBooksList({search,id,sortValue}) {
                     <div className='col-2 ps-3'>Fine<br/>(Rs. 10 per day)</div>
                 </div>
                 
+                
                 {tempArray.filter((tempValue) => {
                         if(search == "") { return tempValue }
                         else if(tempValue.title.toLowerCase().includes(search.toLowerCase())) { return tempValue }
                         else if(tempValue.author.toLowerCase().includes(search.toLowerCase())) { return tempValue }
                         }).map((item) => {
-                            if(eventKey == "Pending" && item.return == false)
-                                return <MyBooksData item={item}/>
-                            if(eventKey == "Returned" && item.return != false)
-                                return <MyBooksData item={item}/>
-                            if(eventKey == "Issued")
-                                return <MyBooksData item={item}/>
+                            if(item.return != false)
+                            return (
+                                <div key={item.key} className="d-flex justify-content-between px-2 py-3 border-bottom blue">
+                                    <div className='col-2'> {item.title} </div>
+                                    <div className='col-2'> {item.author} </div>
+                                    <div className='col-2'>{Moment(new Date(item.IssueDate)).format("DD-MM-YYYY")}</div>
+                                    <div className='col-2'>{Moment(new Date(item.DueDate)).format("DD-MM-YYYY")}</div>
+                                    <div className='col-2'>{ item.ReturnDate == "" ? "-" : Moment(new Date(item.ReturnDate)).format("DD-MM-YYYY") }</div>
+                                    <div className='col-2 ps-5'> { item.fine < 0 ? 0 : item.fine } </div>
+                                </div>
+                                )
                             })
                         }
         </div>
