@@ -1,12 +1,10 @@
 import React from 'react';
-import { useContext , useState } from 'react';
+import { useContext } from 'react';
 import { FiEye } from 'react-icons/fi';
-import { BooksContext , IssuedBooksContext , StudentContext } from '../../App';
+import { BooksContext } from '../../App';
 
 function MyIssuedbooksList({search,sortValue}) {
     const books = useContext(BooksContext);
-    const IssuedBook = useContext(IssuedBooksContext); 
-    const Students = useContext(StudentContext);
 
     if(sortValue == 1) {
         books.sort((a, b) => {
@@ -18,8 +16,8 @@ function MyIssuedbooksList({search,sortValue}) {
 
     if(sortValue == 2) {
         books.sort((a, b) => {
-            if ( a.title > b.title ) { return -1 }
-            if ( a.title < b.title ) { return 1 }
+            if ( a.author < b.author ) { return -1 }
+            if ( a.author > b.author ) { return 1 }
             return 0;
         })
     }
@@ -38,7 +36,7 @@ function MyIssuedbooksList({search,sortValue}) {
             
             
             {books.filter((book) => {
-                if(search == "") { return book; }
+                if(search === "") { return book; }
                 else if(book.title.toLowerCase().includes(search.toLowerCase())) { return book }
                 else if(book.author.toLowerCase().includes(search.toLowerCase())) { return book }
             }).map((item)=>{

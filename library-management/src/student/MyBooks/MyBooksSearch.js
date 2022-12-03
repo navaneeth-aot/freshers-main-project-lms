@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import { GoSearch } from 'react-icons/go';
 
@@ -21,8 +21,8 @@ function MyBooksSearch({setsearch,setsortValue}) {
         Sort By :
           <Form.Select aria-label="Default select example" onChange={handleSort}>
             <option>Select</option>
-            <option value="1">Issue Date</option>
-            <option value="2">Due Date</option>
+            <option value="1">Newest</option>
+            <option value="2">Oldest</option>
           </Form.Select>
         </div>
     </div>

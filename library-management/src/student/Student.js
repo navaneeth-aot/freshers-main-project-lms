@@ -3,15 +3,17 @@ import Logo_white from '../Images/Logo-white.png';
 import profile from '../Images/Student_profile.png';
 import ReactTooltip from 'react-tooltip';
 import Nav from 'react-bootstrap/Nav';
-import { MdMenuBook,MdTaskAlt } from 'react-icons/md';
-import { Link , Outlet } from 'react-router-dom';
+import { MdMenuBook,MdTaskAlt,MdOutlinePeople } from 'react-icons/md';
+import { Link , Outlet ,redirect,useNavigate } from 'react-router-dom';
 import { StudentContext } from '../App';
 
 function Student({user}) {
     const Students = useContext(StudentContext);
 
     const userDetails = Students.find((item)=> {
-       return item.key === user
+        if(item.key == user) {
+            return(item)
+        }
     })
     
   return (
