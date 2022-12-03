@@ -1,7 +1,6 @@
-import React, { useState , useContext } from 'react';
+import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Moment from 'moment';
 import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext , BooksArrayContext , StudentArrayContext } from '../App';
@@ -15,7 +14,6 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag
   const IssuedBook = useContext(IssuedBooksContext);
   const setIssuedBook = useContext(IssuedBooksArrayContext);
 
-  const [deletable, setdeletable] = useState(true)
 
   const handleClose = () => {
     setShow(false);
@@ -73,7 +71,6 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag
           
         </Modal.Footer>
       </Modal>
-      <ToastContainer />
     </>
   );
 }

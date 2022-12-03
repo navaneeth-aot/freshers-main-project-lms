@@ -1,4 +1,4 @@
-import React , {useContext , useEffect, useState } from 'react';
+import React , {useContext , useState } from 'react';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { StudentContext,BooksContext,IssuedBooksContext } from '../App';
 import Form from 'react-bootstrap/Form';
@@ -44,7 +44,7 @@ function ViewDetails() {
             var date1 = issued.ReturnDate == "" ? new Date() : new Date(issued.ReturnDate);
             var date2 = new Date(issued.DueDate);
             var diff = new DateDiff(date1, date2);
-            obj.fine = Math.round(diff.days())*10
+            obj.fine = Math.floor(diff.days())*10
 
             return(obj)
         }
