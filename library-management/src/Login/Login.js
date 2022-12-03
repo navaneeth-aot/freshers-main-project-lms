@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 
-export default function Login({setauthentication,authentication,login,setlogin,students}) {
+export default function Login({setuser,login,setlogin,students}) {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState();
     const navigate  = useNavigate();
@@ -39,7 +39,8 @@ export default function Login({setauthentication,authentication,login,setlogin,s
         else if(login == "student") {
             const log = students.find((student)=>{
                 if((email.toLowerCase() == student.Email.toLowerCase() && password == student.password)) {
-                    navigate("/myBooks",{state:{id:student.key,name:student.name}});
+                    navigate("/myBooks",{state:{id:student.key}});
+                    setuser(student.key)
                     alert("login success");
                 }  
             }) 
