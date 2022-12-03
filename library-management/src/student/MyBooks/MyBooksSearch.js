@@ -21,8 +21,8 @@ function MyBooksSearch({setsearch,setsortValue}) {
         Sort By :
           <Form.Select aria-label="Default select example" onChange={handleSort}>
             <option>Select</option>
-            <option value="1">Newest</option>
-            <option value="2">Oldest</option>
+            <option value="1">Issue Date</option>
+            <option value="2">Due Date</option>
           </Form.Select>
         </div>
     </div>

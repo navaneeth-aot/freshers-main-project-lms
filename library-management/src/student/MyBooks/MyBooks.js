@@ -6,7 +6,7 @@ import {useLocation} from 'react-router-dom';
 function MyBooks() {
   const [search, setsearch] = useState("")
   const location = useLocation();
-  const id = location.state.id;
+  const [id, setid] = useState(location.state.id);
   const [sortValue, setsortValue] = useState()
   
   return (
