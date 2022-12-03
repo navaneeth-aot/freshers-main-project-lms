@@ -2,12 +2,13 @@ import React from 'react';
 import { useContext , useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import DateDiff from 'date-diff';
-import { BooksContext , IssuedBooksContext } from '../../App';
+import { BooksContext , IssuedBooksContext , StudentContext } from '../../App';
 import MyBooksData from './MyBooksData';
 
 function MyBooksList({search,id,sortValue}) {
     const books = useContext(BooksContext);
-    const IssuedBook = useContext(IssuedBooksContext);
+    const IssuedBook = useContext(IssuedBooksContext); 
+    const Students = useContext(StudentContext);
 
     let pending = 0;
     const booksTakenByStudent = IssuedBook.filter((bookList) => {
@@ -39,7 +40,7 @@ function MyBooksList({search,id,sortValue}) {
             var date1 = issued.ReturnDate == "" ? new Date() : new Date(issued.ReturnDate);
             var date2 = new Date(issued.DueDate);
             var diff = new DateDiff(date1, date2);
-            obj.fine = Math.floor(diff.days())*10
+            obj.fine = Math.round(diff.days())*10
 
             return(obj)
         }
@@ -51,7 +52,7 @@ function MyBooksList({search,id,sortValue}) {
     const handlePending = () => { seteventKey("Pending") }
     const handleReturned = () => { seteventKey("Returned") }
 
-    if(sortValue == 2) {
+    if(sortValue == 1) {
         tempArray.sort((a, b) => {
             let date_a = new Date(a.IssueDate);
             let date_b = new Date(b.IssueDate);
@@ -61,7 +62,7 @@ function MyBooksList({search,id,sortValue}) {
         })
     }
 
-    if(sortValue == 1) {
+    if(sortValue == 2) {
         tempArray.sort((a, b) => {
             let date_a = new Date(a.IssueDate);
             let date_b = new Date(b.IssueDate);

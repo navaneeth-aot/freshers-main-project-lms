@@ -2,12 +2,13 @@ import React from 'react';
 import { useContext , useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { FiTrash2 } from 'react-icons/fi';
-import { BooksContext } from '../../App';
+import { BooksArrayContext , BooksContext } from '../../App';
 import ModalAllbooks from './ModalAllbooks';
 import DeleteModal from '../DeleteModal';
 
 function AllbooksList({search}) {
     const Books = useContext(BooksContext);
+    const setbooks = useContext(BooksArrayContext);
 
     const [BookEditFlag, setBookEditFlag] = useState(false);
     const [editBooksetShow, setEditBooksetShow] = useState(false);

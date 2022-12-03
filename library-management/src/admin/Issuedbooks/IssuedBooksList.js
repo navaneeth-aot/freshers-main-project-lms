@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { MdOutlineAssignmentReturn } from 'react-icons/md';
-import { BooksContext , StudentContext , IssuedBooksContext , BooksArrayContext } from '../../App';
+import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext , BooksArrayContext } from '../../App';
 import DeleteModal from '../DeleteModal';
 import DateDiff from 'date-diff';
 import ReactTooltip from 'react-tooltip';
@@ -14,6 +14,7 @@ function IssuedBooksList({search}) {
     const books = useContext(BooksContext);
     const setbooks = useContext(BooksArrayContext);
     const IssuedBook = useContext(IssuedBooksContext);
+    const setIssuedBook = useContext(IssuedBooksArrayContext);
     
     const [DeleteStudentshow, setDeleteStudentShow] = useState(false);
     const [primarykey, setprimarykey] = useState('');
@@ -38,7 +39,7 @@ function IssuedBooksList({search}) {
             var date1 = new Date();
             var date2 = new Date(issued.DueDate);
             var diff = new DateDiff(date1, date2);
-            obj.fine = Math.floor(diff.days())*10
+            obj.fine = Math.round(diff.days())*10
 
             return(obj)
         }

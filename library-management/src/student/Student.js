@@ -3,26 +3,10 @@ import Logo_white from '../Images/Logo-white.png';
 import profile from '../Images/Student_profile.png';
 import ReactTooltip from 'react-tooltip';
 import Nav from 'react-bootstrap/Nav';
-<<<<<<< HEAD
-import { MdMenuBook,MdTaskAlt } from 'react-icons/md';
-import { Link , Outlet } from 'react-router-dom';
-import { StudentContext } from '../App';
-
-function Student({user}) {
-    const Students = useContext(StudentContext);
-
-    const userDetails = Students.find((item)=> {
-        if(item.key == user) {
-            return(item)
-        }
-    })
-    
-=======
 import { MdMenuBook,MdTaskAlt,MdOutlinePeople } from 'react-icons/md';
 import { Link , Outlet } from 'react-router-dom';
 
 function Student() {
->>>>>>> parent of 0fa2ec6 (student completed (without sorting))
   return (
     <div className='d-flex'>
         <div className='col-md-2 d-flex flex-column justify-content-between px-4 sidebar-student sticky'>
