@@ -1,10 +1,9 @@
-import react from 'react';
+import React, {useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import { GoSearch } from 'react-icons/go';
 
-function MyIssuedbooksSearch({setsearch,setsortValue}) {
-  const handleSearch = (e) => {setsearch(e.target.value)};
-  const handleSort = (e) => {setsortValue(e.target.value)};
+function MyIssuedbooksSearch({setsearch}) {
+  const handleSearch = (e) => {setsearch(e.target.value)}
 
   return (
     <>
@@ -19,8 +18,7 @@ function MyIssuedbooksSearch({setsearch,setsortValue}) {
         </form>
         <div className='col-2 d-flex text-nowrap align-items-center gap-2'>
         Sort By :
-          <Form.Select aria-label="Default select example"onChange={handleSort}>
-            <option>Select</option>
+          <Form.Select aria-label="Default select example">
             <option value="1">Ascending</option>
             <option value="2">Descending</option>
           </Form.Select>

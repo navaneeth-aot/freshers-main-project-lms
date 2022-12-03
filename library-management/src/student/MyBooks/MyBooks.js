@@ -7,12 +7,10 @@ function MyBooks() {
   const [search, setsearch] = useState("")
   const location = useLocation();
   const [id, setid] = useState(location.state.id);
-  const [sortValue, setsortValue] = useState()
-  
   return (
     <div className='col-md-12 p-5'>
-        <MyBooksSearch setsearch={setsearch} setsortValue={setsortValue}/>
-        <MyBooksList search={search} id={id} sortValue={sortValue}/>
+        <MyBooksSearch setsearch={setsearch}/>
+        <MyBooksList search={search} id={id}/>
     </div>
   )
 }

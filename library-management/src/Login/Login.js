@@ -66,7 +66,7 @@ export default function Login({setuser,login,setlogin,students}) {
             <div className='col-md-3'>
                 <div className='d-flex px-5 pt-5'>
                     <img src = {logo} alt = ""/>
-                    <p className='logo'>LMC</p>
+                    <p className='logo pb-2'>LMC</p>
                 </div>
             </div>
             <div className='col-md-12'>

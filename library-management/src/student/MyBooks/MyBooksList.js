@@ -7,8 +7,7 @@ import MyBooksData from './MyBooksData';
 
 function MyBooksList({search,id,sortValue}) {
     const books = useContext(BooksContext);
-    const IssuedBook = useContext(IssuedBooksContext); 
-    const Students = useContext(StudentContext);
+    const IssuedBook = useContext(IssuedBooksContext);
 
     let pending = 0;
     const booksTakenByStudent = IssuedBook.filter((bookList) => {
@@ -40,7 +39,7 @@ function MyBooksList({search,id,sortValue}) {
             var date1 = issued.ReturnDate == "" ? new Date() : new Date(issued.ReturnDate);
             var date2 = new Date(issued.DueDate);
             var diff = new DateDiff(date1, date2);
-            obj.fine = Math.round(diff.days())*10
+            obj.fine = Math.floor(diff.days())*10
 
             return(obj)
         }
