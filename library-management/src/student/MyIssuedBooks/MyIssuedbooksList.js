@@ -18,8 +18,8 @@ function MyIssuedbooksList({search,sortValue}) {
 
     if(sortValue == 2) {
         books.sort((a, b) => {
-            if ( a.title > b.title ) { return -1 }
-            if ( a.title < b.title ) { return 1 }
+            if ( a.author < b.author ) { return -1 }
+            if ( a.author > b.author ) { return 1 }
             return 0;
         })
     }

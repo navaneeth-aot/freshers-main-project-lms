@@ -1,12 +1,19 @@
-import React from 'react'
+import React , {useContext} from 'react'
 import Logo_white from '../Images/Logo-white.png';
 import profile from '../Images/Student_profile.png';
 import ReactTooltip from 'react-tooltip';
 import Nav from 'react-bootstrap/Nav';
-import { MdMenuBook,MdTaskAlt,MdOutlinePeople } from 'react-icons/md';
+import { MdMenuBook,MdTaskAlt } from 'react-icons/md';
 import { Link , Outlet } from 'react-router-dom';
+import { StudentContext } from '../App';
 
-function Student() {
+function Student({user}) {
+    const Students = useContext(StudentContext);
+
+    const userDetails = Students.find((item)=> {
+       return item.key === user
+    })
+    
   return (
     <div className='d-flex'>
         <div className='col-md-2 d-flex flex-column justify-content-between px-4 sidebar-student sticky'>
@@ -16,15 +23,15 @@ function Student() {
                         <img src={Logo_white} alt=""/>
                     </div>
                 </div>
-                <Link to="/mybooks" className='btn btn-success mt-5 col-12 d-flex align-items-center gap-3'><MdMenuBook/>My Books</Link>
+                <Link to="/myBooks" state={{ id: userDetails.key }} className='btn btn-success mt-5 col-12 d-flex align-items-center gap-3'><MdMenuBook/>My Books</Link>
                 <Link to="/myissuedbooks" className='btn btn-success col-12 d-flex align-items-center gap-3'><MdTaskAlt/>Issued Books</Link>
             </Nav>
             <div className='sticky-bottom pb-4 border-top pt-3 d-flex gap-2 col-12'>
                 <Link to = "/"><img src={profile} alt="" data-tip="Log Out" className='col-2 profile'/></Link>
                 <ReactTooltip />
                 <div className='text-white col-7'>
-                    <div className='col-12'>Nitha Samuel</div>
-                    <div className='adminEmail pt-2 col-12'>nithasamuel@gmail.com</div>
+                    <div className='col-12'>{userDetails.name}</div>
+                    <div className='adminEmail pt-2 col-12'>{userDetails.Email}</div>
                 </div>
             </div>
         </div>
