@@ -1,4 +1,4 @@
-import React, { useState , useContext } from 'react';
+import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,7 +15,7 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag
   const IssuedBook = useContext(IssuedBooksContext);
   const setIssuedBook = useContext(IssuedBooksArrayContext);
 
-  const [deletable, setdeletable] = useState(true)
+  
 
   const handleClose = () => {
     setShow(false);
@@ -27,12 +27,36 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag
         setStudents(Student.filter((students) => students.key != primarykey));
         handleClose()
         setprimarykey('')
-     }
+  }
 
   const deletebook = () => { 
-      setbooks(books.filter((book) => book.key != primarykey));
-      handleClose();
-      setprimarykey('');
+        let flag = false;
+        books.map((item)=> {
+          if(item.key == primarykey) {
+            if(item.remaining == item.toal) {
+              flag = true;
+            }
+          }
+        });
+
+        if(flag == true) {
+          setbooks(books.filter((book) => book.key != primarykey));
+          handleClose();
+          setprimarykey('');
+        }
+        else {
+          toast.info('You cannot delete this book !. This book is not fully returned', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+          handleClose();
+        }
   }
 
   const handleReturn = () => { 
