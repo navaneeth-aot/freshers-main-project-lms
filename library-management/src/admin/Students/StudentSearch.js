@@ -20,8 +20,8 @@ function StudentSearch({setsearch}) {
     <div className='d-flex mt-5 justify-content-between'>
         <form className='col-md-6'>
             <div className='d-flex align-items-center border rounded bg-white pe-3'>
-                <Form.Control type="text" placeholder="Search by student name or email" className='border-0 montserrat' onChange={handleSearch}/>
-                <GoSearch className='grey'/> 
+              <Form.Control type="text" placeholder="Search by student name or email" className='border-0 montserrat' onChange={handleSearch}/>
+              <GoSearch className='grey'/> 
             </div> 
             
         </form>

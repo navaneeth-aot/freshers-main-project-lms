@@ -1,19 +1,23 @@
 import React from 'react';
-import { useContext , useState } from 'react';
+import { useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import DateDiff from 'date-diff';
-import { BooksContext , IssuedBooksContext , StudentContext } from '../../App';
 import MyBooksData from './MyBooksData';
+import { useQuery } from '@apollo/client';
+import { FETCH_BOOKS, FETCH_ISSUEDBOOK } from '../../graphQl/graphql';
 
 function MyBooksList({search,id,sortValue}) {
-    const books = useContext(BooksContext);
-    const IssuedBook = useContext(IssuedBooksContext); 
-    const Students = useContext(StudentContext);
+    const [eventKey, seteventKey] = useState("Issued");
+    const {data,loading,error} = useQuery(FETCH_ISSUEDBOOK);
+    const {data:BookData} = useQuery(FETCH_BOOKS);
+
+    if(loading) return <p className='pt-3'>loading data...</p>;
+    if(error) return <p className='fs-1'>ERROR 404 </p>;
 
     let pending = 0;
-    const booksTakenByStudent = IssuedBook.filter((bookList) => {
+    const booksTakenByStudent = data.IssuedBooks.filter((bookList) => {
         if(bookList.name == id){
-            if(bookList.return != true) {
+            if(bookList.isreturn !== true) {
                 pending ++;
             }
             return(bookList);
@@ -23,15 +27,15 @@ function MyBooksList({search,id,sortValue}) {
 
     const tempArray = booksTakenByStudent.map((issued) => {
         if(issued.name == id) {
-            let obj ={ key: issued.key,
-                       IssueDate: issued.IssueDate,
+            let obj ={ key: issued.id,
+                       IssueDate: issued.IssuedDate,
                        DueDate: issued.DueDate,
                        return: issued.return,
                        ReturnDate: issued.ReturnDate,
                     }
 
-            books.map((book) => {
-                if(book.key == issued.title) {
+                    BookData.books.map((book) => {
+                if(book.id == issued.title) {
                     obj.title = book.title;
                     obj.author = book.author;
                     }
@@ -46,8 +50,6 @@ function MyBooksList({search,id,sortValue}) {
         }
     })
 
-    const [eventKey, seteventKey] = useState("Issued")
-    
     const handleIssued = () => { seteventKey("Issued") }
     const handlePending = () => { seteventKey("Pending") }
     const handleReturned = () => { seteventKey("Returned") }

@@ -4,11 +4,14 @@ import React,{ useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import { useQuery } from '@apollo/client';
+import { FETCH_STUDENTS } from '../graphQl/graphql';
 
-export default function Login({setuser,login,setlogin,students}) {
+export default function Login({setuser,login,setlogin}) {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState();
     const navigate  = useNavigate();
+    const {data,loading,error} = useQuery(FETCH_STUDENTS);
     
 
     const handleEmail = (e) => { setemail(e.target.value) }
@@ -37,10 +40,10 @@ export default function Login({setuser,login,setlogin,students}) {
         }
 
         else if(login == "student") {
-            const log = students.find((student)=>{
+            const log = data.students.find((student)=>{
                 if((email.toLowerCase() == student.Email.toLowerCase() && password == student.password)) {
-                    navigate("/myBooks",{state:{id:student.key}});
-                    setuser(student.key)
+                    navigate("/myBooks",{state:{id:student.id}});
+                    setuser(student.id)
                     alert("login success");
                 }  
             }) 
@@ -60,6 +63,10 @@ export default function Login({setuser,login,setlogin,students}) {
             
         }
     }
+
+    if(loading) return <p className='pt-3'>loading data...</p>;
+    if(error) return <p className='fs-1'>ERROR 404 </p>;
+    console.log(data)
 
     return(
         <div>

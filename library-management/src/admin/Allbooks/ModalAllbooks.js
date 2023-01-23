@@ -6,6 +6,8 @@ import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BooksArrayContext , BooksContext } from '../../App';
+import { useMutation } from '@apollo/client';
+import { ADD_BOOK, UPDATE_BOOK } from '../../graphQl/graphql';
 
 export default function ModalAllbooks({show,
                                       setShow,
@@ -24,9 +26,6 @@ export default function ModalAllbooks({show,
                                       seteditRemaining
 }) 
 {
-  const shortid = require('shortid');
-  const books = useContext(BooksContext);
-  const setbooks = useContext(BooksArrayContext);
 
   const [bookTitle, setbookTitle] = useState("");
   const [bookAuthor, setbookAuthor] = useState("");
@@ -34,9 +33,19 @@ export default function ModalAllbooks({show,
   const [totalCopies, settotalCopies] = useState(0);
   const [remainingCopies, setremainingCopies] = useState(0);
 
-  const [key, setkey] = useState(shortid.generate())
+  const [key, setkey] = useState(shortid.generate());
+  const [updateBook,{data:updateBookData}] = useMutation(UPDATE_BOOK);
+  const [addBook,{data:addBookData}] = useMutation(ADD_BOOK);
 
-  const handleClose = () => {setShow(false);setBookEditFlag(false)}
+  const handleClose = () => {
+    setShow(false);
+    setBookEditFlag(false);
+    setbookTitle('');
+    setbookAuthor('');
+    setbookLanguage('N/A');
+    settotalCopies(0);
+    setremainingCopies(0);
+  }
 
 
   const handlebookTitle = (e)=> { setbookTitle(e.target.value) }
@@ -66,13 +75,15 @@ export default function ModalAllbooks({show,
           });
       }
       else {
-        setkey(shortid.generate());
-        setbooks([...books,{key:key,title:bookTitle,author:bookAuthor,language:bookLanguage,total:totalCopies,remaining:remainingCopies}]);
-        setbookTitle('')
-        setbookAuthor('')
-        setbookLanguage('N/A')
-        settotalCopies('0')
-        setremainingCopies('0')
+        addBook({
+          variables: {
+            TITLE: bookTitle,
+            AUTHOR: bookAuthor,
+            LANGUAGE: bookLanguage,
+            TOTAL: Number(totalCopies),
+            REMAINING: Number(remainingCopies),
+          },
+        })
         handleClose();
       }
     }
@@ -90,17 +101,16 @@ export default function ModalAllbooks({show,
           });
       }
       else {
-        const updatedAllbooks = books.map((item) => {
-          if(item.key == primarykey) {
-          item.title = editTitle;
-          item.author = editAuthor;
-          item.language = editLanguage;
-          item.total = editTotal;
-          item.remaining = editRemaining;
-          }
-          return(item)
-        })
-        setbooks(updatedAllbooks)
+        updateBook({
+          variables: {
+            ID: primarykey,
+            TITLE: editTitle,
+            AUTHOR: editAuthor,
+            LANGUAGE: editLanguage,
+            TOTAL: Number(editTotal),
+            REMAINING: Number(editRemaining),
+          },
+        });
         handleClose()
       }
     }

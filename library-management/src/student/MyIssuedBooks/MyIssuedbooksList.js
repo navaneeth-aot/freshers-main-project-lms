@@ -1,15 +1,14 @@
+import { useQuery } from '@apollo/client';
 import React from 'react';
-import { useContext , useState } from 'react';
 import { FiEye } from 'react-icons/fi';
-import { BooksContext , IssuedBooksContext , StudentContext } from '../../App';
+import { FETCH_BOOKS } from '../../graphQl/graphql';
 
 function MyIssuedbooksList({search,sortValue}) {
-    const books = useContext(BooksContext);
-    const IssuedBook = useContext(IssuedBooksContext); 
-    const Students = useContext(StudentContext);
+    const {data,loading,error} = useQuery(FETCH_BOOKS);
+
 
     if(sortValue == 1) {
-        books.sort((a, b) => {
+        data.books.sort((a, b) => {
             if ( a.title < b.title ) { return -1 }
             if ( a.title > b.title ) { return 1 }
             return 0;
@@ -17,7 +16,7 @@ function MyIssuedbooksList({search,sortValue}) {
     }
 
     if(sortValue == 2) {
-        books.sort((a, b) => {
+        data.books.sort((a, b) => {
             if ( a.author < b.author ) { return -1 }
             if ( a.author > b.author ) { return 1 }
             return 0;
@@ -37,14 +36,14 @@ function MyIssuedbooksList({search,sortValue}) {
             </div>
             
             
-            {books.filter((book) => {
+            {data.books.filter((book) => {
                 if(search == "") { return book; }
                 else if(book.title.toLowerCase().includes(search.toLowerCase())) { return book }
                 else if(book.author.toLowerCase().includes(search.toLowerCase())) { return book }
             }).map((item)=>{
-
+            
             return(
-                <div key={item.key} className="d-flex justify-content-between px-2 py-3 border-bottom blue bg-white">
+                <div key={item.id} className="d-flex justify-content-between px-2 py-3 border-bottom blue bg-white">
                         <div className='col-2'>{item.title}</div>
                         <div className='col-2'>{item.author}</div>
                         <div className='col-2'>{item.language}</div>
