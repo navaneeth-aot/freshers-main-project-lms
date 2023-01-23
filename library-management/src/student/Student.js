@@ -5,13 +5,18 @@ import ReactTooltip from 'react-tooltip';
 import Nav from 'react-bootstrap/Nav';
 import { MdMenuBook,MdTaskAlt } from 'react-icons/md';
 import { Link , Outlet } from 'react-router-dom';
-import { StudentContext } from '../App';
+import { FETCH_STUDENTS } from '../graphQl/graphql';
+import { useQuery } from '@apollo/client';
 
 function Student({user}) {
-    const Students = useContext(StudentContext);
+    const {data,loading,error} = useQuery(FETCH_STUDENTS)
+    
+    if(loading) return <p className='pt-3'>loading data...</p>;
+    if(error) return <p className='fs-1'>ERROR 404 </p>;
 
-    const userDetails = Students.find((item)=> {
-       return item.key === user
+
+    const userDetails = data.students.find((item)=> {
+       return item.id === user
     })
     
   return (
@@ -23,7 +28,7 @@ function Student({user}) {
                         <img src={Logo_white} alt=""/>
                     </div>
                 </div>
-                <Link to="/myBooks" state={{ id: userDetails.key }} className='btn btn-success mt-5 col-12 d-flex align-items-center gap-3'><MdMenuBook/>My Books</Link>
+                <Link to="/myBooks" state={{ id: userDetails.id }} className='btn btn-success mt-5 col-12 d-flex align-items-center gap-3'><MdMenuBook/>My Books</Link>
                 <Link to="/myissuedbooks" className='btn btn-success col-12 d-flex align-items-center gap-3'><MdTaskAlt/>Issued Books</Link>
             </Nav>
             <div className='sticky-bottom pb-4 border-top pt-3 d-flex gap-2 col-12'>

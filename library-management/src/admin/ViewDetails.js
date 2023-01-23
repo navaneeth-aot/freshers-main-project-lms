@@ -1,43 +1,49 @@
-import React , {useContext , useEffect, useState } from 'react';
+import React , { useState } from 'react';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
-import { StudentContext,BooksContext,IssuedBooksContext } from '../App';
 import Form from 'react-bootstrap/Form';
 import DateDiff from 'date-diff';
 import { GoSearch } from 'react-icons/go';
 import { Link , useParams } from 'react-router-dom';
 import Moment from 'moment';
+import { FETCH_BOOKS, FETCH_ISSUEDBOOK, FETCH_ISSUEDBOOK_BY_ID, FETCH_STUDENTS } from '../graphQl/graphql';
+import { useQuery } from '@apollo/client';
 
 function ViewDetails() {
-    const Student = useContext(StudentContext);
-    const books = useContext(BooksContext);
-    const IssuedBook = useContext(IssuedBooksContext);
     let {id} = useParams();
     const [search, setsearch] = useState('')
+    const {data:IssuedBook,loading,error} = useQuery(FETCH_ISSUEDBOOK);
+    const {data:Student} = useQuery(FETCH_STUDENTS);
+    const {data:bookData} = useQuery(FETCH_BOOKS);
+
+    if(loading) return <p className='pt-3'>loading data...</p>;
+    if(error) return <p className='fs-1'>ERROR 404 </p>;
     
-    const booksTakenByStudent = IssuedBook.filter((bookList) => {
+    const booksTakenByStudent = IssuedBook.IssuedBooks.filter((bookList) => {
         if(bookList.name == id)
             return(bookList)
     })
 
-    const studentDetails = Student.find((object) => {
-        if(object.key == id) {
+    const studentDetails = Student.students.find((object) => {
+        if(object.id == id) {
+            console.log(object,id)
             return object;
             }
         }) 
-
+    
     const tempArray = booksTakenByStudent.map((issued) => {
         if(issued.name == id) {
-            let obj ={ key: issued.key,
-                       IssueDate: issued.IssueDate,
+            let obj ={ key: issued.id,
+                       IssueDate: issued.IssuedDate,
                        DueDate: issued.DueDate,
-                       return: issued.return,
+                       return: issued.isreturn,
                        ReturnDate: issued.ReturnDate,
                     }
-
-            books.map((book) => {
-                if(book.key == issued.title) {
+                
+                bookData.books.map((book) => {
+                if(book.id == issued.title) {
                     obj.title = book.title;
                     obj.author = book.author;
+                    console.log(book.title,book.author)
                     }
                 })
                 
@@ -61,7 +67,7 @@ function ViewDetails() {
             totalFine = totalFine + item.fine
         }
     })
-
+    console.log(tempArray)
     return (
     
             <>

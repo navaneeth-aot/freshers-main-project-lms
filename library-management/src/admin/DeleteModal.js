@@ -4,18 +4,17 @@ import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Moment from 'moment';
-import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext , BooksArrayContext , StudentArrayContext } from '../App';
+import { useMutation, useQuery } from '@apollo/client';
+import { DELETE_BOOK, DELETE_STUDENT, FETCH_BOOK_BY_ID, MARK_AS_READ, RETURN_BOOK } from '../graphQl/graphql';
 
 function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag,Title,setTitle,markFlag,setmarkFlag}) {
   
-  const setStudents = useContext(StudentArrayContext);
-  const Student = useContext(StudentContext);
-  const books = useContext(BooksContext);
-  const setbooks = useContext(BooksArrayContext);
-  const IssuedBook = useContext(IssuedBooksContext);
-  const setIssuedBook = useContext(IssuedBooksArrayContext);
-
-  
+  const [deleteBook,{data:deleteBookData}] = useMutation(DELETE_BOOK);
+  const [deleteStudent,{data:deleteStudentData}] = useMutation(DELETE_STUDENT);
+  const [markAsRead,{data:markAsReadData}] = useMutation(MARK_AS_READ);
+  const [ReturnBook,{data:returnBookData}] = useMutation(RETURN_BOOK);
+  const {data:BookData} = useQuery(FETCH_BOOK_BY_ID,{variables : {ID:primarykey}});
+  const {data:ReturnBookData} = useQuery(FETCH_BOOK_BY_ID,{variables : {ID:Title}});
 
   const handleClose = () => {
     setShow(false);
@@ -24,23 +23,20 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag
   }
 
   const handleStudentDelete = () => { 
-        setStudents(Student.filter((students) => students.key != primarykey));
+        deleteStudent({variables : {ID:primarykey}})
         handleClose()
         setprimarykey('')
   }
 
   const deletebook = () => { 
         let flag = false;
-        books.map((item)=> {
-          if(item.key == primarykey) {
-            if(item.remaining == item.toal) {
-              flag = true;
-            }
-          }
-        });
+        if(BookData?.booksById.remaining == BookData?.booksById.total) {
+          console.log(BookData?.booksById.remaining)
+          flag = true;
+        }
 
         if(flag == true) {
-          setbooks(books.filter((book) => book.key != primarykey));
+          deleteBook({variables:{ID:primarykey}});
           handleClose();
           setprimarykey('');
         }
@@ -60,21 +56,8 @@ function DeleteModal({show,setShow,setprimarykey,primarykey,bookFlag,setbookFlag
   }
 
   const handleReturn = () => { 
-      const marked = IssuedBook.map((object) => {
-          if(object.key == primarykey) { 
-              object.return = true
-              object.ReturnDate = Moment().format("YYYY-MM-DD")
-          }
-          return(object)
-      })
-      const newBook = books.map((object) => {
-          if(object.key == Title) {
-              object.remaining = object.remaining + 1
-          }
-           return(object)
-       })
-      setIssuedBook(marked)
-      setbooks(newBook)
+      markAsRead({variables : {ID:primarykey,RETURNDATE:Moment().format("YYYY-MM-DD"),ISRETURN:true}})
+      ReturnBook({variables : {ID:Title,REMAINING:ReturnBookData?.booksById.remaining + 1}});
       handleClose();
       setprimarykey('');
       setTitle('')

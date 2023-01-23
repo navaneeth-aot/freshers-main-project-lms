@@ -21,14 +21,9 @@ export const IssuedBooksArrayContext = React.createContext()
 export const SetParamsContext = React.createContext()
 
 function App() {
-  const StudentArray = JSON.parse(localStorage.getItem('studentsDB')) || [];
-  const BooksArray = JSON.parse(localStorage.getItem('booksDB')) || [];
-  const IssuedBookArray = JSON.parse(localStorage.getItem('IssuedBookDB')) || [];
+  
   const StudentID = JSON.parse(sessionStorage.getItem('StudentID')) || "";
   const [key, setKey] = useState('admin');
-  const [students, setstudents] = useState(StudentArray);
-  const [books, setbooks] = useState(BooksArray);
-  const [IssuedBook, setIssuedBook] = useState(IssuedBookArray);
   const [id, setid] = useState(StudentID);
 
   useEffect(() => {
@@ -42,71 +37,26 @@ function App() {
     sessionStorage.setItem('StudentID', JSON.stringify(id));
   }, [id]);
 
-  useEffect(() => {
-    const students = JSON.parse(localStorage.getItem('studentsDB'));
-    if (students) {
-      setstudents(students);
-    }
-  }, []);
-
-  useEffect(() => {
-      localStorage.setItem('studentsDB', JSON.stringify(students));
-  }, [students]);
-
-
-  useEffect(() => {
-    const books = JSON.parse(localStorage.getItem('booksDB'));
-    if (books) {
-      setbooks(books);
-    }
-  }, []);
-
-  useEffect(() => {
-      localStorage.setItem('booksDB', JSON.stringify(books));
-  }, [books]);
-
-
-  useEffect(() => {
-    const IssuedBook = JSON.parse(localStorage.getItem('IssuedBookDB'));
-    if (IssuedBook) {
-      setIssuedBook(IssuedBook);
-    }
-  }, []);
-
-  useEffect(() => {
-      localStorage.setItem('IssuedBookDB', JSON.stringify(IssuedBook));
-  }, [IssuedBook]);
+  
 
   return (
       <div>
-        <StudentArrayContext.Provider value = { setstudents }>
-          <StudentContext.Provider value = { students }>
-            <BooksContext.Provider value = { books }>
-              <BooksArrayContext.Provider value = { setbooks }>
-                <IssuedBooksArrayContext.Provider value = { setIssuedBook }>
-                  <IssuedBooksContext.Provider value = { IssuedBook }>
-                    <Routes>
-                      <Route path="/" element={ <Navigate replace to="/login" />} />
-                        <Route path="/login" element={<Login setuser={setid} login={key} setlogin={setKey} students={students}/>} />
-                        <Route path='/' element={<Admin />}>
-                          <Route element= {<Navigate replace to="/issuedbooks" /> } />
-                          <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
-                          <Route path='/allbooks' element = {<AllbooksPage />} />
-                          <Route path="/studentspage" element = {<StudentPage />} />
-                          <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
-                        </Route>
-                        <Route path = '/' element={<Student user={id} />}>
-                          <Route element= {<Navigate replace to="/myBooks" /> } />
-                          <Route path='/myBooks' element={<MyBooks />}/>
-                          <Route path='/myIssuedBooks' element={<MyIssuedBooks />}/>
-                        </Route>
-                    </Routes>
-                  </IssuedBooksContext.Provider>
-                </IssuedBooksArrayContext.Provider>
-              </BooksArrayContext.Provider>
-            </BooksContext.Provider>
-          </StudentContext.Provider>
-        </StudentArrayContext.Provider>    
+        <Routes>
+          <Route path="/" element={ <Navigate replace to="/login" />} />
+          <Route path="/login" element={<Login setuser={setid} login={key} setlogin={setKey}/>} />
+          <Route path='/' element={<Admin />}>
+          <Route element= {<Navigate replace to="/issuedbooks" /> } />
+          <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
+          <Route path='/allbooks' element = {<AllbooksPage />} />
+          <Route path="/studentspage" element = {<StudentPage />} />
+          <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
+        </Route>
+        <Route path = '/' element={<Student user={id} />}>
+          <Route element= {<Navigate replace to="/myBooks" /> } />
+          <Route path='/myBooks' element={<MyBooks />}/>
+          <Route path='/myIssuedBooks' element={<MyIssuedBooks />}/>
+          </Route>
+        </Routes>
       </div>
   );
 }

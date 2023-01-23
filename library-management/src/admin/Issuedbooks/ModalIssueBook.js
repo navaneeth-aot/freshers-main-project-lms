@@ -5,29 +5,33 @@ import Modal from 'react-bootstrap/Modal';
 import Moment from 'moment';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BooksContext , StudentContext , IssuedBooksContext , IssuedBooksArrayContext ,BooksArrayContext } from '../../App';
 import moment from 'moment';
+import { useMutation, useQuery } from '@apollo/client';
+import { ADD_ISSUEDBOOK, FETCH_BOOKS, FETCH_BOOK_BY_ID, FETCH_STUDENTS, RETURN_BOOK } from '../../graphQl/graphql';
 
 export default function ModalIssueBook({show,setShow}) {
-
-  const shortid = require('shortid');
-  const Students = useContext(StudentContext);
-  const books = useContext(BooksContext);
-  const setbooks = useContext(BooksArrayContext);
-  const IssuedBook = useContext(IssuedBooksContext);
-  const setIssuedBook = useContext(IssuedBooksArrayContext);
 
   const [BookName, setBookName] = useState('');
   const [IssuedStudent, setIssuedStudent] = useState('');
   const [Issue, setIssue] = useState(Moment().format("YYYY-MM-DD"));
   const [Due, setDue] = useState(moment().add(7, 'days').format("YYYY-MM-DD"));
-  const [key, setkey] = useState(shortid.generate());
+
+  const [BookIssue,{data:IssueBookData}] = useMutation(ADD_ISSUEDBOOK);
+  const {data:BookData} = useQuery(FETCH_BOOK_BY_ID,{variables : {ID:BookName}});
+  const {data:StudentData} = useQuery(FETCH_STUDENTS);
+  const {data:AllBooks} = useQuery(FETCH_BOOKS);
+  const [ReturnBook,{data:returnBookData}] = useMutation(RETURN_BOOK);
   
   useEffect(() => {
     setDue(moment(Issue, "YYYY-MM-DD").add(7, 'days').format("YYYY-MM-DD"))
   }, [Issue]);  
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setBookName('')
+    setIssuedStudent('')
+    setIssue(Moment().format("YYYY-MM-DD"))
+  }
 
   const handleBook = (e)=> { setBookName(e.target.value) }
   const handleStudent = (e)=> { setIssuedStudent(e.target.value) }
@@ -42,18 +46,17 @@ export default function ModalIssueBook({show,setShow}) {
 
   const IssueBook = () => {
     if(((BookName && IssuedStudent) && Issue) != "") {
-    const newBook = books.map((obj) => {
-      if(obj.key == BookName){
-        obj.remaining = obj.remaining - 1;
-      }
-      return(obj)
-    })
-    setbooks(newBook)
-    setkey(shortid.generate());
-    setIssuedBook([...IssuedBook,{key:key,title:BookName,name:IssuedStudent,IssueDate:Issue,DueDate:Due,ReturnDate:"",return:false}]);
-    setBookName('')
-    setIssuedStudent('')
-    setIssue(Moment().format("YYYY-MM-DD"))
+      ReturnBook({variables : {ID:BookName,REMAINING:BookData?.booksById.remaining - 1}});
+      BookIssue({
+        variables: {
+          TITLE: BookName,
+          NAME: IssuedStudent,
+          ISSUEDDATE: Issue,
+          DUEDATE: Due,
+          RETURNDATE: "",
+          ISRETURN: false,
+        },
+    });
     handleClose();
     }
     else 
@@ -83,11 +86,11 @@ export default function ModalIssueBook({show,setShow}) {
               <Form.Select aria-label="Default select example"
                 onChange={handleBook}>
                 <option value="N/A">Select Book</option>
-                {books.map((book) => {
+                {AllBooks?.books.map((book) => {
                   if(book.remaining != 0)
                   return (
                     <>
-                      <option value={book.key}>{book.title}</option>
+                      <option value={book.id}>{book.title}</option>
                     </>
                   );
                 })}
@@ -99,10 +102,10 @@ export default function ModalIssueBook({show,setShow}) {
               <Form.Select aria-label="Default select example"
               onChange={handleStudent}>
               <option value="N/A">Select Student</option>
-              {Students.map((student) => {
+              {StudentData?.students.map((student) => {
                 return (
                   <>
-                    <option value={student.key}>{student.name}</option>
+                    <option value={student.id}>{student.name}</option>
                   </>
                 );
               })}

@@ -1,4 +1,3 @@
-import react from 'react';
 import Form from 'react-bootstrap/Form';
 import { GoSearch } from 'react-icons/go';
 
