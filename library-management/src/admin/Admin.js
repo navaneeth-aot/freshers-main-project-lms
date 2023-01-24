@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 

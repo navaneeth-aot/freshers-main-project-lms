@@ -33,7 +33,6 @@ export default function ModalAllbooks({show,
   const [totalCopies, settotalCopies] = useState(0);
   const [remainingCopies, setremainingCopies] = useState(0);
 
-  const [key, setkey] = useState(shortid.generate());
   const [updateBook,{data:updateBookData}] = useMutation(UPDATE_BOOK);
   const [addBook,{data:addBookData}] = useMutation(ADD_BOOK);
 
