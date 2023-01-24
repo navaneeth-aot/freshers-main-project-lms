@@ -40,24 +40,26 @@ function App() {
   
 
   return (
+    <>
       <div>
         <Routes>
           <Route path="/" element={ <Navigate replace to="/login" />} />
           <Route path="/login" element={<Login setuser={setid} login={key} setlogin={setKey}/>} />
           <Route path='/' element={<Admin />}>
-          <Route element= {<Navigate replace to="/issuedbooks" /> } />
-          <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
-          <Route path='/allbooks' element = {<AllbooksPage />} />
-          <Route path="/studentspage" element = {<StudentPage />} />
-          <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
-        </Route>
-        <Route path = '/' element={<Student user={id} />}>
-          <Route element= {<Navigate replace to="/myBooks" /> } />
-          <Route path='/myBooks' element={<MyBooks />}/>
-          <Route path='/myIssuedBooks' element={<MyIssuedBooks />}/>
+            <Route element= {<Navigate replace to="/issuedbooks" /> } />
+            <Route path='/issuedbooks' element = {<IssuedBooksPage/>} />
+            <Route path='/allbooks' element = {<AllbooksPage />} />
+            <Route path="/studentspage" element = {<StudentPage />} />
+            <Route path={`/Studentsdetails/:id`} element = {<ViewDetails />} />
+          </Route>
+          <Route path = '/' element={<Student user={id} />}>
+            <Route element= {<Navigate replace to="/myBooks" /> } />
+            <Route path='/myBooks' element={<MyBooks />}/>
+            <Route path='/myIssuedBooks' element={<MyIssuedBooks />}/>
           </Route>
         </Routes>
       </div>
+    </>
   );
 }
 

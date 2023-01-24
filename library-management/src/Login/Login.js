@@ -66,7 +66,6 @@ export default function Login({setuser,login,setlogin}) {
 
     if(loading) return <p className='pt-3'>loading data...</p>;
     if(error) return <p className='fs-1'>ERROR 404 </p>;
-    console.log(data)
 
     return(
         <div>
